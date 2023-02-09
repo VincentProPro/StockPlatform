@@ -1,0 +1,192 @@
+#main .orderDiv{
+	
+	position: relative;
+	display: block;
+	
+	height: auto;
+	width: auto;
+}
+#main .orderDiv form{
+	margin-top: 5px;
+	position: relative;
+	display: block;
+	padding-left: 20px;
+	padding-top: 20px;
+	height: auto;
+}
+#main .orderDiv form fieldset{
+	position: relative;
+	padding-left: 20px;
+	padding-top: 20px;
+	margin-bottom: 20px;
+	height: 350px;
+	width: auto;
+	
+}
+#main .orderDiv form fieldset #customerName{
+	position: absolute;
+	right: 46%;
+	
+}
+#main .orderDiv form fieldset .custName{
+	position: absolute;
+		right: 88%;
+}
+#main .orderDiv form fieldset #emailCustomer, #main .orderDiv form fieldset #customerTel{
+	position: absolute;
+	top: 60px;
+	
+	
+}
+#main .orderDiv form fieldset #customerTel{
+	right: 71%;
+	
+}
+#main .orderDiv form fieldset #emailCustomer{
+	right: 46%;
+	
+}
+#main .orderDiv form fieldset .custTel{
+	position: absolute;
+	right: 88%;
+	top: 60px;
+	
+}
+#main .orderDiv form fieldset .custEmail{
+	position: absolute;
+	right: 63%;
+	top: 60px;	
+}
+#main .orderDiv form fieldset .custMdl{
+	position: absolute;
+	right: 86%;
+	top: 125px;	
+}
+#main .orderDiv form fieldset #mdl{
+	position: absolute;
+	right: 74%;
+	top: 125px;	
+}
+#main .orderDiv form fieldset .custQty{
+	position: absolute;
+	right: 62%;
+	top: 125px;	
+}
+#main .orderDiv form fieldset #qty{
+	position: absolute;
+	right: 46%;
+	top: 125px;	
+}
+#main .orderDiv form fieldset .custThickness{
+	position: absolute;
+	right: 80%;
+	top: 160px;	
+}
+#main .orderDiv form fieldset #thicknessBrick{
+	position: absolute;
+	right: 64%;
+	top: 160px;	
+}
+#main .orderDiv form fieldset .custLenght{
+	position: absolute;
+	right: 88%;
+	top: 190px;	
+}
+#main .orderDiv form fieldset #lengthBrick{
+	position: absolute;
+	right: 71%;
+	top: 190px;	
+}
+#main .orderDiv form fieldset .custHeight{
+	position: absolute;
+	right: 63%;
+	top: 190px;	
+}
+#main .orderDiv form fieldset #heightBrick{
+	position: absolute;
+	right: 46%;
+	top: 190px;	
+}
+#main .orderDiv form fieldset .custLocate{
+	position: absolute;
+	right: 88%;
+	top: 220px;	
+}
+#main .orderDiv form fieldset #locate{
+	position: absolute;
+	right: 73%;
+	top: 220px;	
+}
+#main .orderDiv form fieldset .custDliv{
+	position: absolute;
+	right: 60%;
+	top: 220px;	
+}
+#main .orderDiv form fieldset #delivDate{
+	position: absolute;
+	right: 46%;
+	top: 220px;	
+}
+#main .orderDiv form fieldset div{
+	position: absolute;
+		right: 65%;
+	top: 240px;	
+}
+#main .orderDiv form fieldset div:hover{
+box-shadow:0 2px 0px 0 rgba(0,0,0,0.24),0 5px 0px 0 rgba(0,0,0,0.19);
+}
+#delivDate:hover , #locate:hover , #email:hover , #heightBrick:hover , #lengthBrick:hover 
+, #thicknessBrick:hover , #qty:hover , #mdl:hover , #emailCustomer:hover , #customerTel:hover
+ , #customerName:hover{
+
+box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+border-color: #fe9309;
+
+	
+}
+#main .orderDiv form fieldset #submitBtn{
+	position: absolute;
+	
+	top: 300px;	
+	right: 50%;
+}
+#main .orderDiv form fieldset img.img1{
+	position: absolute;
+		right: 0px;
+	top: 5px;	
+
+}
+#main .orderDiv form fieldset img.img2{
+	position: absolute;
+		right: 30%;
+	top: 150px;	
+
+}
+#main .orderDiv form fieldset img.img3{
+	position: absolute;
+		right: 0;
+	top: 250px;	
+
+}
+#main .orderDiv form fieldset img.img4{
+	position: absolute;
+		right: 90px;
+	top: 190px;	
+
+}
+#main .orderDiv form fieldset img.img5{
+	position: absolute;
+		right: 120px;
+	top: 220px;	
+	height: 90px;
+	width: 130px;
+
+}
+#main .orderDiv form fieldset img.img6{
+	position: absolute;
+		right: 110px;
+	top: 260px;	
+	height: 90px;
+	width: 130px;
+
+}

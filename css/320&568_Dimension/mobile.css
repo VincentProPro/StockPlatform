@@ -1,0 +1,30 @@
+@media screen and (max-width: 320px) and (max-width: 400px){
+header {
+	width: 320px;
+	height: 300px;
+	padding: 0px;
+}
+header ul {
+	width: 320px;
+	margin: 0px;
+}
+header ul li a.selected{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+	border-top: 1px solid #fe9309;
+
+}
+#slideshow {
+	display: none;
+}
+#content {
+	width: 320px;
+}
+header #identite {
+	padding: 10px 10px 10px 35px;
+}
+
+}
