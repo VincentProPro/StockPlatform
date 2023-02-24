@@ -1,9 +1,9 @@
 <?php
-require("authentification.php");
-require("config.php");
-require("AutreClass/message.php");
-require("Model/membre.php");
-// require("configdb.php");
+require("../authentification.php");
+require("../db/config.php");
+require("../AutreClass/message.php");
+require("../Model/membre.php");
+// require("../db/configdb.php");
 
 echo"hellolast";
 

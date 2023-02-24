@@ -4,7 +4,13 @@ session_start();
 error_reporting(0);
 
 require("viewcmu.php");
- echo$gerantcmu->viewstockcmu()[0][4]; 
+// echo json_encode($gerantcmu->viewstockcmu());
+echo json_encode($gerantcmu->viewsorticmuAllYear());
+
+
+// echo json_encode($gerantcmu->viewsorticmu());
+
+//  echo$gerantcmu->viewstockcmu()[0][4]; 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../index.php");
@@ -25,7 +31,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
      <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-               <script src="plotly-2.8.3.min.js"></script>
+               <!-- <script src="plotly-2.8.3.min.js"></script> -->
+               <script src='https://cdn.plot.ly/plotly-2.18.0.min.js'></script>
 
                <script type="text/javascript" src="../jqueryforperode1.js"></script>
 <script type="text/javascript" src="../jqueryforperiode2.js"></script>
@@ -93,9 +100,40 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                       </div>
                
      <div class="card shadowexempl">
+            <div id="revenusorties">
+
+                <h2>Revenu des sorties </h2>
+                <div class="btn-group">
+                <button onclick="dothisgraphrevenumoi()">Du Mois</button>
+                <button onclick="dothisgraphrevenuthree()">Sur 3 Mois</butto
+                n>
+                <button onclick="dothisgraphrevenusix()">Sur 6 Mois</button>
+                <label>Debut</label> <input type="date" id="date3">
+                    <label>Fin</label><input type="date" id="date4">
+                        <button onclick="dothisgraphrevenuperiode()">Sur Période</button>
+                </div>
+                <h5>statistique sur les revenus du CMU </h5>
+
+                  <div id="graphrevenugeneral" style="width:auto;height:550px;">
+                  
+                </div>
+                  <p>Autres fonctions..</p>
+                <p>Le Gestionaire de stock est aussi chargé d'ajouter dans la base de donnée des nouveaux fournisseurs, catégories, format et articles.</p>
+              </div>
+    </div>
+    <div class="card shadowexempl">
             <div id="frequencesorties">
 
                 <h2>Frequence des sorties </h2>
+                <div class="btn-group">
+                <button>Du Mois</button>
+                <button>Sur 3 Mois</butto
+                n>
+                <button>Sur 6 Mois</button>
+                <label>Debut</label> <input type="date" id="date3">
+                    <label>Fin</label><input type="date" id="date4">
+                        <button onclick="dothisgraphrentabiliarticle()">Sur Période</button>
+                </div>
                 <h5>statistique sur la frequence de sortie par article</h5>
 
                   <div id="graphsortigeneral" style="width:auto;height:550px;">
@@ -183,7 +221,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-                                    include('../config.php');
+                                    include('../db/config.php');
 
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
@@ -221,11 +259,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   <h2>Footer</h2>
 </div>
 <script type="text/javascript">
+    
     var datadesignation=[];
     var dataquantity=[];
     <?php foreach ($gerantcmu->viewstockcmu() as $element){ ?>
       var designation=<?php echo json_encode($element["designation"]); ?>;
       var quantity=<?php echo json_encode($element["quantity"]); ?>;
+      // alert("designation is "+designation);
 
       datadesignation.push(designation);
       dataquantity.push(quantity);
@@ -242,8 +282,101 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 var layout = {title:"Vue du StockCMU"};
 document.getElementById("graphsituationstock").style.width = 'auto';
 document.getElementById("graphsituationstock").style.height = '550px';
-Plotly.newPlot("graphsituationstock", data, layout); 
+Plotly.newPlot("graphsituationstock", data, layout);
+dothisgraphrevenu()
+function dothisgraphrevenu(){
+  var datadate1=[];
+  var databenefice1=[];
+  var datatotalbenefice=0;
+                        <?php foreach ($gerantcmu->viewsorticmuAllYear() as $element){ ?>
+                          var datearr=<?php echo json_encode($element["date"]); ?>;
+                          var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
+                          datadate1.push(datearr);
+                          databenefice1.push(benefice);
+                          <?php
+                        }
+                          ?>
+                          alert(datadate1.toString());
+                          var formateddatearr=[];
+                          var formatedbenefice=[];
+                          var match=false;
+                          var position=0;
+
+                          for(var i=0; i<datadate1.length;i++){
+                            //initialize
+                            if(formateddatearr.length===0){
+                                formateddatearr.push(datadate1[i]);
+                                formatedbenefice.push(databenefice1[i]);
+
+                            }else{
+                                //search if element has been added
+                                for(var srch=0; srch<formateddatearr.length;srch++){
+                                    if(formateddatearr[srch]===datadate1[i]){
+                                        //do update quantity by adding to previous qty
+                                        match=true;
+                                        position=srch;
+                                        break;
+                                    }else{
+                                        //add new element
+                                        match=false;
+                                    }
+
+                                }
+                                if(match===true){
+                                    //do update quantity by adding to previous qty
+                                    var previousbenefice=formatedbenefice[position];
+                                    formatedbenefice[position]=previousbenefice+databenefice1[i];
+
+                                }else{
+                                    //add new elements
+                                    formateddatearr.push(datadate1[i]);
+                                    formatedbenefice.push(databenefice1[i]);
+
+
+                                }
+
+                            }
+                            
+
+
+
+                          }
+                          if(formateddatearr.length>0){
+                            alert(formateddatearr.toString());
+                            alert(formatedbenefice.toString());
+                            formatedbenefice.forEach(item => {
+                                  datatotalbenefice += item;
+                                 });
+
+                            var data = [{
+                                  x:formateddatearr,
+                                  y:formatedbenefice,
+                                  type: "scatter",
+                                  mode: "lines",
+                                  name: 'Benefice Year',
+                                  line: {color: '#7F7F7F'}
+                                }];
+                                
+
+                            var layout = {title:"Benefice total: "+datatotalbenefice};
+                            document.getElementById("graphrevenugeneral").style.width = 'auto';
+                            document.getElementById("graphrevenugeneral").style.height = '550px';
+                            Plotly.newPlot("graphrevenugeneral", data, layout); 
+                            
+
+                          }else{
+                            alert("no data to display");
+                          }
+  
+
+
+
+
+  
+ 
+
+}
 
 function dothisgraphrentabiliarticle(){
     alert(document.cookie);
@@ -341,10 +474,9 @@ function dothisgraphrentabiliarticle(){
                           }
                           
                           
+}
 
-    }
-
-     function dothisgraphperiodesortiarticle(){
+function dothisgraphperiodesortiarticle(){
 
                  var x1 = document.getElementById("date1").value; 
                  var x2 = document.getElementById("date2").value;
@@ -364,7 +496,7 @@ function dothisgraphrentabiliarticle(){
 
                     
 
-    }
+}
 
 
 

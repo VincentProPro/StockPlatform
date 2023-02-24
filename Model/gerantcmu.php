@@ -66,6 +66,36 @@ class GerantCMU{
 		return $objectCreated->selectAllPeriode($debutperiode,$finperiode);
 		
 	}
+	function viewsorticmuMois(){
+		$objectCreated=new Cmusorti();
+
+return $objectCreated->selectAllMois();
+
+}
+	function viewsorticmuThreeMois(){
+		$objectCreated=new Cmusorti();
+
+return $objectCreated->selectAllThreeMois();
+
+}
+function viewsorticmuSixMois(){
+	$objectCreated=new Cmusorti();
+
+return $objectCreated->selectAllSixMois();
+
+}
+function viewsorticmuAllYear(){
+	$objectCreated=new Cmusorti();
+
+return $objectCreated->selectAllYear();
+
+}
+
+	
+	
+	
+	
+
 	// function viewAllNonExecuter(){
 	// 			$objectCreated=new Sortimagasin();
 

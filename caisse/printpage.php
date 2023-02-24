@@ -77,7 +77,7 @@ button:hover, a:hover {
 <div class="card cssInp" id="divToPrint">
     <div class="centerthis"><img  src="../images/1550389719.jpeg" alt="John" style="width:50%"></div>
   
-  <h1 class="centerthis">Clinique Ste Vincent </h1>
+  <h1 class="centerthis">Clinique Ste Nom </h1>
   <p class="title" class="centerthis">Bon De Commande</p>
 <h2>Libellé: <?php echo$Libellé;?></h2>
 <h2>Description: <?php echo$Description;?></h2>

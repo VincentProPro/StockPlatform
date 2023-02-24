@@ -1,7 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
-echo "in format";
+require("../db/config.php");
 
 class Format{
 
@@ -65,7 +64,7 @@ class Format{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into format (code,nom,description,matriculredacteur,lastmodification) values (:code,:nom,:description,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
@@ -124,7 +123,7 @@ class Format{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  format Set code=:code, nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -177,7 +176,7 @@ class Format{
 
 						            	  try{
 											    $sql="Select * from format Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -217,7 +216,7 @@ class Format{
 
 						            	  try{
 											    $sql="Select * from format";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -255,7 +254,7 @@ class Format{
 
 									            	  try{
 														    $sql="Delete from format Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){
@@ -280,7 +279,6 @@ class Format{
 
 	
 }
-echo"end format";
 // $objectCreated=new Format();
 				// echo$objectCreated->selectmatricule(3)[0][2][0];
 // $l=substr($objectCreated->selectmatricule(3)[0][2], 0,1);

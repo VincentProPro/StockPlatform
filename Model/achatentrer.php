@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 class AchatEntrer{
 
@@ -88,7 +88,7 @@ class AchatEntrer{
 
 
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -164,7 +164,7 @@ class AchatEntrer{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  achatentrer Set magasin=:magasin, reference=:reference , libeller=:libeller ,tarif=:tarif,fournicode=:fournicode, numcomand=:numcomand,numfacture=:numfacture,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -225,7 +225,7 @@ class AchatEntrer{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  achatentrer Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -277,7 +277,7 @@ class AchatEntrer{
 
 						            	  try{
 											    $sql="SELECT achaten.matricule, achaten.libeller, achaten.reference, fourni.nom, besoin.libeller,  achaten.date, achaten.numfacture  FROM achatentrer achaten, fournisseurdb fourni, bondecommandedb besoin where achaten.fournicode=fourni.matricule AND besoin.matricule=achaten.matricule_comand AND achaten.validation=0";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -314,7 +314,7 @@ class AchatEntrer{
 
 						            	  try{
 											    $sql="SELECT achaten.matricule, achaten.libeller, achaten.tarif, fourni.nom, besoin.libeller, achaten.date, achaten.numfacture FROM achatentrer achaten, fournisseurdb fourni, bondecommandedb besoin where achaten.fournicode=fourni.matricule AND besoin.matricule=achaten.matricule_comand AND achaten.validation=1";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -352,7 +352,7 @@ class AchatEntrer{
 
 						            	  try{
 											    $sql="Select * from achatentrer Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -392,7 +392,7 @@ class AchatEntrer{
 
 						            	  try{
 											    $sql="Select * from achatentrer";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -430,7 +430,7 @@ class AchatEntrer{
 
 									            	  try{
 														    $sql="Delete from achatentrer Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

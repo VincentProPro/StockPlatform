@@ -1,10 +1,11 @@
 <?php
+error_reporting(0);
 // Initialize the session
 session_start();
-// require("../config.php");
+// require("../db/config.php");
 require("viewcomptable.php");
 
-                    include('../config.php');
+                    include('../db/config.php');
 
  
 // Check if the user is logged in, if not then redirect him to login page
@@ -483,6 +484,26 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
           <p>Le ou la Comptable est chargé de faire l'inventaire, evaluer les besoins de la clinics. Vérifier et valider les entrées et sorties d'articles, produire l'inventaire et génerer les statistics sur la consommation interne, faire des prévisions de consommation.</p>
     </div>
+    <div class="card shadowexempl">
+        <h2>Archive</h2>
+        <h5>Televerser un document de la Clinic</h5>
+ 
+          <div>
+          <form method="POST" enctype="multipart/form-data" action="apicomptable.php">
+          <input type="text" name="title" required placeholder="Le nom du fichier">
+          <input type="text" name="filedescription"  placeholder="La description du fichier">
+          <input type="file" name="file">
+          <input type="hidden" name="formulaire" value="upload"> 
+
+              <input type="submit" name="submit" value="Upload">
+          </form>
+
+
+          </div>
+            <p>Autres fonctions..</p>
+
+          <p>Le ou la Comptable est chargé de faire l'inventaire, evaluer les besoins de la clinics. Vérifier et valider les entrées et sorties d'articles, produire l'inventaire et génerer les statistics sur la consommation interne, faire des prévisions de consommation.</p>
+    </div>
   </div>
   <div class="rightcolumn">
     <div class="card">
@@ -530,7 +551,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   // include('../config.php');
+   // include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -596,7 +617,7 @@ function openCity(evt, object) {
 </html>
 
 <?php
-                    // include('../config.php');
+                    // include('../db/config.php');
 error_reporting(0);
 
         if(array_key_exists('button1', $_POST)) {
@@ -632,7 +653,7 @@ error_reporting(0);
 
                     //start
                     $sql = "SELECT * FROM bondecommandedb WHERE code = :comandnum";
-                       include('../config.php');
+                       include('../db/config.php');
 
 
                     if($stmt = $pdo->prepare($sql)){

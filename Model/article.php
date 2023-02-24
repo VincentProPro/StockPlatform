@@ -1,8 +1,7 @@
 <?php
 
 require("../authentification.php");
-require("../config.php");
-echo "in Article";
+require("../db/config.php");
 
 require("format.php");
 
@@ -97,7 +96,7 @@ class Article{
 		            	$redacteurcode=$_SESSION["email"];
 		            	$this->dateachat=$datereel;
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -181,7 +180,7 @@ class Article{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  article Set code=:code,designation=:designation,description=:description, prixachat=:prixachat , prixvente=:prixvente ,code_category=:code_category,quantity_per_unit=:quantity_per_unit, poids_kg=:poids_kg,format=:format,benefice=:benefice,tmc=:tmc,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -327,7 +326,7 @@ class Article{
 
                                   $result=strtoupper($result);
                                   $result.=$numberandom;
-                                           include('../config.php');
+                                           include('../db/config.php');
 
 
                                   $sql = "SELECT * FROM article WHERE code = :code ";
@@ -360,7 +359,7 @@ class Article{
 
 						            	  try{
 											    $sql="Select * from article Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -403,7 +402,7 @@ class Article{
 
 						            	  try{
 											    $sql="Select matricule from article Where  designation=:designation";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -444,7 +443,7 @@ class Article{
 
 						            	  try{
 											    $sql="Select * from article Where  designation=:designation";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -483,7 +482,7 @@ class Article{
 
 						            	  try{
 											    $sql="Select * from article";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -521,7 +520,7 @@ class Article{
 
 									            	  try{
 														    $sql="Delete from article Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

@@ -42,7 +42,7 @@
 
 
 <?php
-include 'config.php';
+include 'db/config.php';
 
 
 $term=$_GET['term'];

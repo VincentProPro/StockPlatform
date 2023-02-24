@@ -9,7 +9,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../logout.php");
     exit;
 }
-         include('../../config.php');
+         include('../../db/config.php');
 
 
               $nommdf=$_POST['nommdf'];
@@ -154,7 +154,7 @@ $numberandom=rand(0,10)+rand(20,90);
 
   $result=strtoupper($result);
   $result.=$numberandom;
-           include('../../config.php');
+           include('../../db/config.php');
 
 
   $sql = "SELECT * FROM fournisseurdb WHERE code = :code ";

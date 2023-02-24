@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 class Commande{
 
@@ -67,7 +67,7 @@ class Commande{
 		           		$datereel=date("Y-m-d H:i:s",$t);
 		            	$redacteurcode=$_SESSION["email"];
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 
 
@@ -132,7 +132,7 @@ class Commande{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  bondecommandedb Set libeller=:libeller, magazincode=:magazincode , description=:description ,situation=:situation,tarif=:tarif, matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -193,7 +193,7 @@ class Commande{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  bondecommandedb Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation, lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -247,7 +247,7 @@ class Commande{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  bondecommandedb Set status=:status  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -299,7 +299,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -339,7 +339,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -376,7 +376,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb Where validation=0";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -413,7 +413,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb Where validation=1";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -451,7 +451,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb Where status='1'";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -488,7 +488,7 @@ class Commande{
 
 						            	  try{
 											    $sql="Select * from bondecommandedb Where status='En attente' And validation=1";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -526,7 +526,7 @@ class Commande{
 
 									            	  try{
 														    $sql="Delete from bondecommandedb Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

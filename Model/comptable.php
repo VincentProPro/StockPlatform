@@ -2,6 +2,7 @@
 
 require("../authentification.php");
 require("besoin.php");
+require("archive.php");
 // require("../AutreClass/message.php");
 require("message.php");
 
@@ -69,6 +70,13 @@ class Comptable{
 
 		return $commande->selectAllExecuter();
 		
+	}
+       
+	function  executeupload($name, $description){
+		$archive=new Archive();
+		
+		$this->callnotification($archive->uploadfile($name, $description),"../comptable/welcomecomptable.php");
+
 	}
 
 

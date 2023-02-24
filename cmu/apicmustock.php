@@ -11,7 +11,7 @@
 
 // error_reporting(0);
 
-// require_once "../config.php";
+// require_once "../db/config.php";
 
 $ttt=$_GET['perio'];
 switch ($ttt) {
@@ -90,7 +90,7 @@ $sessionarray=array();
  }
  function infogetexc(){
      header("location: cmu/welcomecmu.php ");
-                        include "../config.php";
+                        include "../db/config.php";
                             $artclname=$_GET['artclname'];
 
 
@@ -170,7 +170,7 @@ $sessionarray=array();
 }
 
 // function situationstockexc(){
-//                         include "../config.php";
+//                         include "../db/config.php";
 
 //                         $sql = "SELECT cs.code, art.designation, cs.quantity FROM cmustock cs LEFT JOIN article art ON cs.codearticle =art.code ORDER BY cs.lastmodification DESC";
                             
@@ -232,7 +232,7 @@ $sessionarray=array();
 // $date2=date('Y-m-d', $date);
 
 
-//                         include "../config.php";
+//                         include "../db/config.php";
 
 //                         // $sql = "SELECT cs.code, art.designation, cs.quantity FROM cmustock cs LEFT JOIN article art ON cs.codearticle =art.code WHERE cs.date BETWEEN '2022-02-09' AND '2022-02-11' ";
 
@@ -303,7 +303,7 @@ $sessionarray=array();
 // $date2=date('Y-m-d', $date);
 
 
-//                         include "../config.php";
+//                         include "../db/config.php";
 
 //                         // $sql = "SELECT cs.code, art.designation, cs.quantity FROM cmustock cs LEFT JOIN article art ON cs.codearticle =art.code WHERE cs.date BETWEEN '2022-02-09' AND '2022-02-11' ";
 

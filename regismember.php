@@ -3,6 +3,7 @@
 <?php
        
 require_once "config.php";
+// require_once "config.php";
 
 
 
@@ -130,7 +131,17 @@ $pass_word=md5($pass_word1);
                             $_SESSION["email"] = $email;                            
                             $_SESSION["role"] = $role;                            
                             $_SESSION["tel"] = $tel;                            
-                            $_SESSION["matricule"] = $matricule;                            
+                            $_SESSION["matricule"] = $matricule;  
+                            
+                            //generate token
+                            include "mytokens.php";
+                            $objecttoken= new Mytokens();
+                            $token=$objecttoken->generateToken();
+                            $_SESSION["token"] = $token;
+
+                            $objecttoken->storeToken($matricule, $token);
+                            
+
                             
                             if($role=="SuperAdmin") {
                                 // Redirect user to welcome page
@@ -172,7 +183,16 @@ $pass_word=md5($pass_word1);
                 //echo "good good";
             }else{
                 echo "canot execute insert";
-                                        http_response_code(201);
+                                        // http_response_code(201);
+                                        $cookie_name="messagedisplay";
+                            if(!isset($_COOKIE[$cookie_name])) {
+                                setcookie("messagedisplay", "Inscription a echoué ", time()+30,"/");
+                            } else {
+                                unset($_COOKIE[$cookie_name]);
+                                $res = setrawcookie($cookie_name, '', time() - 3600);
+                                setcookie("messagedisplay", "Inscription a echoué ", time()+30,"/");
+                            }
+                            header("location: index.php");
 
             }
 

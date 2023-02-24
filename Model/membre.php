@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("../AutreClass/message.php");
 
 class Membre{
@@ -73,7 +73,7 @@ class Membre{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into users(fullname,tel,email,position,role,status,matriculredacteur,lastmodification) values (:fullname,:tel,:email,:position,:role,:status,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":fullname", $this->fullname, PDO::PARAM_STR);
@@ -137,7 +137,7 @@ class Membre{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  users Set fullname=:fullname, tel=:tel , position=:position , email=:email , role=:role, status=:status  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -192,7 +192,7 @@ class Membre{
 
 						            	  try{
 											    $sql="Select * from users Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -232,7 +232,7 @@ class Membre{
 
 						            	  try{
 											    $sql="Select * from users";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -270,7 +270,7 @@ class Membre{
 
 						            	  try{
 											    $sql="Delete from users Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){

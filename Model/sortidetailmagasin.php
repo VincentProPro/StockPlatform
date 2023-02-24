@@ -1,10 +1,8 @@
 <?php
-echo" first line sortidetailmagasin";
 
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
-echo" in sortidetailmagasin";
 
 
 class Sortidetailmagasin{
@@ -122,7 +120,7 @@ class Sortidetailmagasin{
 	           		$datereel=date("Y-m-d H:i:s",$t);
 	            	$redacteurcode=$_SESSION["email"];
 	            	// $redacteurcode="_SESSION";
-        	         include('../config.php');
+        	         include('../db/config.php');
         	            $sql="insert into sortidetailmagasin (matricule_sorti,matricule_article,matricule_format,magazincode,matricule_magasin,groupcode_article,previousqty,currentqty,quantity,quantityperunit,situation_matricule,date,matriculredacteur,lastmodification) values (:matricule_sorti,:matricule_article,:matricule_format,:magazincode,:matricule_magasin,:groupcode_article,:previousqty,:currentqty,:quantity,:quantityperunit,:situation_matricule,:date,:matriculredacteur,:lastmodification)";
              	 if($stmt = $pdo->prepare($sql)){
                       $stmt->bindParam(":matricule_article", $this->matricule_article, PDO::PARAM_STR);
@@ -392,7 +390,7 @@ class Sortidetailmagasin{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into sortidetailmagasin (matricule_sorti,matricule_article,matricule_format,magazincode,matricule_magasin,groupcode_article,previousqty,currentqty,quantity,quantityperunit,situation_matricule,date,matriculredacteur,lastmodification) values (:matricule_sorti,:matricule_article,:matricule_format,:magazincode,:matricule_magasin,:groupcode_article,:previousqty,:currentqty,:quantity,:quantityperunit,:situation_matricule,:date,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":matricule_article", $matricule_article, PDO::PARAM_STR);
@@ -465,7 +463,7 @@ class Sortidetailmagasin{
 		         try{
 
 		         	   $sql="Update  sortidetailmagasin Set matricule_sorti=:matricule_sorti , matricule_article=:matricule_article , matricule_format=:matricule_format, matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule=:matricule";
-		         	   include('../config.php');
+		         	   include('../db/config.php');
 		         		// echo"this->fullname: ".$this->fullname;
 
 	                if($stmt = $pdo->prepare($sql)){
@@ -525,7 +523,7 @@ class Sortidetailmagasin{
 		         try{
 
 		         	   $sql="Update  sortidetailmagasin Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-		         	   include('../config.php');
+		         	   include('../db/config.php');
 		         		// echo"this->fullname: ".$this->fullname;
 
 	                if($stmt = $pdo->prepare($sql)){
@@ -586,7 +584,7 @@ class Sortidetailmagasin{
 		         try{
 
 		         	   $sql="Update  sortidetailmagasin Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule=:matricule";
-		         	   include('../config.php');
+		         	   include('../db/config.php');
 		         		// echo"this->fullname: ".$this->fullname;
 
 	                if($stmt = $pdo->prepare($sql)){
@@ -649,7 +647,7 @@ class Sortidetailmagasin{
 
 	            	  try{
 						    $sql="Select * from sortidetailmagasin Where  matricule = :matricule  ";
-						                	            	         include('../config.php');
+						                	            	         include('../db/config.php');
 
 
 						    if($stmt = $pdo->prepare($sql)){
@@ -689,7 +687,7 @@ class Sortidetailmagasin{
 
 			            	  try{
 								    $sql="Select * from sortidetailmagasin";
-								                	            	         include('../config.php');
+								                	            	         include('../db/config.php');
 
 
 								    if($stmt = $pdo->prepare($sql)){
@@ -726,7 +724,7 @@ class Sortidetailmagasin{
 
 			            	  try{
 								    $sql="SELECT sortidetail.matricule, art.designation, sortidetail.quantity, sortidetail.quantityperunit, sortidetail.currentqty,sortidetail.groupcode_article, sortimg.libeller,sortidetail.date, form.nom FROM sortidetailmagasin sortidetail, article art, format form, sortimagasin sortimg where form.matricule=sortidetail.matricule_format AND art.matricule=sortidetail.matricule_article AND sortimg.matricule=sortidetail.matricule_sorti AND sortidetail.validation=0";
-								                	            	         include('../config.php');
+								                	            	         include('../db/config.php');
 
 
 								    if($stmt = $pdo->prepare($sql)){
@@ -763,7 +761,7 @@ class Sortidetailmagasin{
 
 			            	  try{
 								    $sql="SELECT sortidetail.matricule, art.designation, sortidetail.quantity, sortidetail.quantityperunit, sortidetail.currentqty,sortidetail.groupcode_article, sortimg.libeller,sortidetail.date, form.nom FROM sortidetailmagasin sortidetail, article art, format form, sortimagasin sortimg where form.matricule=sortidetail.matricule_format AND art.matricule=sortidetail.matricule_article AND sortimg.matricule=sortidetail.matricule_sorti AND sortidetail.validation=1";
-								                	            	         include('../config.php');
+								                	            	         include('../db/config.php');
 
 
 								    if($stmt = $pdo->prepare($sql)){
@@ -802,7 +800,7 @@ class Sortidetailmagasin{
 
 						            	  try{
 											    $sql="Delete from sortidetailmagasin Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){

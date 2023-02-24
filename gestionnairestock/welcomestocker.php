@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 ob_start();
 
 // Initialize the session
@@ -716,7 +717,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT nom , matricule FROM magasintable";
                         
@@ -746,7 +747,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                    <?php
            
-             include('../config.php');
+             include('../db/config.php');
                     // $query=mysqli_query($conn,"select * from `users`");
                     $sql = "SELECT DISTINCT nom , matricule FROM fournisseurdb";
                       
@@ -784,7 +785,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT libeller , matricule FROM bondecommandedb ORDER  BY timestamp DESC LIMIT 3";
                         
@@ -848,7 +849,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                    <?php
            
-             include('../config.php');
+             include('../db/config.php');
                     // $query=mysqli_query($conn,"select * from `users`");
                     $sql = "SELECT DISTINCT libeller , matricule FROM sortimagasin ORDER  BY timestamp DESC LIMIT 5";
                       
@@ -888,7 +889,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                    <?php
            
-             include('../config.php');
+             include('../db/config.php');
                     // $query=mysqli_query($conn,"select * from `users`");
                     $sql = "SELECT DISTINCT nom , matricule FROM format";
                       
@@ -914,7 +915,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT nom , matricule FROM magasintable";
                         
@@ -977,7 +978,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   include('config.php');
+   include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

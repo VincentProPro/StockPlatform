@@ -17,6 +17,9 @@ $retraitdetailvalid=$surveillante->viewAllRetraitDetailValider();
 
 $achatCoursierValider=$surveillante->viewAllAchatCoursierValider();
 $achatCoursiernonValider=$surveillante->viewAllAchatCoursiernonValider();
+// $stockcmu=$surveillante->viewAllCmuStock();
+$stockmagasin=$surveillante->viewAllMagasinStock();
+
 // print_r($boncommandenonvalid);
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 class CaisseEntrer{
 
@@ -66,7 +66,7 @@ class CaisseEntrer{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into caisse (titre,description,prix,recu,payement,matricule_module,matriculredacteur,lastmodification) values (:titre,:description,:prix,:recu,:payement,:matricule_module,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":titre", $this->titre, PDO::PARAM_STR);
@@ -80,7 +80,7 @@ class CaisseEntrer{
 			                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
 
 			                        if($stmt->execute()){
-			                        														return "Le caisse a bien ete ajouté ";
+			                        														return "Paiement Enregistrer avec succès";
 
 
 			                               
@@ -89,13 +89,13 @@ class CaisseEntrer{
 
 			                        }
 			                        else{
-			                        	 return "La caisse n'a pas ete ajouté, Requete Invalid veuillez retenter ";
+			                        	 return "Le Paiement n'a pas ete ajouté, Requete Invalid veuillez retenter ";
 			                        	
 
 
 			                        }
 			                    }else{
-			                    		 return "Le caisse n'a pas ete ajouté, Requete Invalid Execution Fail veuillez retenter ";
+			                    		 return "Le Paiement n'a pas ete ajouté, Requete Invalid Execution Fail veuillez retenter ";
 
 
 			                    }
@@ -103,7 +103,7 @@ class CaisseEntrer{
 
 												}catch(exception $e){
 
-												return "Le caisse n'a pas ete ajouté, Requete Invalid veuillez retenter Error:".$e;
+												return "Le Paiement n'a pas ete ajouté, Requete Invalid veuillez retenter Error:".$e;
 
 												}
     		
@@ -129,7 +129,7 @@ class CaisseEntrer{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  caisse Set nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -147,19 +147,19 @@ class CaisseEntrer{
 											            // Attempt to execute the prepared statement
 											            if($stmt->execute()){
 
-											            	return "Le caisse a ben été modifié";
+											            	return "Le Paiement a ben été modifié";
 
 
 											            }
 											            else{
-											            	return "Le caisse n'a pas ete modifié correctement, Requete Invalid veuillez retenter ";
+											            	return "Le Paiement n'a pas ete modifié correctement, Requete Invalid veuillez retenter ";
 
 
 											            }}
 
 	    	            	         }
 	    	            	         catch(Exception $e){
-	    	            	         		return "Le caisse n'a pas ete modifié, Requete Invalid veuillez retenter Error:".$e;
+	    	            	         		return "Le Paiement n'a pas ete modifié, Requete Invalid veuillez retenter Error:".$e;
 
 
 
@@ -182,7 +182,7 @@ class CaisseEntrer{
 
 						            	  try{
 											    $sql="Select * from caisse Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -222,7 +222,7 @@ class CaisseEntrer{
 
 						            	  try{
 											    $sql="Select * from caisse";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -260,7 +260,7 @@ class CaisseEntrer{
 
 									            	  try{
 														    $sql="Delete from caisse Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

@@ -10,7 +10,7 @@
            
 
 
-         include('../../config.php');
+         include('../../db/config.php');
           $sql = "SELECT code FROM fournisseurdb WHERE code = :code ";
                                          if($stmt = $pdo->prepare($sql)){
                                            $stmt->bindParam(":code", $codeis, PDO::PARAM_STR);

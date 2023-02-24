@@ -2,7 +2,6 @@
 // 
 require("../authentification.php");
 require("achatcoursier.php");
-echo"good AutreClass";
 
 class Coursier{
 	private $email;

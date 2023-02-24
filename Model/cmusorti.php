@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("article.php");
 // require("cmuentrer.php");
 
@@ -17,6 +17,7 @@ class Cmusorti{
 	private $quantity;
 	private $situation_matricule;
 	private $benefice;
+	private $totalbenefice;
 	private $previousqty;
 	private $previousqtyreal;
 	private $currentqtyreal;
@@ -102,13 +103,15 @@ class Cmusorti{
 				$this->prixvente=$objetcmuentrer[0][11];
 				$this->quantity=$quantity;
 				$this->situation_matricule=$situation_matricule;
-				$this->benefice=$this->prixachat-$this->prixvente;
+				$this->benefice=$this->prixvente-$this->prixachat;
+				$this->totalbenefice=$this->benefice*$this->quantity;
+
 
 				// echo"article_matricule : ".$this->article_matricule;
 				// echo"article_desgnation : ".$article_desgnation;
 				// echo"good".$objetcmuentrer[0][11];
 						             	$sql="Select quantity,quantityreal from cmustock Where  matricule_article = :matricule_article  ";
-															                	            	         include('../config.php');
+															                	            	         include('../db/config.php');
 
 
 															    if($stmt = $pdo->prepare($sql)){
@@ -146,7 +149,7 @@ class Cmusorti{
 
 
 
-						    	    $sql="insert into  cmusorti (article_matricule,prixachat,prixvente,previousqty,quantity,currentqty,numerofacture,situation_matricule,benefice,date,taxe,lastmodification,matriculredacteur) values ( :article_matricule, :prixachat,:prixvente,:previousqty,:quantity,:currentqty,:numerofacture,:situation_matricule,:benefice,:date,:taxe,:lastmodification,:matriculredacteur)";
+						    	    $sql="insert into  cmusorti (article_matricule,prixachat,prixvente,previousqty,quantity,currentqty,numerofacture,situation_matricule,benefice,totalbenefice,date,taxe,lastmodification,matriculredacteur) values ( :article_matricule, :prixachat,:prixvente,:previousqty,:quantity,:currentqty,:numerofacture,:situation_matricule,:benefice,:totalbenefice,:date,:taxe,:lastmodification,:matriculredacteur)";
 						             	 if($stmt = $pdo->prepare($sql)){
 						             	 	
 
@@ -159,7 +162,9 @@ class Cmusorti{
 				                                                    $stmt->bindParam(":situation_matricule", $this->situation_matricule, PDO::PARAM_STR);
 				                                                    $stmt->bindParam(":previousqty", $this->previousqty, PDO::PARAM_STR);
 				                                                    $stmt->bindParam(":currentqty", $this->currentqty, PDO::PARAM_STR);
-				                                                    $stmt->bindParam(":benefice", $this->benefice, PDO::PARAM_STR);
+																	 
+																	$stmt->bindParam(":totalbenefice", $this->totalbenefice, PDO::PARAM_STR);
+																	$stmt->bindParam(":benefice", $this->benefice, PDO::PARAM_STR);
 				                                                    $stmt->bindParam(":taxe", $this->taxe, PDO::PARAM_STR);
 
 				                                                    $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
@@ -178,7 +183,7 @@ class Cmusorti{
 															        	 if($stmt->rowCount()>0){
 															        	 	// $arraystable= $stmt->fetchAll();
 															        		$sql="Update cmustock SET quantity=:quantity, quantityreal=:quantityreal  Where  matricule_article = :matricule_article  ";
-															                	            	         // include('../config.php');
+															                	            	         // include('../db/config.php');
 
 
 															    if($stmt = $pdo->prepare($sql)){
@@ -298,7 +303,7 @@ class Cmusorti{
 
 		  //            try{
 		  //            	$sql="Select quantity ,matricule_article from cmuentrer Where  matricule = :matricule  ";
-				// 							                	            	         include('../config.php');
+				// 							                	            	         include('../db/config.php');
 
 
 				// 							    if($stmt = $pdo->prepare($sql)){
@@ -313,7 +318,7 @@ class Cmusorti{
 
 				// 							        	 }}}
 		  //            	$sql="Select quantity from cmustock Where  matricule_article = :matricule_articleadded  ";
-				// 							                	            	         include('../config.php');
+				// 							                	            	         include('../db/config.php');
 
 
 				// 							    if($stmt = $pdo->prepare($sql)){
@@ -324,7 +329,7 @@ class Cmusorti{
 				// 							        	 	$arraystable= $stmt->fetchAll();
 				// 							        		$this->previousqty=$arraystable[0][0];
 				// 							        		$sql="Update quantity=:quantity from cmustock Where  matricule_article = :matricule_article  ";
-				// 							                	            	         include('../config.php');
+				// 							                	            	         include('../db/config.php');
 
 
 				// 							    if($stmt = $pdo->prepare($sql)){
@@ -409,7 +414,7 @@ class Cmusorti{
 	   //  	            	         try{
 
 	   //  	            	         	   $sql="Update  cmuentrer Set description=:description, prixachat=:prixachat , prixvente=:prixvente ,quantity=:quantity,quantityperunit=:quantityperunit, poids=:poids,situation_matricule=:situation_matricule,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	   //  	            	         	   include('../config.php');
+	   //  	            	         	   include('../db/config.php');
 	   //  	            	         		// echo"this->fullname: ".$this->fullname;
 
 				//                         if($stmt = $pdo->prepare($sql)){
@@ -474,7 +479,7 @@ class Cmusorti{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  cmusorti Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -527,7 +532,7 @@ class Cmusorti{
 
 		// 				            	  try{
 		// 									    $sql="Select * from achatcoursier Where  matricule = :matricule  ";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -567,7 +572,7 @@ class Cmusorti{
 
 						            	  try{
 											    $sql="Select * from achatcoursier";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -599,53 +604,202 @@ class Cmusorti{
 
 											  }
 							        }
+
+		public function selectAllMois(){
+    			
+
+						            	  try{
+											    $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE  MONTH(cmusorti.date) = MONTH(now()) and YEAR(cmusorti.date) = YEAR(now())";
+											                	            	         include('../db/config.php');
+
+
+											    if($stmt = $pdo->prepare($sql)){
+											  
+											        if($stmt->execute()){
+											        	 if($stmt->rowCount()>0){
+											        	 	$arraystable= $stmt->fetchAll();
+											        		return $arraystable;
+
+											        	 }else{
+											        	 	return "none";
+											        	 }
+											          
+
+											        }else{
+											    	 return "La selection a échoué, veuillez retenter. ";
+
+											    }
+											  
+											    }else{
+											    	 return "La selection a échoué, veuillez retenter. ";
+
+											    }
+
+											  }
+											catch(exception $e){
+												 return "La suppression a échoué, veuillez retenter. Error: ".$e;
+											     
+
+											  }
+		}
+		public function selectAllThreeMois(){
+    			
+
+			try{
+				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date > now() - INTERVAL 3 MONTH;";
+														   include('../db/config.php');
+
+
+				  if($stmt = $pdo->prepare($sql)){
+				
+					  if($stmt->execute()){
+						   if($stmt->rowCount()>0){
+							   $arraystable= $stmt->fetchAll();
+							  return $arraystable;
+
+						   }else{
+							   return "none";
+						   }
+						
+
+					  }else{
+					   return "La selection a échoué, veuillez retenter. ";
+
+				  }
+				
+				  }else{
+					   return "La selection a échoué, veuillez retenter. ";
+
+				  }
+
+				}
+			  catch(exception $e){
+				   return "La suppression a échoué, veuillez retenter. Error: ".$e;
+				   
+
+				}
+}
+public function selectAllSixMois(){
+    			
+
+	try{
+		  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date > now() - INTERVAL 6 MONTH;";
+												   include('../db/config.php');
+
+
+		  if($stmt = $pdo->prepare($sql)){
+		
+			  if($stmt->execute()){
+				   if($stmt->rowCount()>0){
+					   $arraystable= $stmt->fetchAll();
+					  return $arraystable;
+
+				   }else{
+					   return "none";
+				   }
+				
+
+			  }else{
+			   return "La selection a échoué, veuillez retenter. ";
+
+		  }
+		
+		  }else{
+			   return "La selection a échoué, veuillez retenter. ";
+
+		  }
+
+		}
+	  catch(exception $e){
+		   return "La suppression a échoué, veuillez retenter. Error: ".$e;
+		   
+
+		}
+}
 
 		public function selectAllPeriode($debutperiode,$finperiode){
     			
 
-						            	  try{
-											    $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date BETWEEN :date1 AND :date2";
-											                	            	         include('../config.php');
+			try{
+				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice , cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date BETWEEN :date1 AND :date2";
+														   include('../db/config.php');
 
 
-											    if($stmt = $pdo->prepare($sql)){
-											    	$stmt->bindParam(":date1", $debutperiode, PDO::PARAM_STR);
-                                             		$stmt->bindParam(":date2", $finperiode, PDO::PARAM_STR);
-											  
-											        if($stmt->execute()){
-											        	 if($stmt->rowCount()>0){
-											        	 	$arraystable= $stmt->fetchAll();
-											        		return $arraystable;
+				  if($stmt = $pdo->prepare($sql)){
+					  $stmt->bindParam(":date1", $debutperiode, PDO::PARAM_STR);
+					   $stmt->bindParam(":date2", $finperiode, PDO::PARAM_STR);
+				
+					  if($stmt->execute()){
+						   if($stmt->rowCount()>0){
+							   $arraystable= $stmt->fetchAll();
+							  return $arraystable;
 
-											        	 }else{
-											        	 	return "none";
-											        	 }
-											          
+						   }else{
+							   return "none";
+						   }
+						
 
-											        }else{
-											    	 return "La selection a échoué, veuillez retenter. ";
+					  }else{
+					   return "La selection a échoué, veuillez retenter. ";
 
-											    }
-											  
-											    }else{
-											    	 return "La selection a échoué, veuillez retenter. ";
+				  }
+				
+				  }else{
+					   return "La selection a échoué, veuillez retenter. ";
 
-											    }
+				  }
 
-											  }
-											catch(exception $e){
-												 return "La suppression a échoué, veuillez retenter. Error: ".$e;
-											     
+				}
+			  catch(exception $e){
+				   return "La suppression a échoué, veuillez retenter. Error: ".$e;
+				   
 
-											  }
-							        }
+				}
+}
+public function selectAllYear(){
+    			
+
+	try{
+		  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date > now() - INTERVAL 1 YEAR;";
+												   include('../db/config.php');
+
+
+		  if($stmt = $pdo->prepare($sql)){
+		
+			  if($stmt->execute()){
+				   if($stmt->rowCount()>0){
+					   $arraystable= $stmt->fetchAll();
+					  return $arraystable;
+
+				   }else{
+					   return "none";
+				   }
+				
+
+			  }else{
+			   return "La selection a échoué, veuillez retenter. ";
+
+		  }
+		
+		  }else{
+			   return "La selection a échoué, veuillez retenter. ";
+
+		  }
+
+		}
+	  catch(exception $e){
+		   return "La suppression a échoué, veuillez retenter. Error: ".$e;
+		   
+
+		}
+}
 		// // public function supprimer($matricule){
 		// 	    							$this->matricule=$matricule;
 			    			
 
 		// 							            	  try{
 		// 												    $sql="Delete from achatcoursier Where  matricule = :matricule  ";
-		// 												                	            	         include('../config.php');
+		// 												                	            	         include('../db/config.php');
 
 
 		// 												    if($stmt = $pdo->prepare($sql)){

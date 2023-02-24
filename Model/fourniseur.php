@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("../AutreClass/message.php");
 
 class Fourniseur{
@@ -72,7 +72,7 @@ class Fourniseur{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 
 			            	            	            $sql="insert into fournisseurdb(nom,tel,email,plusinfo,location,reference,matriculredacteur,lastmodification) values (:nom,:tel,:email,:plusinfo,:location,:reference,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
@@ -139,7 +139,7 @@ class Fourniseur{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  fournisseurdb Set nom=:nom, tel=:tel , plusinfo=:plusinfo , email=:email , location=:location, reference=:reference  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 
 				                        if($stmt = $pdo->prepare($sql)){
 
@@ -276,7 +276,7 @@ class Fourniseur{
 
                                   $result=strtoupper($result);
                                   $result.=$numberandom;
-                                           include('../config.php');
+                                           include('../db/config.php');
 
 
                                   $sql = "SELECT * FROM fournisseurdb WHERE reference = :reference ";
@@ -313,7 +313,7 @@ class Fourniseur{
 
 						            	  try{
 											    $sql="Select matricule from fournisseurdb Where  reference = :reference  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -354,7 +354,7 @@ class Fourniseur{
 
 						            	  try{
 											    $sql="Select * from fournisseurdb Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -394,7 +394,7 @@ class Fourniseur{
 
 						            	  try{
 											    $sql="Select * from fournisseurdb";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -433,7 +433,7 @@ class Fourniseur{
 
 						            	  try{
 											    $sql="Delete from users Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){

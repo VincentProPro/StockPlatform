@@ -1,7 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
-echo" Sortimagasin class ";
+require("../db/config.php");
 
 class Sortimagasin{
 
@@ -82,7 +81,7 @@ class Sortimagasin{
 
 
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -150,7 +149,7 @@ class Sortimagasin{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  sortimagasin Set matricule_magasin=:matricule_magasin, matricule_module=:matricule_module , libeller=:libeller ,lastmodification=:lastmodification  WHERE matricule=:matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -205,7 +204,7 @@ class Sortimagasin{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  sortimagasin Set status=:status WHERE matricule=:matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -260,7 +259,7 @@ class Sortimagasin{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  sortimagasin Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule=:matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -313,7 +312,7 @@ class Sortimagasin{
 
 						            	  try{
 											    $sql="Select * from sortimagasin Where  matricule=:matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -354,7 +353,7 @@ class Sortimagasin{
 
 						            	  try{
 											    $sql="SELECT sortimagasin.matricule, sortimagasin.libeller, sortimagasin.status, sortimagasin.date, module.nom AS modulenom, magasintable.nom AS magasinnom FROM sortimagasin JOIN module ON sortimagasin.matricule_module=module.matricule JOIN magasintable ON sortimagasin.matricule_magasin=magasintable.matricule WHERE sortimagasin.status='1'";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -391,7 +390,7 @@ class Sortimagasin{
 
 						            	  try{
 											    $sql="SELECT sortimagasin.matricule, sortimagasin.libeller, sortimagasin.status, sortimagasin.date, module.nom AS modulenom, magasintable.nom AS magasinnom FROM sortimagasin JOIN module ON sortimagasin.matricule_module=module.matricule JOIN magasintable ON sortimagasin.matricule_magasin=magasintable.matricule";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -428,7 +427,7 @@ class Sortimagasin{
 
 						            	  try{
 											    $sql="Select * from sortimagasin";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -466,7 +465,7 @@ class Sortimagasin{
 
 									            	  try{
 														    $sql="Delete from sortimagasin Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

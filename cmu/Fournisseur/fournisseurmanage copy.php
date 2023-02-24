@@ -409,7 +409,7 @@ function updateadd(){
 
 
     $validationstocker=true;
-         include('../../config.php');
+         include('../../db/config.php');
 
 
 
@@ -569,7 +569,7 @@ function updateadd(){
 
          <?php
  
-   include('../config.php');
+   include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

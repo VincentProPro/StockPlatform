@@ -30,7 +30,7 @@ if($conn->connect_error){
         }
 */
         
-require_once "config.php";
+require_once "db/config.php";
 $email ="";
  $password = "";
 $username_err = "";
@@ -115,7 +115,13 @@ $essaieempty=trim($_POST["email"]);
                             $_SESSION["email"] = $email;                            
                             $_SESSION["role"] = $role;                            
                             $_SESSION["tel"] = $tel;     
-                            $_SESSION["matricule"] = $matricule;     
+                            $_SESSION["matricule"] = $matricule;
+                            //generate token
+                            include "mytokens.php";
+                            $objecttoken= new Mytokens();
+                            $token=$objecttoken->generateToken();
+                            $_SESSION["token"] = $token;
+                            $objecttoken->storeToken($matricule, $token);     
                             if($role=="SuperAdmin") {
                                 // Redirect user to welcome page
                             header("location: welcomesuperAdmin.php");
@@ -147,6 +153,24 @@ $essaieempty=trim($_POST["email"]);
                             
                         } else{
                             // Display an error message if password is not valid
+                            $cookie_name="messagedisplay";
+                            if(!isset($_COOKIE[$cookie_name])) {
+                                setcookie("messagedisplay", "Vos credentiales pour vous connecter ne sont pas valides", time()+30,"/");
+                            } else {
+                                unset($_COOKIE[$cookie_name]);
+                                $res = setrawcookie($cookie_name, '', time() - 3600);
+                                setcookie("messagedisplay", "Vos credentiales pour vous connecter ne sont pas valides", time()+30,"/");
+                            }
+                        //     echo"<script type=\"text/javascript\" >
+                        //     document.getElementById(\"btnconnect\").addEventListener(\"click\", function() {
+                        //         // Send an AJAX request to the PHP script
+                        //         var xhr = new XMLHttpRequest();
+                        //         xhr.open(\"GET\", \"index.php\", true);
+                        //         xhr.send();
+                        //     });
+                        // </script>";
+                            
+                            header("location: index.php");
                             $password_err = "The password you entered was not valid.";
                                      echo $password_err;
 

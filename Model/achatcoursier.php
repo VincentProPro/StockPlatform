@@ -1,12 +1,10 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("article.php");
-echo "before entrermagasin";
 
 require("entrermagasin.php");
 
-echo "after entrermagasin";
 
 class AchatCoursier{
 
@@ -107,7 +105,7 @@ class AchatCoursier{
 		            	$redacteurcode=$_SESSION["email"];
 		            	$this->dateachat=$datereel;
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -187,7 +185,7 @@ class AchatCoursier{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  achatcoursier Set description=:description, prixachat=:prixachat , prixvente=:prixvente ,quantity=:quantity,quantityperunit=:quantityperunit, poids=:poids,matricule_format=:matricule_format,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -253,7 +251,7 @@ class AchatCoursier{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  achatcoursier Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -312,7 +310,7 @@ class AchatCoursier{
 
 						            	  try{
 											    $sql="SELECT achatcour.matricule, art.designation, achatcour.quantity, achatcour.quantityperunit, achatcour.prixachat, besoin.libeller, achatcour.numfacture,achatcour.description,achatcour.dateachat, form.nom FROM achatcoursier achatcour, article art, format form, bondecommandedb besoin where form.matricule=achatcour.matricule_format AND art.matricule=achatcour.matricule_article AND besoin.matricule=achatcour.matricule_comand AND achatcour.validation=0";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -349,7 +347,7 @@ class AchatCoursier{
 
 						            	  try{
 											    $sql="SELECT achatcour.matricule, art.designation, achatcour.quantity, achatcour.quantityperunit, achatcour.prixachat, besoin.libeller, achatcour.numfacture,achatcour.description, achatcour.dateachat,form.nom FROM achatcoursier achatcour, article art, format form, bondecommandedb besoin where form.matricule=achatcour.matricule_format AND art.matricule=achatcour.matricule_article AND besoin.matricule=achatcour.matricule_comand AND achatcour.validation=1";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -387,7 +385,7 @@ class AchatCoursier{
 
 						            	  try{
 											    $sql="Select * from achatcoursier Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -427,7 +425,7 @@ class AchatCoursier{
 
 						            	  try{
 											    $sql="Select * from achatcoursier";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -465,7 +463,7 @@ class AchatCoursier{
 
 									            	  try{
 														    $sql="Delete from achatcoursier Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

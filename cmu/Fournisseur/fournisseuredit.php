@@ -340,7 +340,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -381,7 +381,7 @@ span.psw {
 </body>
 </html>
 <?php
-                    // include('../config.php');
+                    // include('../db/config.php');
 // error_reporting(0);
 
         if(array_key_exists('modify', $_POST)) {
@@ -405,7 +405,7 @@ span.psw {
                     // $redacteurcode="gastron@gmail.com";
 
 
-         include('../../config.php');
+         include('../../db/config.php');
 
 
 

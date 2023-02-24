@@ -1,6 +1,6 @@
 <?php
 ob_start();
-
+error_reporting(0);
 // Initialize the session
 session_start();
 require("viewcmu.php");
@@ -79,120 +79,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <div class="row">
   <div class="leftcolumn">
-                  <div class="card shadowexempl">
-                       <center>  <?php 
-      if(isset($_COOKIE['messagedisplay'])) : ?>
-       
-
-         <div class="alerttext">
-          
-          <p>
-            <?php echo $_COOKIE['messagedisplay']; ?></p>
-          </div>
-            <?php endif; ?>
-
-          </center>
-                          <div id="entrerarticle">
-
-                              <h2>Entrée d'Article CMU</h2>
-                              <h5>Gérant CMU Fonction</h5>
-                                    
-                                <div>
-                                  <form  method="POST">
-                                 
-                                  <br>
-                                  <br>
-                                                      <label for="artcl"><b> Articleici </b></label>
-                                                      <input type="text" name="autocomplete-search"  placeholder="search here...." class="form-control autocompletesearcharticle">
-
-
-
-                                  <label for="sorticodemagasin"><b> Sorti Magasin Libelé</b></label>
-                                             
-                                  <select name="sorticodemagasin">
-
-                                 <?php
-                         
-                                    include('../config.php');
-                                  // $query=mysqli_query($conn,"select * from `users`");
-                                  $sql = "SELECT DISTINCT libeller , matricule FROM sortimagasin ORDER  BY matricule DESC LIMIT 3";
-                                    
-                                    // Set parameters
-                                    // $param_username = trim($_POST["email"]);
-                                
-                                if($stmt = $pdo->prepare($sql)){
-
-                                    
-                                    if($stmt->execute()){
-                                                                
-                                        if($stmt->rowCount()>0){
-                                                              $arrayrole= $stmt->fetchAll();
-                                                              foreach($arrayrole as $roleelement){
-                                                                ?> 
-                                                                  <option value="<?php echo $roleelement[1];?>"><?php echo $roleelement[0];?></option>
-                                                                <?php
-                                                              }  }}}?>
-                                                                </select>
-                                  <br>
-
-                                  <br>
-                                  <label for="situation"><b>Situation </b></label>
-
-                                     <select name="situation">
-
-                                 <?php
-                         
-                                    include('../config.php');
-                                  // $query=mysqli_query($conn,"select * from `users`");
-                                  $sql = "SELECT DISTINCT nom , matricule FROM situation where matricule_module=1";
-                                    
-                                    // Set parameters
-                                    // $param_username = trim($_POST["email"]);
-                                
-                                if($stmt = $pdo->prepare($sql)){
-
-                                    
-                                    if($stmt->execute()){
-                                                                
-                                        if($stmt->rowCount()>0){
-                                                              $arrayrole= $stmt->fetchAll();
-                                                              foreach($arrayrole as $roleelement){
-                                                                ?> 
-                                                                  <option value="<?php echo $roleelement[1];?>"><?php echo $roleelement[0];?></option>
-                                                                <?php
-                                                              }  }}}?>
-                                                                </select><br>
-
-                              <label for="quantityperunit"><b>Quantité par Unité</b></label>
-                              <input type="number" placeholder="Entrer la quantité en détail" name="quantityperunit" required>
-
-                               <label for="prixachat"><b>Prix d'Achat</b></label>
-                              <input type="number" placeholder="Entrer le Prix d'Achat" name="prixachat" required>
-
-                               <label for="prixvente"><b>Prix De Vente</b></label>
-                              <input type="number" placeholder="Entrer le Prix de Vente " name="prixvente" required>
-
-                               <label for="taxe"><b>Taxe</b></label>
-                              <input type="number" placeholder="Entrer la taxe" name="taxe" required>
-                                   
-                                 
-                                  <br>
-                                  <br>
-                                   <label for="datesorti"><b>Date</b></label>
-                            <input type="date"  name="datesorti" required>
-
-                                       
-
-
-                             
-                               
-                              <button type="submit" name="button1">Envoyé</button>
-                                  
-                                </form></div>
-                                <p>Autres fonctions..</p>
-                              <p>Le Gérant du CMU est aussi chargé d'ajouter dans la base de donnée des nouveaux fournisseurs, catégories, format et articles.</p>
-                            </div>
-                      </div>
+                  
                
      <div class="card shadowexempl">
             <div id="retraitarticle">
@@ -214,7 +101,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                                  <?php
                          
-                                    include('../config.php');
+                                    include('../db/config.php');
                                   // $query=mysqli_query($conn,"select * from `users`");
                                   $sql = "SELECT DISTINCT titre , matricule FROM caisse where matricule_module=1 ORDER  BY matricule DESC LIMIT 3";
                                     
@@ -245,7 +132,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                                  <?php
                          
-                                    include('../config.php');
+                                    include('../db/config.php');
                                   // $query=mysqli_query($conn,"select * from `users`");
                                   $sql = "SELECT DISTINCT nom , matricule FROM situation where matricule_module=1";
                                     
@@ -316,7 +203,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   include('config.php');
+   include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

@@ -133,10 +133,22 @@ span.psw {
   <img src="images/traffic-sign-38589_1280.png" style="width:50%">
   <div>
     <h3>Cliquer sur s'enregistrer pour une première fois ou se connecter si votre compte existe déjà</h3>
+    <center>  <?php 
+      if(isset($_COOKIE['messagedisplay'])) : ?>
+       
+
+         <div class="alerttext">
+          
+          <p>
+            <?php echo $_COOKIE['messagedisplay']; ?></p>
+          </div>
+            <?php endif; ?>
+
+          </center>
   </div>
   <div>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Se Connecter</button>
-    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">S'Inscrire</button>
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="btnconnect">Se Connecter</button>
+    <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" id="btninscri">S'Inscrire</button>
 
   </div>
 
@@ -155,6 +167,18 @@ span.psw {
     </div>
 
     <div class="container">
+    <center>  <?php 
+      if(isset($_COOKIE['messagedisplay'])) : ?>
+       
+
+         <div class="alerttext">
+          
+          <p>
+            <?php echo $_COOKIE['messagedisplay']; ?></p>
+          </div>
+            <?php endif; ?>
+
+          </center>
             <h3>Se Connecter</h3>
 
       <label for="email"><b>Email</b></label>
@@ -186,6 +210,18 @@ span.psw {
 
     <div class="container">
       <h3>S'Inscrire</h3>
+      <center>  <?php 
+      if(isset($_COOKIE['messagedisplay'])) : ?>
+       
+
+         <div class="alerttext">
+          
+          <p>
+            <?php echo $_COOKIE['messagedisplay']; ?></p>
+          </div>
+            <?php endif; ?>
+
+          </center>
       <label for="email"><b>Email</b></label>
       <input type="text" placeholder="Entrer l'email" name="email" required>
 

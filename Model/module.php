@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("../AutreClass/message.php");
 
 class Module{
@@ -66,7 +66,7 @@ class Module{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into module (code,nom,description,matriculredacteur,lastmodification) values (:code,:nom,:description,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
@@ -126,7 +126,7 @@ class Module{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  module Set nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -261,7 +261,7 @@ class Module{
 
                                   $result=strtoupper($result);
                                   $result.=$numberandom;
-                                           include('../config.php');
+                                           include('../db/config.php');
 
 
                                   $sql = "SELECT * FROM module WHERE code = :code ";
@@ -300,7 +300,7 @@ class Module{
 
 						            	  try{
 											    $sql="Select * from module Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -340,7 +340,7 @@ class Module{
 
 						            	  try{
 											    $sql="Select * from module";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -378,7 +378,7 @@ class Module{
 
 									            	  try{
 														    $sql="Delete from module Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

@@ -1,10 +1,7 @@
 <?php
-echo"in stcok";
 
 require("../authentification.php");
-require("../config.php");
-echo"in stcok";
-
+require("../db/config.php");
 class CmuStock{
 
 	private $matricule;
@@ -47,7 +44,7 @@ class CmuStock{
 		            	$redacteurcode=$_SESSION["email"];
 		            	// $this->dateachat=$datereel;
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 		            	            	         $sql="Select quantity,quantityreal from cmustock Where  matricule_article=:matricule_articleadded  or groupcode_article=:groupcode_article";
 
 
@@ -62,7 +59,7 @@ class CmuStock{
 											        	 	$this->currentqty=$arraystable[0][0]+$this->quantity;
 
 											        		$sql="Update cmustock SET quantity=:quantity, quantityreal=:quantityreal  Where  matricule_article=:matricule_article  ";
-											                	            	         // include('../config.php');
+											                	            	         // include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -140,7 +137,7 @@ class CmuStock{
 	    	  //           	         try{
 
 	    	  //           	         	   $sql="Update  stockmagasin Set quantity=:quantity Where  groupcode_article=:groupcode_article AND matricule_format=:matricule_format AND matricule_magazin=:matricule_magazin AND quantityperunit=:quantityperunit";
-	    	  //           	         	   include('../config.php');
+	    	  //           	         	   include('../db/config.php');
 	    	  //           	         		// echo"this->fullname: ".$this->fullname;
 
 				    //                     if($stmt = $pdo->prepare($sql)){
@@ -192,7 +189,7 @@ class CmuStock{
 
 						            	  try{
 											    $sql="Select * from cmustock Where  matricule=:matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -233,7 +230,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from cmustock Where  groupcode_article=:groupcode_article And magazincode=:magazincode";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -277,7 +274,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from stockmagasin Where  groupcode_article=:groupcode_article And magazincode=:magazincode And matricule_format!=:matricule_format";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -321,7 +318,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit ";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -366,7 +363,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit  ";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -411,7 +408,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -456,7 +453,7 @@ class CmuStock{
 
 		// 				            	  try{
 		// 									    $sql="Select * from stockmagasin Where  groupcode_article=:groupcode_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit";
-		// 									                	            	         include('../config.php');
+		// 									                	            	         include('../db/config.php');
 
 
 		// 									    if($stmt = $pdo->prepare($sql)){
@@ -501,7 +498,7 @@ class CmuStock{
 
 						            	  try{
 											    $sql="SELECT cmustock.matricule, cmustock.groupcode_article,cmustock.quantity, cmustock.prixachat, cmustock.prixvente, article.designation FROM cmustock JOIN article ON cmustock.matricule_article=article.matricule";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -532,14 +529,15 @@ class CmuStock{
 											     
 
 											  }
-							        }
+		}
+		
 		public function supprimer($matricule){
 			    							$this->matricule=$matricule;
 			    			
 
 									            	  try{
 														    $sql="Delete from cmustock Where  matricule=:matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

@@ -1,12 +1,13 @@
 <?php
 ob_start();
+error_reporting(0);
 
 // Initialize the session
 session_start();
-// require("../config.php");
+// require("../db/config.php");
 require("viewcaisse.php");
 
-                    include('../config.php');
+                    include('../db/config.php');
 
  
 // Check if the user is logged in, if not then redirect him to login page
@@ -295,44 +296,41 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
       </div>
       <div class="card shadowexempl">
         <h2>Stock Liste</h2>
-<h3>Voulez vous rechercher un article?</h3>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <h3>Voulez vous rechercher un article?</h3>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         <div class="retraitarticleperunit">
           <div class="wrapper">
 
 
-<table id="myTable">
-  <tr class="header">
-    <th style="width:40%;">Article</th>
-    <th style="width:15%;">Groupe Code</th>
-    <th style="width:15%;">Quantity</th>
-    <th style="width:15%;">Prix Achat</th>
-    <th style="width:15%;">Prix Vente</th>
-  </tr>
-  
-  <?php 
-  foreach($stockcmu as $element){
+                <table id="myTable">
+                  <tr class="header">
+                    <th style="width:40%;">Article</th>
+                    <th style="width:15%;">Groupe Code</th>
+                    <th style="width:15%;">Quantity</th>
+                    <th style="width:15%;">Prix Achat</th>
+                    <th style="width:15%;">Prix Vente</th>
+                  </tr>
+                  
+                  <?php 
+                  foreach($stockcmu as $element){
 
-    ?>
-    <tr>     
-      <td contentEditable ><?php echo $element["designation"]; ?></td>              
-      <td><?php echo $element["groupcode_article"]; ?></td>                                              
-      <td><?php echo $element["quantity"]; ?></td>                                              
-      <td><?php echo $element["prixachat"]; ?></td> 
-      <td><?php echo $element["prixvente"]; ?></td>                                              
-    </tr>
+                    ?>
+                    <tr>     
+                      <td contentEditable ><?php echo $element["designation"]; ?></td>              
+                      <td><?php echo $element["groupcode_article"]; ?></td>                                              
+                      <td><?php echo $element["quantity"]; ?></td>                                              
+                      <td><?php echo $element["prixachat"]; ?></td> 
+                      <td><?php echo $element["prixvente"]; ?></td>                                              
+                    </tr>
 
-    <?php
+                    <?php
 
-  }
+                  }
 
-  ?>
-  
-</table>
-
-          
-
-        </div>
+                  ?>
+                  
+                </table>   
+          </div>
 
         </div>
         
@@ -340,7 +338,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
          <div id="payement">
 
                 <h2>Caisse Payement</h2>
-                <h5>Gestionaire de Stock Fonction</h5>
+                <h5>Ajout des paiements effectués</h5>
 
                   <div><form method="POST"  action="apicaisse.php" autocomplete="off"  id="formtable">
                     <div>           
@@ -364,7 +362,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
 <br><br>
 
                     
-                    <label for="prix"><b>Prix </b></label><input type="number" name="prix">
+                    <label for="prix"><b>Prix Total</b></label><input type="number" name="prix">
                     <label for="recu"><b>Somme Reçu </b></label><input type="number" name="recu">
                     
 
@@ -386,7 +384,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT nom , matricule FROM module";
                         
@@ -477,7 +475,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
          <?php
          //dsimagasine\wp-content\uploads\woocommerce_uploads\2023\01
  //dsimagasine/wp-contentuploadswoocommerce_uploads202301
-   // include('../config.php');
+   // include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -533,7 +531,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
       var xarticle = document.getElementById("caissemyInput").value;
       var xqty = document.getElementById("idqty").value;
 
-      alert(xarticle+xqty);
+      // alert(xarticle+xqty);
 
 //         let data = [
 //   ['Title', 'Artist', 'Duration', 'Created'],
@@ -597,7 +595,7 @@ cell2.innerHTML = xqty;
 
       }
 
-            alert(dataarray.toString());
+            // alert(dataarray.toString());
             document.getElementById("descriptioninput").value = dataarray.toString();
 
         

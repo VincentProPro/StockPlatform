@@ -1,9 +1,7 @@
 <?php
-echo"in stcok";
 
 require("../authentification.php");
-require("../config.php");
-echo"in stcok";
+require("../db/config.php");
 
 class Stockmagasin{
 
@@ -47,7 +45,7 @@ class Stockmagasin{
 		            	$redacteurcode=$_SESSION["email"];
 		            	$this->dateachat=$datereel;
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -156,7 +154,7 @@ class Stockmagasin{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  stockmagasin Set quantity=:quantity Where  groupcode_article=:groupcode_article AND matricule_format=:matricule_format AND matricule_magazin=:matricule_magazin AND quantityperunit=:quantityperunit";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -208,7 +206,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -249,7 +247,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  groupcode_article=:groupcode_article And magazincode=:magazincode";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -293,7 +291,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  groupcode_article=:groupcode_article And magazincode=:magazincode ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -337,7 +335,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -382,7 +380,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -427,7 +425,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  matricule_article=:matricule_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -472,7 +470,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="Select * from stockmagasin Where  groupcode_article=:groupcode_article  And matricule_format=:matricule_format And magazincode=:magazincode And quantityperunit=:quantityperunit";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -517,7 +515,7 @@ class Stockmagasin{
 
 						            	  try{
 											    $sql="SELECT stockmagasin.matricule, stockmagasin.matricule_article, stockmagasin.groupcode_article, article.designation, stockmagasin.quantity, stockmagasin.quantityperunit, format.nom AS formatnom, magasintable.nom AS magazinnom FROM stockmagasin JOIN article ON stockmagasin.matricule_article=article.matricule JOIN format ON stockmagasin.matricule_format=format.matricule JOIN magasintable ON stockmagasin.magazincode=magasintable.code ORDER BY stockmagasin.quantity ASC";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -555,7 +553,7 @@ class Stockmagasin{
 
 									            	  try{
 														    $sql="Delete from stockmagasin Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

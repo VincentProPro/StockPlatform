@@ -63,7 +63,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       </thead>
       <tbody>
         <?php
-          include('config.php');
+          include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT * FROM users ";
         
@@ -135,7 +135,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <div id="id02" class="modal2">
   <?php
  
-   // include('config.php');
+   // include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT * FROM users WHERE matricule = :matricule";
             

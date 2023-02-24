@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 
 class Cmuentrer{
@@ -81,7 +81,7 @@ class Cmuentrer{
 
 		             try{
 		             	$sql="Select quantity,quantityreal from cmustock Where  matricule_article = :matricule_article  or groupcode_article=:groupcode_article";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -203,7 +203,7 @@ class Cmuentrer{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  cmuentrer Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -277,7 +277,7 @@ class Cmuentrer{
 
 													  //            try{
 													  //            	$sql="Select quantity ,matricule_article from cmuentrer Where  matricule = :matricule  ";
-															// 							                	            	         include('../config.php');
+															// 							                	            	         include('../db/config.php');
 
 
 															// 							    if($stmt = $pdo->prepare($sql)){
@@ -292,7 +292,7 @@ class Cmuentrer{
 
 															// 							        	 }}}
 													  //            	$sql="Select quantity from cmustock Where  matricule_article = :matricule_articleadded  ";
-															// 							                	            	         include('../config.php');
+															// 							                	            	         include('../db/config.php');
 
 
 															// 							    if($stmt = $pdo->prepare($sql)){
@@ -303,7 +303,7 @@ class Cmuentrer{
 															// 							        	 	$arraystable= $stmt->fetchAll();
 															// 							        		$this->previousqty=$arraystable[0][0];
 															// 							        		$sql="Update quantity=:quantity from cmustock Where  matricule_article = :matricule_article  ";
-															// 							                	            	         include('../config.php');
+															// 							                	            	         include('../db/config.php');
 
 
 															// 							    if($stmt = $pdo->prepare($sql)){
@@ -388,7 +388,7 @@ class Cmuentrer{
 												   //  	            	         try{
 
 												   //  	            	         	   $sql="Update  cmuentrer Set description=:description, prixachat=:prixachat , prixvente=:prixvente ,quantity=:quantity,quantityperunit=:quantityperunit, poids=:poids,situation_matricule=:situation_matricule,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-												   //  	            	         	   include('../config.php');
+												   //  	            	         	   include('../db/config.php');
 												   //  	            	         		// echo"this->fullname: ".$this->fullname;
 
 															//                         if($stmt = $pdo->prepare($sql)){
@@ -453,7 +453,7 @@ class Cmuentrer{
 	 //    	            	         try{
 
 	 //    	            	         	   $sql="Update  cmuentrer Set validation=:validation, tempsvalidation=:tempsvalidation, matriculevalidation=:matriculevalidation WHERE matricule = :matricule";
-	 //    	            	         	   include('../config.php');
+	 //    	            	         	   include('../db/config.php');
 	 //    	            	         		// echo"this->fullname: ".$this->fullname;
 
 		// 		                        if($stmt = $pdo->prepare($sql)){
@@ -507,7 +507,7 @@ class Cmuentrer{
 
 						            	  try{
 											    $sql="Select * from cmuentrer Where  matricule=:matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -547,7 +547,7 @@ class Cmuentrer{
 
 						            	  try{
 											    $sql = "SELECT * FROM cmuentrer  WHERE groupcode_article=:groupcode_article ORDER BY date DESC";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -588,7 +588,7 @@ class Cmuentrer{
 
 						            	  try{
 											    $sql="Select * from cmuentrer";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -626,7 +626,7 @@ class Cmuentrer{
 
 						            	  try{
 											    $sql="SELECT cmuentrer.matricule, cmuentrer.article_matricule, article.designation, cmuentrer.quantity, cmuentrer.benefice FROM cmuentrer JOIN article ON cmuentrer.article_matricule=article.matricule  WHERE cmuentrer.date BETWEEN :date1 AND :date2";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -666,7 +666,7 @@ class Cmuentrer{
 
 		// 							            	  try{
 		// 												    $sql="Delete from achatcoursier Where  matricule = :matricule  ";
-		// 												                	            	         include('../config.php');
+		// 												                	            	         include('../db/config.php');
 
 
 		// 												    if($stmt = $pdo->prepare($sql)){

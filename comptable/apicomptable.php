@@ -14,6 +14,9 @@ switch ($formulaire) {
     case "valider":
         validerbondecommande();
         break;
+    case "upload":
+        validerupload();
+        break;
 }
 
 function ajoutbondecommande(){
@@ -51,4 +54,22 @@ function validerbondecommande(){
 
 
 }
+function validerupload(){
+   
+        $description = $_POST['filedescription'];
+        $name = $_POST['title'];
+        
+
+        $objectCreated=new Comptable();
+        // echo"execute executebondecommande";
+        $objectCreated->executeupload($name, $description);
+    
+}
+    
+        
+       
+            
+
+
+
 ?>

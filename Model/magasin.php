@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 class Magasin{
 
@@ -65,7 +65,7 @@ class Magasin{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into magasintable (code,nom,description,matriculredacteur,lastmodification) values (:code,:nom,:description,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
@@ -125,7 +125,7 @@ class Magasin{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  magasintable Set nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -260,7 +260,7 @@ class Magasin{
 
                                   $result=strtoupper($result);
                                   $result.=$numberandom;
-                                           include('../config.php');
+                                           include('../db/config.php');
 
 
                                   $sql = "SELECT * FROM magasintable WHERE code = :code ";
@@ -300,7 +300,7 @@ class Magasin{
 
 						            	  try{
 											    $sql="Select * from magasintable Where  code = :code  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -340,7 +340,7 @@ class Magasin{
 
 						            	  try{
 											    $sql="Select * from magasintable Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -380,7 +380,7 @@ class Magasin{
 
 						            	  try{
 											    $sql="Select * from magasintable";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -418,7 +418,7 @@ class Magasin{
 
 									            	  try{
 														    $sql="Delete from magasintable Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

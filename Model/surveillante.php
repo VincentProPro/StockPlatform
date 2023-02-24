@@ -1,35 +1,10 @@
 <?php 
 
-// require("../authentification.php");
-
-
-// require("achatentrer.php");
-// require("sortimagasin.php");
-// require("achatcoursier.php");
-// require("sortidetailmagasin.php");
-
-
-// // require("besoin.php");
-// // require("../AutreClass/message.php");
-// require("message.php");
-
-// // require('article.php');
-// // require('magasin.php');
-// // require("entrermagasin.php");
-
-// // require('stockmagasin.php');
-
 require("../authentification.php");
 require("achatentrer.php");
 require("sortimagasin.php");
-
-
 require("achatcoursier.php");
-// require("../AutreClass/message.php");
-echo" before sortidetailmagasin";
-
 require("sortidetailmagasin.php");
-echo" after sortidetailmagasin";
 require("cmustock.php");
 require("cmuentrer.php");
 require("message.php");
@@ -38,15 +13,9 @@ require("message.php");
 
 class Surveillante{
 	private $email;
-	// public $commande=new Commande();
 
 	function __construct(){}
-	 function callnotification($messageici, $locationpage){
-		echo"callnotification \n ";
-			// 	echo "Message: ".$messageici." goto $locationpage";
-			// 	setcookie("messagedisplay",$messageici, time()+3600,"/");
-            //   header("location: ".$locationpage);
-
+	 function callnotification($messageici, $locationpage){			
 				$messageObject=new Messager($messageici, $locationpage);
                                $messageObject->sendmessage($messageici, $locationpage);
 
@@ -82,23 +51,23 @@ class Surveillante{
 		$objectCreated=new Sortidetailmagasin();
 		$matricule_module=$objectCreated->validationsorti($matricule,"1");
 		$message="Validation effctuée";
-			echo"matricule_module== $matricule_module";
-															if($matricule_module==1){
-																echo"matricule_module==1";
-																// insert in cmuentrere
-																$arraysorti=$objectCreated->selectmatricule($matricule);
-																$cmuentrer=new Cmuentrer();
-																$entrerMagasin=new EntrerMagasin();
-																//set prix d'achat et prix de vente from entrer magasin
-																$arrayentrer=$entrerMagasin->selectmatricule_article($arraysorti[0][2]);
-																$prixachat=(($arraysorti[0][5]*$arraysorti[0][7])*$arrayentrer[0][7])/($arrayentrer[0][4]*$arrayentrer[0][6]);
-																$taxe=0.2;
-																$prixvente=$prixachat+($prixachat*$taxe);
-																$benefice=$prixvente-$prixachat;
-																
-																$message=$cmuentrer->ajouter($arraysorti[0][2],$arraysorti[0][3],$prixachat,$prixvente,($arraysorti[0][5]*$arraysorti[0][7]),1,$arraysorti[0][1],$arraysorti[0][11],$benefice,$taxe);
-															}
-															echo"$message";
+			// echo"matricule_module== $matricule_module";
+				if($matricule_module==1){
+					echo"matricule_module==1";
+					// insert in cmuentrere
+					$arraysorti=$objectCreated->selectmatricule($matricule);
+					$cmuentrer=new Cmuentrer();
+					$entrerMagasin=new EntrerMagasin();
+					//set prix d'achat et prix de vente from entrer magasin
+					$arrayentrer=$entrerMagasin->selectmatricule_article($arraysorti[0][2]);
+					$prixachat=(($arraysorti[0][5]*$arraysorti[0][7])*$arrayentrer[0][7])/($arrayentrer[0][4]*$arrayentrer[0][6]);
+					$taxe=0.2;
+					$prixvente=$prixachat+($prixachat*$taxe);
+					$benefice=$prixvente-$prixachat;
+					
+					$message=$cmuentrer->ajouter($arraysorti[0][2],$arraysorti[0][3],$prixachat,$prixvente,($arraysorti[0][5]*$arraysorti[0][7]),1,$arraysorti[0][1],$arraysorti[0][11],$benefice,$taxe);
+				}
+				echo"$message";
 		// break;
 		$this->callnotification($message,"../surveillante/welcomsurveillante.php");
 
@@ -254,7 +223,20 @@ class Surveillante{
 		
 	}
 	
+	function viewAllCmuStock(){
+		$objectCreated=new CmuStock();
 
+		return $objectCreated->selectAll();
+
+
+	}
+	function viewAllMagasinStock(){
+		$objectCreated=new Stockmagasin();
+
+		return $objectCreated->selectAll();
+
+
+	}
 	// function viewAllCmuEntrerValider(){
 	// 			$objectCreated=new AchatEntrer();
 

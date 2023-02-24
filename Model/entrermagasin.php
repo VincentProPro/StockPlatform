@@ -1,20 +1,13 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 
 require("besoin.php");
-echo"good";
 
 require("magasin.php");
-echo"good1";
 
 require("stockmagasin.php");
-echo"good2";
-
-echo"entrermagasin before article";
-
 require("article.php");
-echo"after article";
 
 class EntrerMagasin{
 
@@ -97,7 +90,7 @@ class EntrerMagasin{
 		            	$redacteurcode=$_SESSION["email"];
 		            	$this->dateachat=$datereel;
 		            	// $redacteurcode="_SESSION";
-		            	            	         include('../config.php');
+		            	            	         include('../db/config.php');
 
 		            	            	         //get code from designation
 		            	            	         //check if numcommand exist in achat entrer
@@ -192,7 +185,7 @@ class EntrerMagasin{
 	// 	            	$redacteurcode=$_SESSION["email"];
 	// 	            	$this->dateachat=$datereel;
 	// 	            	// $redacteurcode="_SESSION";
-	// 	            	            	         include('../config.php');
+	// 	            	            	         include('../db/config.php');
 
 	// 	            	            	         //get code from designation
 	// 	            	            	         //check if numcommand exist in achat entrer
@@ -277,7 +270,7 @@ class EntrerMagasin{
 	//     	            	         try{
 
 	//     	            	         	   $sql="Update entrermagasin Set matricule_article=:matricule_article, prixachat=:prixachat , prixvente=:prixvente ,quantity=:quantity,quantityperunit=:quantityperunit, magazincode=:magazincode,previousqty=:previousqty,currentqty=:currentqty,matricule_magazin:matricule_magazin poids=:poids,matricule_format=:matricule_format,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	//     	            	         	   include('../config.php');
+	//     	            	         	   include('../db/config.php');
 	//     	            	         		// echo"this->fullname: ".$this->fullname;
 
 	// 			                        if($stmt = $pdo->prepare($sql)){
@@ -342,7 +335,7 @@ class EntrerMagasin{
 
 						            	  try{
 											    $sql="Select * from entrermagasin Where  matricule_article = :matricule_article  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -382,7 +375,7 @@ class EntrerMagasin{
 
 						            	  try{
 											    $sql="Select * from entrermagasin Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -422,7 +415,7 @@ class EntrerMagasin{
 
 						            	  try{
 											    $sql="Select * from entrermagasin";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -460,7 +453,7 @@ class EntrerMagasin{
 
 									            	  try{
 														    $sql="Delete from entrermagasin Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

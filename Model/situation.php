@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 // require("../AutreClass/message.php");
 
 class Situation{
@@ -68,7 +68,7 @@ class Situation{
 			           		$datereel=date("Y-m-d H:i:s",$t);
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
-			            	            	         include('../config.php');
+			            	            	         include('../db/config.php');
 			            	            	            $sql="insert into situation (code,nom,description,matricule_module,matriculredacteur,lastmodification) values (:code,:nom,:description,:matricule_module,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
@@ -130,7 +130,7 @@ class Situation{
 	    	            	         try{
 
 	    	            	         	   $sql="Update  situation Set nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
-	    	            	         	   include('../config.php');
+	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
@@ -267,7 +267,7 @@ class Situation{
 
                                   $result=strtoupper($result);
                                   $result.=$numberandom;
-                                           include('../config.php');
+                                           include('../db/config.php');
 
 
                                   $sql = "SELECT * FROM situation WHERE code = :code ";
@@ -306,7 +306,7 @@ class Situation{
 
 						            	  try{
 											    $sql="Select * from situation Where  matricule = :matricule  ";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -346,7 +346,7 @@ class Situation{
 
 						            	  try{
 											    $sql="Select * from situation";
-											                	            	         include('../config.php');
+											                	            	         include('../db/config.php');
 
 
 											    if($stmt = $pdo->prepare($sql)){
@@ -384,7 +384,7 @@ class Situation{
 
 									            	  try{
 														    $sql="Delete from situation Where  matricule = :matricule  ";
-														                	            	         include('../config.php');
+														                	            	         include('../db/config.php');
 
 
 														    if($stmt = $pdo->prepare($sql)){

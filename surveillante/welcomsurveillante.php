@@ -1,13 +1,13 @@
 <?php
-    ob_start(); // Initiate the output buffer
-?>
-<?php
+    // ob_start(); // Initiate the output buffer
+    error_reporting(0);
+
 // Initialize the session
 session_start();
 // require("../config.php");
 require("viewsurveillante.php");
 
-                    include('../config.php');
+                    include('../db/config.php');
 
  
 // Check if the user is logged in, if not then redirect him to login page
@@ -1003,6 +1003,45 @@ require("viewsurveillante.php");
           <p>Le ou la surveillante est chargé de faire l'inventaire, evaluer les besoins de la clinics. Vérifier et valider les entrées et sorties d'articles, produire l'inventaire et génerer les statistics sur la consommation interne, faire des prévisions de consommation.</p>
     </div>
     <div class="card shadowexempl">
+    <h2>Magasin Stock Liste</h2>
+        <h3>Voulez vous rechercher un article?</h3>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher ici.." title="Type in a name">
+        <div class="retraitarticleperunit">
+          <div class="wrapper">
+
+
+                <table id="myTable">
+                  <tr class="header">
+                    <th style="width:40%;">Article</th>
+                    <th style="width:15%;">Groupe Code</th>
+                    <th style="width:15%;">Quantité</th>
+                    <th style="width:15%;">Format</th>
+                    <th style="width:15%;">Quantité Unité</th>
+
+                  </tr>
+                  
+                  <?php 
+                  foreach($stockmagasin as $element){
+
+                    ?>
+                    <tr>     
+                      <td contentEditable ><?php echo $element["designation"]; ?></td>              
+                      <td><?php echo $element["groupcode_article"]; ?></td>                                              
+                      <td><?php echo $element["quantity"]; ?></td>                                              
+                      <td><?php echo $element["formatnom"]; ?></td> 
+                      <td><?php echo $element["quantityperunit"]; ?></td>                                              
+                    </tr>
+
+                    <?php
+
+                  }
+
+                  ?>
+                  
+                </table>   
+          </div>
+
+        </div>
             <div id="retraitarticle">
                   <h2>Retrait d'Article magasin</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
@@ -1198,6 +1237,32 @@ function openCity(evt, object) {
   }
   document.getElementById(object).style.display = "block";
   evt.currentTarget.className += " active";
+}
+function myFunction() {
+  var input, filter, table, tr, td, i,j, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    
+    td = tr[i].getElementsByTagName("td")[0];
+    td2 = tr[i].getElementsByTagName("td")[1];
+    td3 = tr[i].getElementsByTagName("td")[2];
+    td4 = tr[i].getElementsByTagName("td")[3];
+    td5 = tr[i].getElementsByTagName("td")[4];
+    td6 = tr[i].getElementsByTagName("td")[5];
+      
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+     
+  }
 }
 </script>
 </body>

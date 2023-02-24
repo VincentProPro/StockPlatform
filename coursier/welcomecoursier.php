@@ -61,19 +61,19 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <div><form  method="POST" action="apicoursier.php">
           <div>
                     <label for="artcl"><b> Article </b></label>
-                    <input type="text" name="autocomplete-search" id="autocomplete-search" placeholder="search here...." class="form-control">
+                    <input type="text" name="autocomplete-search" id="autocomplete-search" placeholder="search here...." class="form-control" required>
           </div>
            
           
 
           <label for="quantite"><b>Quantité</b></label>
-          <input type="number" name="quantite"> 
+          <input type="number" name="quantite" required> 
 
           <label for="quantityperunit"><b>Quantité par Unité</b></label>
-          <input type="number" name="quantityperunit"> 
+          <input type="number" name="quantityperunit" required> 
 
           <label for="prixachat"><b>Prix d'Achat</b></label>
-          <input type="number" name="prixachat"> 
+          <input type="number" name="prixachat" required> 
           <br> <br> 
 
           <label for="description"><b>Description</b></label>
@@ -88,7 +88,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                    <?php
            
-             include('../config.php');
+             include_once('../db/config.php');
                     // $query=mysqli_query($conn,"select * from `users`");
                     $sql = "SELECT DISTINCT nom , matricule FROM format";
                       
@@ -116,7 +116,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT libeller , matricule FROM bondecommandedb ORDER  BY matricule DESC LIMIT 3";
                         
@@ -142,7 +142,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                      <?php
              
-               include('../config.php');
+               include('../db/config.php');
                       // $query=mysqli_query($conn,"select * from `users`");
                       $sql = "SELECT DISTINCT numfacture  FROM achatentrer ORDER  BY timestamp DESC LIMIT 10";
                         
@@ -211,7 +211,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   include('../config.php');
+   include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
