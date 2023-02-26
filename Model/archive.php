@@ -134,6 +134,45 @@ class Archive{
         }
     }
 
+    public function selectAll(){
+        try{
+            $sql="SELECT * FROM archive";
+                                                     include('../db/config.php');
+
+
+            if($stmt = $pdo->prepare($sql)){
+          
+                if($stmt->execute()){
+                     if($stmt->rowCount()>0){
+                         $arraystable= $stmt->fetchAll();
+                        return $arraystable;
+
+                     }else{
+                         return "none";
+                     }
+                  
+
+                }else{
+                 return "La selection a échoué, veuillez retenter. ";
+
+            }
+          
+            }else{
+                 return "La selection a échoué, veuillez retenter. ";
+
+            }
+
+          }
+        catch(exception $e){
+             return "La selection a échoué, veuillez retenter. Error: ".$e;
+             
+
+          }
+
+
+    }
+    
+
 
 
 }

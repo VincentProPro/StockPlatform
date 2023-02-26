@@ -70,7 +70,56 @@ class Cmusorti{
 				 //     //                           $messageObject->sendmessage();
 
 					// 	}
-		public function ajouter($article_desgnation,$quantity,$situation_matricule,$numerofacture){
+public function reduce($matricule_article,$groupcode_article,$quantity,$dateexpiring,$matricule_lieu,$matricule_format){
+	$sql="Select quantity, matricule from expiretb Where  dateexpiring=:dateexpiring  AND  groupcode_article=:groupcode_article AND matricule_format=:matricule_format AND matricule_lieu=:matricule_lieu";
+	include('../db/config.php');
+
+
+if($stmt = $pdo->prepare($sql)){
+	$stmt->bindParam(":dateexpiring", $dateexpiring, PDO::PARAM_STR);
+	$stmt->bindParam(":groupcode_article", $groupcode_article, PDO::PARAM_STR);
+	$stmt->bindParam(":matricule_format", $matricule_format, PDO::PARAM_STR);
+	$stmt->bindParam(":matricule_lieu", $matricule_lieu, PDO::PARAM_STR);
+
+if($stmt->execute()){
+if($stmt->rowCount()>0){
+$arraystable= $stmt->fetchAll();
+$previousqty=$arraystable[0][0];
+$matricule=$arraystable[0][1];
+if($previousqty>$quantity){
+	$currentqty=$previousqty-$quantity;
+	$sql="Update expiretb SET quantity=:quantity Where  matricule = :matricule  ";
+																											 // include('../db/config.php');
+	
+	
+																	if($stmt = $pdo->prepare($sql)){
+																	  $stmt->bindParam(":matricule", $matricule, PDO::PARAM_STR);
+																	  $stmt->bindParam(":quantity", $currentqty, PDO::PARAM_STR);
+																  
+																		if($stmt->execute()){
+																																// echo"update in cmustcok";
+																						return "L'article avec cette date d'expiration a bien été retiré";
+	
+																			// return "L'cmuentrer  a ben été enregistré";
+	
+																		}}
+
+
+
+}else{
+return "retrait impossible, stock insuffisant: ".$previousqty." || Besoin :".$quantity;
+
+}
+
+															    
+//end
+}
+}
+}
+
+}
+public function ajouter($article_desgnation,$quantity,$situation_matricule,$numerofacture,$dateexpiring){
+
 				
 
 
@@ -79,6 +128,7 @@ class Cmusorti{
 
 
 		             try{
+						echo" dateexpiring : ".$dateexpiring;
 
 		         $this->numerofacture=$numerofacture;
 				// include("article.php");
@@ -173,6 +223,10 @@ class Cmusorti{
 
 
 						                        if($stmt->execute()){
+													$expiringtb=new ExpiringArticle();
+													// remove article in expiring tb if necessary
+													$messagenfo= $expiringtb->reduce($this->article_matricule,$this->groupcode_article,$this->quantity,$dateexpiring,1,3);
+
 						                        	$sql="Select quantity from cmustock Where  matricule_article = :matricule_articleadded  ";
 
 
@@ -192,8 +246,9 @@ class Cmusorti{
 															      $stmt->bindParam(":quantityreal", $this->currentqtyreal, PDO::PARAM_STR);
 															  
 															        if($stmt->execute()){
-															        												    	// echo"update in cmustcok";
-															        				return "L'cmusorti  a ben été enregistré et le cmustock modifié";
+															        												    	// echo"update in cmustcok ";
+													$messagenfo= $expiringtb->reduce($this->article_matricule,$this->groupcode_article,$this->quantity,$dateexpiring,1,3);
+															        				return "Le retrait a ben été enregistré et le stock du CMU modifié.\n".$messagenfo;
 
 															        	// return "L'cmuentrer  a ben été enregistré";
 
@@ -646,7 +701,7 @@ class Cmusorti{
     			
 
 			try{
-				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date > now() - INTERVAL 3 MONTH;";
+				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date > now() - INTERVAL 3 MONTH";
 														   include('../db/config.php');
 
 

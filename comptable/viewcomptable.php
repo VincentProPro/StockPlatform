@@ -6,6 +6,7 @@ $boncommandenonvalid=$comptable->viewAllCommandenonValider();
 $boncommandNonExecuter=$comptable->viewAllNonExecuter();
 $boncommandExecuter=$comptable->viewAllExecuter();
 $boncommandevalid=$comptable->viewAllCommandeValider();
+$archive=$comptable->viewAllArchive();
 // print_r($boncommandenonvalid);
 
 ?>

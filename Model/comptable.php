@@ -71,6 +71,11 @@ class Comptable{
 		return $commande->selectAllExecuter();
 		
 	}
+	function viewAllArchive(){
+
+				$archiveobject= new Archive();
+				return $archiveobject->selectAll();
+	}
        
 	function  executeupload($name, $description){
 		$archive=new Archive();

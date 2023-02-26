@@ -495,11 +495,49 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
           <input type="file" name="file">
           <input type="hidden" name="formulaire" value="upload"> 
 
-              <input type="submit" name="submit" value="Upload">
+              <button type="submit" name="submit" value="Upload"> Archiver </button>
           </form>
 
 
           </div>
+          <h2>Listes Des Documents </h2>
+        <h3>Voulez vous rechercher un document?</h3>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for documents.." title="Type in a name">
+        <div class="retraitarticleperunit">
+          <div class="wrapper">
+
+
+                <table id="myTable">
+                  <tr class="header">
+                    <th style="width:40%;">Titre</th>
+                    <th style="width:15%;">Description</th>
+                    <th style="width:15%;">Lien</th>
+                    <th style="width:15%;">Date de Creation</th>
+                    <th style="width:15%;">Ajouté par</th>
+                  </tr>
+                  
+                  <?php 
+                  foreach($archive as $element){
+
+                    ?>
+                    <tr>     
+                      <td contentEditable ><?php echo $element["title"]; ?></td>              
+                      <td><?php echo $element["description"]; ?></td>                                              
+                      <td><button type="submit" onclick="window.open('<?php echo $element["lien"]; ?>')">Download!</button></td>                                              
+                      <td><?php echo $element["dateadded"]; ?></td> 
+                      <td><?php echo $element["addedby"]; ?></td>                                              
+                    </tr>
+
+                    <?php
+
+                  }
+
+                  ?>
+                  
+                </table>   
+          </div>
+
+        </div>
             <p>Autres fonctions..</p>
 
           <p>Le ou la Comptable est chargé de faire l'inventaire, evaluer les besoins de la clinics. Vérifier et valider les entrées et sorties d'articles, produire l'inventaire et génerer les statistics sur la consommation interne, faire des prévisions de consommation.</p>
@@ -596,199 +634,34 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   <h2>Footer</h2>
 </div>
 <script type="text/javascript" src="../javascript.js"></script>
+<script type="text/javascript" >
 
-<!-- <script>
-function openCity(evt, object) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
+function myFunction(){
+  var input, filter, table, tr, td, i,j, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    
+    td = tr[i].getElementsByTagName("td")[0];
+    td2 = tr[i].getElementsByTagName("td")[1];
+    td3 = tr[i].getElementsByTagName("td")[2];
+    td4 = tr[i].getElementsByTagName("td")[3];
+    td5 = tr[i].getElementsByTagName("td")[4];
+    td6 = tr[i].getElementsByTagName("td")[5];
+      
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+     
   }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(object).style.display = "block";
-  evt.currentTarget.className += " active";
 }
-</script> -->
-
+</script>
 </body>
 </html>
-
-<?php
-                    // include('../db/config.php');
-error_reporting(0);
-
-        if(array_key_exists('button1', $_POST)) {
-            button1();
-        }
-        else if(array_key_exists('button2', $_POST)) {
-            button2();
-        }
-        function button1() {
-            echo "This is Button1 that is selected";
-        }
-        function button2() {
-
-
-        $magasin=$_POST['magasin'];
-
-        $libeller=$_POST['libeller'];
-        $tarif=$_POST['tarif'];
-        $t=time();
-        $datereel=date("Y-m-d",$t);
-        $idtimetable_err='' ;
-        $comandnum=trim($_POST["comandnum"]);
-        $redacteurcode=$_SESSION["email"];
-       if(empty($comandnum)){
-              $idtimetable_err = "Please enter command num.";
-              echo $idtimetable_err;
-          } else{
-              $comandnum = trim($_POST["comandnum"]);
-          }
-
-        if(empty($idtimetable_err) ){
-
-
-                    //start
-                    $sql = "SELECT * FROM bondecommandedb WHERE code = :comandnum";
-                       include('../db/config.php');
-
-
-                    if($stmt = $pdo->prepare($sql)){
-                    // Bind variables to the prepared statement as parameters
-                    $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-              
-                    // Set parameters
-                    $comandnum = trim($_POST["comandnum"]);
-                    
-                    // Attempt to execute the prepared statement
-                          if($stmt->execute()){
-
-
-                                if($stmt->rowCount() ==0){
-                                     //let go
-                                     try{
-
-
-
-                                              $sql="insert into  bondecommandedb (code,libeller,tarif,magazincode,lastmodification,redacteurcode) values (:comandnum, :libeller, :tarif,:magasin,:lastmodification,:redacteurcode)";
-
-                                              if($stmt = $pdo->prepare($sql)){
-
-                                                    $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-
-                                                    $stmt->bindParam(":libeller", $libeller, PDO::PARAM_STR);
-                                                    $stmt->bindParam(":tarif", $tarif, PDO::PARAM_STR);
-                                                    $stmt->bindParam(":magasin", $magasin, PDO::PARAM_STR);
-                                                    $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-                                                    $stmt->bindParam(":redacteurcode", $redacteurcode, PDO::PARAM_STR);
-
-                                  
-          
-           
-            
-                                                          // Attempt to execute the prepared statement
-                                                          if($stmt->execute()){
-
-                                                                      $sql = "SELECT * FROM bondecommandedb WHERE code = :comandnum";
-                                                      
-                                                                  if($stmt = $pdo->prepare($sql)){
-                                                                      // Bind variables to the prepared statement as parameters
-                                                                      $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-            
-                                                                              // Set parameters
-                                                                              //$idSession = trim($_POST["idSession"]);
-                                                                              
-                                                                              // Attempt to execute the prepared statement
-                                                                              if($stmt->execute()){
-                                                                                  // Check if username exists, if yes then verify password
-                                                                                  if($stmt->rowCount() >0){
-                                                                                      $arraystable= $stmt->fetchAll();
-                                                                                          echo "<script>alert('Success!');</script>";
-                                                                                                    unset($pdo);
-
-
-                                                                                                      
-                                                                                                            // http_response_code(205);
-
-
-                                                                                              // show products data in json format
-                                                                                                                          //echo"hello";
-
-                                                                                                                      
-                                                                                  }
-                                                                                  else{
-                                                                                      echo  "Course add fails ";
-                                                                                          http_response_code(201);
-                                                                                          $message="This comandnum has not been added";
-
-                                                                                          echo json_encode($message);
-                                                                                  }
-                                                                              }
-                                                                              else{
-                                                                                    echo  "Course Add fails ";
-                                                                                            http_response_code(201);
-                                                                                            $message="This comandnum has not been added";
-
-                                                                                            echo json_encode($message);
-                                                                              }
-                                                                  }
-                                                                  else{
-                                                                    echo "canot execute select";
-                                                                  }
-
-
-                                                              //echo "good good";
-                                                          }
-                                                          else{
-                                                              echo "canot execute insert";
-                                                          }
-
-
-
-                                                          }
-                                                          else{
-                                                              echo " canot insert comandnum";
-                                                          }
-
-}
-
-                                                                  
-                                        catch(exception $e){
-                                                  echo"try again".$e;
-                                                  
-
-                                        }
-
-                }else{
-                    echo  "comandnum Add fails, course code exists ";
-                        http_response_code(201);
-                        $message="This comandnum has not been added because comandnum code exists already";
-
-                        echo json_encode($message);
-                }
-
-
-            }else{
-                echo "something went wrong in execute()";
-            }
-        }else{
-                echo "canot do the stmt = pdo->prepare(sql)something went wrong";
-            }
-             unset($stmt);
-}else{
-    echo  "comand Add fails,  code is required ";
-                        http_response_code(201);
-                        $message="This comand has not been added because  code is required field";
-
-                        echo json_encode($message);
-}
-
-        
-      }
-          unset($pdo);
-
-
-    ?>

@@ -6,6 +6,9 @@ require("article.php");
 require("cmuentrer.php");
 require("cmusorti.php");
 require("cmustock.php");
+// require("../db/config.php");
+
+require("expiringarticle.php");
 
 // require("../AutreClass/message.php");
 require("message.php");
@@ -24,12 +27,21 @@ class GerantCMU{
 
 		}
 
-		function executeretrait($article_matricule,$quantity,$situation_matricule,$numerofacture){
+		function executeretrait($article_matricule,$quantity,$situation_matricule,$numerofacture,$dateexpiring){
 		$objectCreated=new Cmusorti();
 		echo"hood";
-		$this->callnotification($objectCreated->ajouter($article_matricule,$quantity,$situation_matricule,$numerofacture),"../cmu/welcomecmu.php");
+		// echo$objectCreated->ajouter($article_matricule,$quantity,$situation_matricule,$numerofacture,$dateexpiring);
+		$this->callnotification($objectCreated->ajouter($article_matricule,$quantity,$situation_matricule,$numerofacture,$dateexpiring),"../cmu/welcomecmu.php");
 
 	}
+
+	function addexpiringarticle($name_article,$dateexpiring,$matricule_situation,$quantity,$matricule_format,$matricule_lieu){
+		$objectCreated=new ExpiringArticle();
+		// echo$objectCreated->ajouter($name_article,$dateexpiring,$matricule_situation,$quantity,$matricule_format,$matricule_lieu);
+		$this->callnotification($objectCreated->ajouter($name_article,$dateexpiring,$matricule_situation,$quantity,$matricule_format,$matricule_lieu),"../cmu/welcomecmu.php");
+
+	}
+	
 
 
 	function viewstockcmu(){
@@ -90,7 +102,24 @@ function viewsorticmuAllYear(){
 return $objectCreated->selectAllYear();
 
 }
+function viewStockExpiringInThree(){
+	$objectCreated=new ExpiringArticle();
 
+return $objectCreated->selectAllInthreeMois();
+
+}
+function viewStockExpiringInSix(){
+	$objectCreated=new ExpiringArticle();
+
+return $objectCreated->selectAllInSixMois();
+
+}
+// function viewStockExpiringInYear(){
+// 	$objectCreated=new ExpiringArticle();
+
+// return $objectCreated->selectAllInYear();
+
+// }
 	
 	
 	
