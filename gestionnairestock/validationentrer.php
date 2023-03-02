@@ -193,7 +193,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $sql = "SELECT designation FROM article WHERE code = :code";
 // error_reporting(0);
 
-     include('../config.php');
+     include('../db/config.php');
 
                                          if($stmt = $pdo->prepare($sql)){
                                            $stmt->bindParam(":code", $row["codearticle"], PDO::PARAM_STR);
@@ -281,7 +281,7 @@ function updateadd(){
 
 
     $validationstocker=true;
-         include('../config.php');
+         include('../db/config.php');
 
 
 
@@ -441,7 +441,7 @@ function updateadd(){
 
          <?php
  
-   include('config.php');
+   include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

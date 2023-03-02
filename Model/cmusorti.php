@@ -776,7 +776,7 @@ public function selectAllSixMois(){
     			
 
 			try{
-				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice , cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date BETWEEN :date1 AND :date2";
+				  $sql="SELECT cmusorti.matricule, cmusorti.article_matricule, article.designation, cmusorti.quantity, cmusorti.benefice, cmusorti.totalbenefice, cmusorti.date FROM cmusorti JOIN article ON cmusorti.article_matricule=article.matricule  WHERE cmusorti.date BETWEEN :date1 AND :date2";
 														   include('../db/config.php');
 
 

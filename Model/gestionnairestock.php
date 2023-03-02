@@ -21,6 +21,24 @@ class Gestionnairestock{
                                $messageObject->sendmessage();
 
 		}
+	function createfournisseur($nom,$email,$tel,$plusinfo,$location){
+		$objectCreated=new Fourniseur();
+		$this->callnotification($objectCreated->ajouter($nom,$email,$tel,$plusinfo,$location),"../gestionnairestock/welcomestocker.php");
+
+
+	}
+	function editfournisseur(){
+		$objectCreated=new Fourniseur();
+		$this->callnotification($objectCreated->modifier($matricule,$nom,$email,$tel,$plusinfo,$location),"../gestionnairestock/welcomestocker.php");
+
+
+	}
+	function deletefournisseur(){
+		$objectCreated=new Fourniseur();
+		$this->callnotification($objectCreated->delete($matricule),"../gestionnairestock/welcomestocker.php");
+
+
+	}
 
 	function generateachatentrer($magasin,$reference,$libeller,$tarif,$fournicode,$numcomand,$numfacture){
 		$objectCreated=new AchatEntrer();

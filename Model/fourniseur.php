@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../db/config.php");
+// require("../db/config.php");
 // require("../AutreClass/message.php");
 
 class Fourniseur{
@@ -16,46 +16,7 @@ class Fourniseur{
 	function __construct(){}
 
 
-				// public function setparamedit($matricule,$nom,$email,$tel,$plusinfo,$role,$status){
-				// 	$this->matricule=$matricule;
-				// 	$this->nom=$nom;
-				// 	$this->email=$email;
-				// 	$this->tel=$tel;
-				// 	$this->plusinfo=$plusinfo;
-				// 	$this->location=$location;
-				// 	$this->status=$status;
-
-				// }
-				// public function getfullname(){
-				// 	return $this->fullname;
-				// 	}
-				// public function getmatricule(){
-				// 	return $this->matricule;
-				// 	}
-				// public function getrole(){
-				// 	return $this->role;
-				// 	}
-				// public function getposition(){
-				// 	return $this->position;
-				// 	}
-				// public function gettel(){
-				// 	return $this->tel;
-				// 	}
-				// public function getemail(){
-				// 	return $this->email;
-				// 	}
-				// public function getstatus(){
-				// 	return $this->status;
-				// 	}
-
-				// public function callnotification($messageici, $locationpage){
-				// 		echo"callnotification \n ";
-				// 				echo "Message: ".$messageici." goto $locationpage";
-
-				// 				// $messageObject=new Message($messageici, $locationpage);
-				//      //                           $messageObject->sendmessage();
-
-				// 		}
+				
     			public function ajouter($nom,$email,$tel,$plusinfo,$location){
 				    	// $this->matricule=$matricule;
 						$this->nom=$nom;
@@ -432,7 +393,7 @@ class Fourniseur{
     			
 
 						            	  try{
-											    $sql="Delete from users Where  matricule = :matricule  ";
+											    $sql="Delete from fournisseurdb Where  matricule = :matricule  ";
 											                	            	         include('../db/config.php');
 
 

@@ -305,7 +305,7 @@ span.psw {
         <?php  
           
         // Import the file where we defined the connection to Database.     
-            require_once "../../conn.php";   
+            require_once "../../db/conn.php";   
         
             $per_page_record = 4;  // Number of entries to show in a page.   
             // Look for a GET variable page if not found default is 1.        
@@ -318,7 +318,7 @@ span.psw {
         
             $start_from = ($page-1) * $per_page_record;     
         
-            $query = "SELECT code, designation, description, poidsenkg, categorycode FROM article  LIMIT $start_from, $per_page_record";     
+            $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc FROM article  LIMIT $start_from, $per_page_record";     
             $rs_result = mysqli_query ($con, $query);    
         ?>    
       
@@ -327,14 +327,14 @@ span.psw {
           <div>
           <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ajouter Un Article</button>   
             <h1>Liste Des Articles</h1>   
-            <p> Modifier et Supprimer.   
-            </p>   
+            <h3> Vous avez la possibilité de Modifier et Supprimer.   
+          </h3>   
 
             <table id="customers" class="table table-striped table-condensed    
                                               table-bordered">   
               <thead>   
                 <tr>   
-                  <th width="10%">code</th>   
+                  <th width="10%">matricule</th>   
                   <th width="10%">designation</th>   
                   <th>description</th>   
                   <th>poidsenkg</th>   
@@ -348,25 +348,30 @@ span.psw {
                       // Display each field of the records.    
                 ?>     
                 <tr>     
-                 <td><?php echo $row["code"]; ?></td>     
+                 <td><?php echo $row["matricule"]; ?></td>     
                      
                 <td><?php echo $row["designation"]; ?></td>   
                 <td><?php echo $row["description"]; ?></td>   
-                <td><?php echo $row["poidsenkg"]; ?></td>   
-                <td><?php echo $row["categorycode"]; ?></td>                                           
+                <td><?php echo $row["poids_kg"]; ?></td>   
+                <td><?php echo $row["code_category"]; ?></td>                                           
                 <td>
                     <form action="articleedit.php" method="POST"> 
                     <div class="invisi">
-                                        <input type="hidden"  name="idcode" value="<?php echo $row["code"]; ?>">
+                                        <input type="hidden"  name="matricule" value="<?php echo $row["matricule"]; ?>">
                                         <input type="hidden"  name="designation" value="<?php echo $row["designation"]; ?>">
                                         <input type="hidden"  name="description" value="<?php echo $row["description"]; ?>">
-                                        <input type="hidden"  name="poidsenkg" value="<?php echo $row["poidsenkg"]; ?>">
-                                        <input type="hidden"  name="categorycode" value="<?php echo $row["categorycode"]; ?>">
+                                        <input type="hidden"  name="poidsenkg" value="<?php echo $row["poids_kg"]; ?>">
+                                        <input type="hidden"  name="quantity_per_unit" value="<?php echo $row["quantity_per_unit"]; ?>">
+                                        <input type="hidden"  name="tmc" value="<?php echo $row["tmc"]; ?>">
+                                        <input type="hidden"  name="prixvente" value="<?php echo $row["prixvente"]; ?>">
+                                        <input type="hidden"  name="prixachat" value="<?php echo $row["prixachat"]; ?>">
+                                        <input type="hidden"  name="format" value="<?php echo $row["format"]; ?>">
+                                        <input type="hidden"  name="category" value="<?php echo $row["code_category"]; ?>">
 </div>
               
 <div id="outer">
   <div class="inner"><button type="submit"  >Modifier</button></div>
-  <div class="inner"><button type="button" id="<?php echo $row["code"]; ?>" onclick="myFunctionDelete(this.id)">Supprimer</button></div>
+  <div class="inner"><button type="button" id="<?php echo $row["matricule"]; ?>" onclick="myFunctionDelete(this.id)">Supprimer</button></div>
  
 </div>
 </form>
@@ -463,7 +468,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -501,32 +506,84 @@ span.psw {
 </div>
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="apifournisseurajout.php" method="POST">
-   
-
-     <div class="container">
-            <h3>Article Ajout</h3>
-
-      <label for="nommdf"><b>Nom Complet</b></label>
-      <input type="text" placeholder="Entrer mom" name="nommdf" >
-
+  <form class="modal-content animate" action="apiarticle.php" method="POST">
+      <div class="container">
+      <h3>Article Ajout</h3>       
+      <label for="designation"><b>Nom Complet</b></label>
+      <input type="text" placeholder="Entrer le nom de l'article" name="designation" >
       <label for="telmdf"><b>Description</b></label>
-      <input type="text" placeholder="Entrer le tel"  name="telmdf" >
-      <label for="emailmdf"><b>Poids en Kg</b></label>
-      <input type="text" placeholder="Entrer email" name="emailmdf" >
-      <label for="locationmdf"><b>Categorie</b></label>
-      <input type="text" placeholder="Entrer la Position" name="locationmdf" >
+      <input type="text" placeholder="Entrer la description du produit"  name="description" >
+      <label for="poids_kg"><b>Poids en Kg</b></label>
+      <input type="number"  name="poids_kg" >
+      <label for="tmc"><b>TMC</b></label>
+      <input type="number"  name="tmc" >
+      <label for="poids_kg"><b>Poids en Kg</b></label>
+      <input type="number"  name="poids_kg" >
+      <label for="format"><b>Format </b></label>
+
+      <select name="format">
+                  <?php
+                      include('../../db/config.php');
+                      $sql = "SELECT DISTINCT nom , matricule FROM format";
+                      if($stmt = $pdo->prepare($sql)){
+                        if($stmt->execute()){
+                            if($stmt->rowCount()>0){
+                                $arrayrole= $stmt->fetchAll();
+                                foreach($arrayrole as $roleelement){
+                                  ?> 
+                                    <option value="<?php echo $roleelement[1];?>">
+                                      <?php echo $roleelement[0];?>
+                                    </option>
+                                  <?php
+                                }  
+                            }
+                          }
+                        }
+                    ?>
+      </select>
+      <label for="quantity_per_unit"><b>Quantité par Unité</b></label>
+      <input type="number"  name="quantity_per_unit" >
+      <label for="prixachat"><b>Prix Achat </b></label>
+      <input type="number"  name="prixachat" >
+      <label for="prixvente"><b>Prix Vente </b></label>
+      <input type="number"  name="prixvente" >
+
+                                                    <br><br>
+      <label for="category"><b>Categorie </b></label>
+
+      <select name="category">
+                  <?php
+                      include('../../db/config.php');
+                      $sql = "SELECT DISTINCT nom , matricule FROM categoritable";
+                      if($stmt = $pdo->prepare($sql)){
+                        if($stmt->execute()){
+                            if($stmt->rowCount()>0){
+                                $arrayrole= $stmt->fetchAll();
+                                foreach($arrayrole as $roleelement){
+                                  ?> 
+                                    <option value="<?php echo $roleelement[1];?>">
+                                      <?php echo $roleelement[0];?>
+                                    </option>
+                                  <?php
+                                }  
+                            }
+                          }
+                        }
+                    ?>
+      </select>               
+                                                  <br><br>
        <label>Mode</label>
        <br>
-       <select>
-         <option>Voie Orale</option>
-         <option>Injectable</option>
-         <option>Seringle</option>
-       </select>
-      
+      <select>
+        <option>Voie Orale</option>
+        <option>Injectable</option>
+        <option>Seringle</option>
+                      </select>
       <br> <br> 
+      <input type="hidden" name="formulaire" value="ajouter" >
+
       
-      <button type="submit" name="modify">Envoyé</button>
+      <button type="submit" name="">Envoyé</button>
       
     </div>
 
@@ -536,35 +593,7 @@ span.psw {
   </form>
 </div>
 
-<div id="id02" class="modal2">
-  
-  <form class="modal-content animate" action="regismember.php" method="POST">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="images/1550389719.jpeg" alt="Avatar" class="avatar">
-    </div>
 
-    <div class="container">
-      <h3>S'Inscrire</h3>
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Entrer l'email" name="email" >
-
-      <label for="psw"><b>Mot de Passe</b></label>
-      <input type="password" placeholder="Entrer Mot de Passe" name="psw" >
-      <label for="psw"><b>Confirmer Mot de Passe</b></label>
-      <input type="password" placeholder="Entrer Mot de Passe" name="psw" >
-        
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> se Souvenir
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Annulé</button>
-    </div>
-  </form>
-</div>
 <script>
     function go2Page()   
         {   

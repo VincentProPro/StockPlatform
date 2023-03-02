@@ -41,9 +41,13 @@ if ($_SESSION['rate_limit_cache'][$_SERVER['REMOTE_ADDR']]['requests'] > 100) {
     ];
   }
 }
-
+chromium.googlesourse.com/chromium/src/net/+/master/http/transport_security_state_static.json
   
-setcookie('cookie', rand(100, 999), 0, '/', '', false, true)
+setcookie('cookie', rand(100, 999), 0, '/', '', false, true);
+session.use_strict_mode = 1  
+session.cookie_secure = 1
+session.use_only_cookie = 1
+session.cookie_httponly = 1
 ?>
 
 <!DOCTYPE html>

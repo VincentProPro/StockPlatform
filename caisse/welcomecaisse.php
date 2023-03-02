@@ -145,154 +145,154 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
 <div class="row">
   <div class="leftcolumn">
        <div class="card shadowexempl">
-        <center>  <?php 
-      if(isset($_COOKIE['messagedisplay'])) : ?>
-       
+            <center>  <?php 
+                if(isset($_COOKIE['messagedisplay'])) : ?>
+                
 
-         <div class="alerttext">
-          
-          <p>
-            <?php echo $_COOKIE['messagedisplay']; ?></p>
+                  <div class="alerttext">
+                    
+                    <p>
+                      <?php echo $_COOKIE['messagedisplay']; ?></p>
+                    </div>
+                      <?php endif; ?>
+
+                    </center>
+                  <h4>Voir Commandes</h4>
+
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'executer')">Executer</button>
+            <button class="tablinks" onclick="openCity(event, 'valider')">Valider</button>
           </div>
-            <?php endif; ?>
-
-          </center>
-        <h4>Voir Commandes</h4>
-
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'executer')">Executer</button>
-  <button class="tablinks" onclick="openCity(event, 'valider')">Valider</button>
-</div>
 
 
 
 
 
-<div id="valider" class="tabcontent">
-  <h3>Commande Valider</h3>
-  <p>Commande(s) validée(s) par la comptabe</p>
-   <div class="wrapper">
-     <div class="row">
-      <?php
-      try{
-        foreach($boncommandevalid as $commande){
-          ?>
-          
-          <div class="carddisplay columnfit">
-          <h5>   🗒Commande</h5>
-          <div class="row">
-            <div class="columnfit"><span>Libellé: </span><span><?php echo$commande[1]; ?></span></div>
-          </div>
-          <div class="row">
-              <div class="columnfit"><span>Description: </span><span><?php echo$commande[2]; ?></span></div>
+                <div id="valider" class="tabcontent">
+                  <h3>Commande Valider</h3>
+                  <p>Commande(s) validée(s) par la comptabe</p>
+                  <div class="wrapper">
+                    <div class="row">
+                      <?php
+                      try{
+                        foreach($boncommandevalid as $commande){
+                          ?>
+                          
+                          <div class="carddisplay columnfit">
+                          <h5>   🗒Commande</h5>
+                          <div class="row">
+                            <div class="columnfit"><span>Libellé: </span><span><?php echo$commande[1]; ?></span></div>
+                          </div>
+                          <div class="row">
+                              <div class="columnfit"><span>Description: </span><span><?php echo$commande[2]; ?></span></div>
 
-          </div>
-          <div class="row">
-            <div class="columnfit"><span>Tarif: </span><span><?php echo$commande[3]; ?></span></div>
-          </div>
-         
-          <div  class="row">
-            
-           <div class="columnfit"><span>Situation: </span><span><?php echo$commande[5]; ?></span></div>
-          </div>
-          <div class="row">
-                      <div class="columnfit"><span>Statu: </span><span><?php echo$commande[6]; ?></span></div>
+                          </div>
+                          <div class="row">
+                            <div class="columnfit"><span>Tarif: </span><span><?php echo$commande[3]; ?></span></div>
+                          </div>
+                        
+                          <div  class="row">
+                            
+                          <div class="columnfit"><span>Situation: </span><span><?php echo$commande[5]; ?></span></div>
+                          </div>
+                          <div class="row">
+                                      <div class="columnfit"><span>Statu: </span><span><?php echo$commande[6]; ?></span></div>
 
-          </div>
-          <form method="POST" action="printpage.php">
-          <input type="hidden" name="Libellé" value=<?php echo$commande[1]; ?>>
-          <input type="hidden" name="Description" value=<?php echo$commande[2]; ?>>
-          <input type="hidden" name="Tarif" value=<?php echo$commande[3]; ?>>
-          <input type="hidden" name="Situation" value=<?php echo$commande[5]; ?>>
-          <input type="hidden" name="EmailCaisse" value=<?php echo$_SESSION["email"]; ?>>
-          <input type="hidden" name="FullnameCaisse" value=<?php echo$_SESSION["fullname"]; ?>>
-          <input type="hidden" name="TelCaisse" value=<?php echo$_SESSION["tel"]; ?>>
-              <!-- <input type="submit"> -->
-          
+                          </div>
+                          <form method="POST" action="printpage.php">
+                          <input type="hidden" name="Libellé" value=<?php echo$commande[1]; ?>>
+                          <input type="hidden" name="Description" value=<?php echo$commande[2]; ?>>
+                          <input type="hidden" name="Tarif" value=<?php echo$commande[3]; ?>>
+                          <input type="hidden" name="Situation" value=<?php echo$commande[5]; ?>>
+                          <input type="hidden" name="EmailCaisse" value=<?php echo$_SESSION["email"]; ?>>
+                          <input type="hidden" name="FullnameCaisse" value=<?php echo$_SESSION["fullname"]; ?>>
+                          <input type="hidden" name="TelCaisse" value=<?php echo$_SESSION["tel"]; ?>>
+                              <!-- <input type="submit"> -->
+                          
 
-                    <button  type="submit"  value="Submit">Imprimer</button>
-                    </form>
+                                    <button  type="submit"  value="Submit">Imprimer</button>
+                                    </form>
 
-         
-        
-          
-        </div>
-          <?php 
-        }
-      }catch(Exception $ex){
-        ?>
-        <i>Aucun resultat</i>
+                        
+                        
+                          
+                        </div>
+                          <?php 
+                        }
+                      }catch(Exception $ex){
+                        ?>
+                        <i>Aucun resultat</i>
 
-        <?php 
-        echo"n result";
-      }
+                        <?php 
+                        echo"n result";
+                      }
 
-      ?>
+                      ?>
 
-      
-          
-     </div>
-    
-  </div>
+                      
+                          
+                    </div>
+                    
+                  </div>
 
-</div>
+                </div>
 
-<div id="executer" class="tabcontent">
-  <h3>Commande Executer</h3>
-  <p>Liste des Commandes Executer</p>
-   <div class="wrapper">
-     <div class="row">
-      <?php
-      try{
-        foreach($boncommandExecuter as $commande){
-          ?>
-          
-          <div class="carddisplay columnfit">
-          <h5>   🗒Commande</h5>
-          <div class="row">
-            <div class="columnfit"><span>Libelé: </span><span><?php echo$commande[1]; ?></span></div>
-          </div>
-          <div class="row">
-              <div class="columnfit"><span>Description: </span><span><?php echo$commande[2]; ?></span></div>
+                <div id="executer" class="tabcontent">
+                  <h3>Commande Executer</h3>
+                  <p>Liste des Commandes Executer</p>
+                  <div class="wrapper">
+                    <div class="row">
+                      <?php
+                      try{
+                        foreach($boncommandExecuter as $commande){
+                          ?>
+                          
+                          <div class="carddisplay columnfit">
+                          <h5>   🗒Commande</h5>
+                          <div class="row">
+                            <div class="columnfit"><span>Libelé: </span><span><?php echo$commande[1]; ?></span></div>
+                          </div>
+                          <div class="row">
+                              <div class="columnfit"><span>Description: </span><span><?php echo$commande[2]; ?></span></div>
 
-          </div>
-          <div class="row">
-            <div class="columnfit"><span>Tarif: </span><span><?php echo$commande[3]; ?></span></div>
-          </div>
-         
-          <div  class="row">
-            
-           <div class="columnfit"><span>Situation: </span><span><?php echo$commande[5]; ?></span></div>
-          </div>
-          <div class="row">
-                      <div class="columnfit"><span>Statu: </span><span><?php echo$commande[6]; ?></span></div>
+                          </div>
+                          <div class="row">
+                            <div class="columnfit"><span>Tarif: </span><span><?php echo$commande[3]; ?></span></div>
+                          </div>
+                        
+                          <div  class="row">
+                            
+                          <div class="columnfit"><span>Situation: </span><span><?php echo$commande[5]; ?></span></div>
+                          </div>
+                          <div class="row">
+                                      <div class="columnfit"><span>Statu: </span><span><?php echo$commande[6]; ?></span></div>
 
-          </div>
-          <!-- <button>Imprimer</button> -->
-         
-        
-          
-        </div>
-          <?php 
-        }
-         }catch(Exception $ex){
-        ?>
-        <i>Aucun resultat</i>
-        <?php 
-      }
+                          </div>
+                          <!-- <button>Imprimer</button> -->
+                        
+                        
+                          
+                        </div>
+                          <?php 
+                        }
+                        }catch(Exception $ex){
+                        ?>
+                        <i>Aucun resultat</i>
+                        <?php 
+                      }
 
-      ?>
+                      ?>
 
-      
-          
-     </div>
-    
-  </div>
+                      
+                          
+                    </div>
+                    
+                  </div>
 
-</div>
+                </div>
 
 
-       
+                      
       </div>
       <div class="card shadowexempl">
         <h2>Stock Liste</h2>
@@ -350,16 +350,16 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
                   <label for="artcl"><b> Article </b></label>
                   <div class="caisse" id="aftercaisse"> 
 
-<!--Make sure the form has the autocomplete function switched off:-->
-<!-- <form autocomplete="off"  id="formtable"> -->
-  <div class="caisseautocomplete" style="width:300px;">
-    <input id="caissemyInput" type="text" name="myArticle" placeholder="Nom de l'article ici">
-  </div>
-  <input type="number" name="quantity" id="idqty" placeholder="Entrer quantité">
-  <input type="button" onclick="addarticle()" value="Ajouter">
-<!-- </form> -->
-</div>
-<br><br>
+        <!--Make sure the form has the autocomplete function switched off:-->
+        <!-- <form autocomplete="off"  id="formtable"> -->
+          <div class="caisseautocomplete" style="width:300px;">
+            <input id="caissemyInput" type="text" name="myArticle" placeholder="Nom de l'article ici">
+          </div>
+          <input type="number" name="quantity" id="idqty" placeholder="Entrer quantité">
+          <input type="button" onclick="addarticle()" value="Ajouter">
+        <!-- </form> -->
+        </div>
+        <br><br>
 
                     
                     <label for="prix"><b>Prix Total</b></label><input type="number" name="prix">
@@ -423,7 +423,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
 
 
 
-    </div>
+      </div>
  
 
 
@@ -743,7 +743,7 @@ var obj = <?php echo json_encode($stockcmu); ?>;
     }
       ?>
 /*An array containing all the country names in the world:*/
-var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+// var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 caisseautocomplete(document.getElementById("caissemyInput"), objarticle);

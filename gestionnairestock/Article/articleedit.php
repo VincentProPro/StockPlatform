@@ -5,15 +5,21 @@ session_start();
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: ../index.php");
+    header("location: ../../login.php");
     exit;
 }
-$emailfourni=$_POST['emailfourni'];
-$idcode=$_POST['idcode'];
-$tel=$_POST['tel'];
-$location=$_POST['location'];
-$plusinfo=$_POST['plusinfo'];
-$nom=$_POST['nom'];
+
+
+$matricule=$_POST['matricule'];
+$designation=$_POST['designation'];
+$prixachat=$_POST['prixachat'];
+$prixvente=$_POST['prixvente'];
+$category=$_POST['category'];
+$quantity_per_unit=$_POST['quantity_per_unit'];
+$description=$_POST['description'];
+$poids_kg=$_POST['poids_kg'];
+$format=$_POST['format'];
+$tmc=$_POST['tmc'];
 ?>
  
 <!DOCTYPE html>
@@ -25,7 +31,7 @@ $nom=$_POST['nom'];
 
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-<link rel="stylesheet" href="../cliniccss.css">
+<link rel="stylesheet" href="../../cliniccss.css">
 <!-- //<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 //        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 //        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
@@ -199,7 +205,7 @@ span.psw {
 <body>
 
 <div class="header">
-  <h1>Clinic </h1>
+  <h1>Clinic</h1>
   <p>La Clinic  est une Clinique de réference.</p>
 </div>
 
@@ -212,10 +218,10 @@ span.psw {
 </div>
 
 <div class="navbar">
-    <a href="welcomestocker.php#entrerarticle">Entrer Magasin</a>
-    <a href="welcomestocker.php#retraitarticle">Retrait Magasin</a>
-    <a href="welcomestocker.php#retraitarticleperunit">Retrait Détailé Magasin</a>
-    <a href="validationentrer.php">Validation d'Entrer Magasin</a>
+    <a href="../welcomestocker.php#entrerarticle">Entrer Magasin</a>
+    <a href="../welcomestocker.php#retraitarticle">Retrait Magasin</a>
+    <a href="../welcomestocker.php#retraitarticleperunit">Retrait Détailé Magasin</a>
+    <a href="../validationentrer.php">Validation d'Entrer Magasin</a>
 
  
    
@@ -277,19 +283,76 @@ span.psw {
     <div class="container">
             <h3>Fournisseur Modification</h3>
 
-      <label for="nommdf"><b>Nom Complet</b></label>
-      <input type="text" placeholder="Entrer mom" name="nommdf" value="<?php echo $nom; ?>"required>
-      <input type="text"  name="codeis" value="<?php echo $idcode; ?>">
+            <label for="designation"><b>Nom Complet</b></label>
+      <input type="text" placeholder="Entrer le nom de l'article" name="designation"  value="<?php echo $designation;?> " >
+      <label for="telmdf"><b>Description</b></label>
+      <input type="text" placeholder="Entrer la description du produit"  name="description"  value="<?php echo $description;?> " >
+      <label for="poids_kg"><b>Poids en Kg</b></label>
+      <input type="number"  name="poids_kg"  value="<?php echo $poids_kg;?> ">
+      <label for="tmc"><b>TMC</b></label>
+      <input type="number"  name="tmc"  value="<?php echo $tmc;?> ">
+      <label for="format"><b>Format </b></label>
 
-      <label for="telmdf"><b>Tel</b></label>
-      <input type="text" placeholder="Entrer le tel" value="<?php echo $tel;?>" name="telmdf" required>
-      <label for="emailmdf"><b>Email</b></label>
-      <input type="text" placeholder="Entrer email" name="emailmdf" value="<?php echo $emailfourni;?>">
-      <label for="locationmdf"><b>Location</b></label>
-      <input type="text" placeholder="Entrer la Position" name="locationmdf" value="<?php echo $location;?> ">
-       <label for="plusinfomdf"><b>Plus d'Info</b></label>
-      <input type="text" placeholder="Entrer la description" name="plusinfomdf" value="<?php echo $plusinfo;?> ">
-      
+      <select name="format">
+                  <?php
+                      include('../../db/config.php');
+                      $sql = "SELECT DISTINCT nom , matricule FROM format";
+                      if($stmt = $pdo->prepare($sql)){
+                        if($stmt->execute()){
+                            if($stmt->rowCount()>0){
+                                $arrayrole= $stmt->fetchAll();
+                                foreach($arrayrole as $roleelement){
+                                  ?> 
+                                    <option value="<?php echo $roleelement[1];?>">
+                                      <?php echo $roleelement[0];?>
+                                    </option>
+                                  <?php
+                                }  
+                            }
+                          }
+                        }
+                    ?>
+      </select>
+      <label for="quantity_per_unit"><b>Quantité par Unité</b></label>
+      <input type="number"  name="quantity_per_unit"  value="<?php echo $quantity_per_unit;?> ">
+      <label for="prixachat"><b>Prix Achat </b></label>
+      <input type="number"  name="prixachat"  value="<?php echo $prixachat;?> ">
+      <label for="prixvente"><b>Prix Vente </b></label>
+      <input type="number"  name="prixvente"  value="<?php echo $prixvente;?> ">
+
+                                                    <br><br>
+      <label for="category"><b>Categorie </b></label>
+
+      <select name="category">
+                  <?php
+                      include('../../db/config.php');
+                      $sql = "SELECT DISTINCT nom , matricule FROM categoritable";
+                      if($stmt = $pdo->prepare($sql)){
+                        if($stmt->execute()){
+                            if($stmt->rowCount()>0){
+                                $arrayrole= $stmt->fetchAll();
+                                foreach($arrayrole as $roleelement){
+                                  ?> 
+                                    <option value="<?php echo $roleelement[1];?>">
+                                      <?php echo $roleelement[0];?>
+                                    </option>
+                                  <?php
+                                }  
+                            }
+                          }
+                        }
+                    ?>
+      </select>               
+                                                  <br><br>
+       <label>Mode</label>
+       <br>
+      <select name="modeuse">
+        <option value="Voie Orale">Voie Orale</option>
+        <option value="Injectable">Injectable</option>
+        <option value="Seringle">Seringle</option>
+                      </select>
+      <br> <br> 
+      <input type="hidden" name="formulaire" value="modifier" >      
       <br> <br> 
       
       <button type="submit" name="modify">Envoyé</button>
@@ -313,7 +376,7 @@ span.psw {
   <div class="rightcolumn">
     <div class="card">
       <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
+            <div class="fakeimg" style="height:100px;"><img src="../../images/contact.png" style="height:80px;"></div>
 <b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
       <br>
       <br>
@@ -322,7 +385,7 @@ span.psw {
       <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
         <br>
       <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-                  <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
+                  <a href="../../logout.php"><button class="fakeimg" >Log Out</button></a>
 
     </div>
     <div class="card">
@@ -339,7 +402,7 @@ span.psw {
 
          <?php
  
-   include('../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -379,58 +442,7 @@ span.psw {
 
 </body>
 </html>
-<?php
-                    // include('../config.php');
-// error_reporting(0);
 
-        if(array_key_exists('modify', $_POST)) {
-            modifyfunc();
-        }
-        else if(array_key_exists('button2', $_POST)) {
-            
-        }
-        function modifyfunc() {
-
-              $codeis=$_POST['codeis'];
-              $nommdf=$_POST['nommdf'];
-              $telmdf=$_POST['telmdf'];
-              $locationmdf=$_POST['locationmdf'];
-              $emailmdf=$_POST['emailmdf'];
-              $plusinfomdf=$_POST['plusinfomdf'];
-                 
-            $t=time();
-            $datereel=date("Y-m-d H:i:s",$t);
-            $redacteurcode=$_SESSION["email"];
-                    // $redacteurcode="gastron@gmail.com";
-
-
-         include('../config.php');
-
-
-
-           $sql="Update  fournisseurdb Set nom=:nommdf, tel=:telmdf, email=:emailmdf, location=:locationmdf, plusinfo=:plusinfomdf, matriculredacteur=:matriculredacteur, lastmodification=:lastmodification WHERE code = :codeis";
-
-              if($stmt = $pdo->prepare($sql)){
-                      $stmt->bindParam(":nom", $nommdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":tel", $telmdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":email", $emailmdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":location", $locationmdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":plusinfo", $plusinfomdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":code", $codeis, PDO::PARAM_STR);
-                      $stmt->bindParam(":matriculredacteur", $matriculredacteur, PDO::PARAM_STR);
-                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-                        if($stmt->execute()){
-                               echo "<script>alert('Success!');</script>";
-                                 header("location: gestionnairestock/fournisseurmanage.php");
-
-
-
-
-                        }}
-            echo "This is Button1 that is selected";
-        }
-
-?>
 
 
  

@@ -313,7 +313,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                             <?php  
                               
                             // Import the file where we defined the connection to Database.     
-                                require_once "../config.php";   
+                                require_once "../db/config.php";   
                             
                                 $per_page_record = 3;  // Number of entries to show in a page.   
                                 // Look for a GET variable page if not found default is 1.        
@@ -579,7 +579,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   include('config.php');
+   include('db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

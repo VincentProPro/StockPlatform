@@ -19,7 +19,7 @@ $description='';
 $nom='';
 
 $sql = "SELECT * FROM categoritable WHERE code = :codeis ";
-         include('../../config.php');
+         include('../../db/config.php');
 
 
                     if($stmt = $pdo->prepare($sql)){
@@ -387,7 +387,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

@@ -305,7 +305,7 @@ span.psw {
         <?php  
           
         // Import the file where we defined the connection to Database.     
-            require_once "../../conn.php";   
+            require_once("../../../db/conn.php");   
         
             $per_page_record = 4;  // Number of entries to show in a page.   
             // Look for a GET variable page if not found default is 1.        

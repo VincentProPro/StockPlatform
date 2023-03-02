@@ -1,6 +1,6 @@
 <?php
 require("../authentification.php");
-require("../config.php");
+require("../db/config.php");
 require("../AutreClass/message.php");
 
 class Membre{
@@ -45,7 +45,7 @@ class Membre{
            		$datereel=date("Y-m-d H:i:s",$t);
             	$redacteurcode=$_SESSION["email"];
             	// $redacteurcode="_SESSION";
-            	            	         include('../config.php');
+            	            	         include('../db/config.php');
 
 
 
@@ -87,7 +87,7 @@ class Membre{
     			$t=time();
            		$datereel=date("Y-m-d H:i:s",$t);
             	$redacteurcode=$_SESSION["email"];
-            	            	            	         include('../config.php');
+            	            	            	         include('../db/config.php');
 
 
             	  $sql="Update  users Set fullname=:fullname, tel=:tel , position=:position , email=:email , role=:role, status=:status  WHERE matricule = :matricule";
@@ -129,7 +129,7 @@ class Membre{
 
 						            	  try{
 						    $sql="Delete from users Where  matricule = :matricule  ";
-						                	            	         include('../config.php');
+						                	            	         include('../db/config.php');
 
 
 						    if($stmt = $pdo->prepare($sql)){

@@ -10,7 +10,7 @@
 // echo $myJSON;
 
 
-require_once "../config.php";
+require_once "../db/config.php";
 
  $sql = "SELECT COUNT(cs.codearticle) AS frequence, art.designation, cs.codearticle, cs.code, cs.quantity FROM cmusorti cs LEFT JOIN article art ON cs.codearticle = art.code GROUP BY cs.codearticle";
         

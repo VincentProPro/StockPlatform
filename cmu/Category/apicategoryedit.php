@@ -22,7 +22,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             // echo "variable: ".$codeis.$nommdf.$locationmdf.$telmdf.$emailmdf.$plusinfomdf;
 
 
-         include('../../config.php');
+         include('../../db/config.php');
 
 
 

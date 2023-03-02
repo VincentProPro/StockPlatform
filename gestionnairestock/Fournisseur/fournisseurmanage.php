@@ -305,7 +305,7 @@ span.psw {
         <?php  
           
         // Import the file where we defined the connection to Database.     
-            require_once "../../conn.php";   
+            require_once "../../db/conn.php";   
         
             $per_page_record = 4;  // Number of entries to show in a page.   
             // Look for a GET variable page if not found default is 1.        
@@ -318,7 +318,7 @@ span.psw {
         
             $start_from = ($page-1) * $per_page_record;     
         
-            $query = "SELECT code, nom, tel, email, location, plusinfo FROM fournisseurdb  LIMIT $start_from, $per_page_record";     
+            $query = "SELECT matricule, nom, tel, email, location, plusinfo FROM fournisseurdb  LIMIT $start_from, $per_page_record";     
             $rs_result = mysqli_query ($con, $query);    
         ?>    
       
@@ -327,14 +327,14 @@ span.psw {
           <div>
           <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ajouter Un Fournisseur</button>   
             <h1>Liste Des Fournisseurs</h1>   
-            <p> Modifier et Supprimer.   
-            </p>   
+            <h3> Vous avez la possibilité de Modifier et Supprimer.   
+          </h3>   
 
             <table id="customers" class="table table-striped table-condensed    
                                               table-bordered">   
               <thead>   
                 <tr>   
-                  <th width="10%">code</th>   
+                  <th width="10%">matricule</th>   
                   <th width="10%">nom</th>   
                   <th>tel</th>   
                   <th>email</th>   
@@ -349,7 +349,7 @@ span.psw {
                       // Display each field of the records.    
                 ?>     
                 <tr>     
-                 <td><?php echo $row["code"]; ?></td>     
+                 <td><?php echo $row["matricule"]; ?></td>     
                      
                 <td><?php echo $row["nom"]; ?></td>   
                 <td><?php echo $row["tel"]; ?></td>   
@@ -359,7 +359,7 @@ span.psw {
                 <td>
                     <form action="fournisseuredit.php" method="POST"> 
                     <div class="invisi">
-                                        <input type="hidden"  name="idcode" value="<?php echo $row["code"]; ?>">
+                                        <input type="hidden"  name="idcode" value="<?php echo $row["matricule"]; ?>">
                                         <input type="hidden"  name="nom" value="<?php echo $row["nom"]; ?>">
                                         <input type="hidden"  name="tel" value="<?php echo $row["tel"]; ?>">
                                         <input type="hidden"  name="emailfourni" value="<?php echo $row["email"]; ?>">
@@ -369,7 +369,7 @@ span.psw {
               
 <div id="outer">
   <div class="inner"><button type="submit"  >Modifier</button></div>
-  <div class="inner"><button type="button" id="<?php echo $row["code"]; ?>" onclick="myFunctionDelete(this.id)">Supprimer</button></div>
+  <div class="inner"><button type="button" id="<?php echo $row["matricule"]; ?>" onclick="myFunctionDelete(this.id)">Supprimer</button></div>
  
 </div>
 </form>
@@ -466,7 +466,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -504,7 +504,7 @@ span.psw {
 </div>
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="apifournisseurajout.php" method="POST">
+  <form class="modal-content animate" action="apifournisseur.php" method="POST">
    
 
      <div class="container">
@@ -520,11 +520,12 @@ span.psw {
       <label for="locationmdf"><b>Location</b></label>
       <input type="text" placeholder="Entrer la Position" name="locationmdf" >
        <label for="plusinfomdf"><b>Plus d'Info</b></label>
-      <input type="text" placeholder="Entrer la description" name="plusinfomdf" >
+       <input type="text" placeholder="Entrer la description" name="plusinfomdf" >
+       <input type="hidden"  name="formulaire" value="ajouter" >
       
       <br> <br> 
       
-      <button type="submit" name="modify">Envoyé</button>
+      <button type="submit" name="ajout">Envoyé</button>
       
     </div>
 
@@ -534,35 +535,7 @@ span.psw {
   </form>
 </div>
 
-<div id="id02" class="modal2">
-  
-  <form class="modal-content animate" action="regismember.php" method="POST">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="images/1550389719.jpeg" alt="Avatar" class="avatar">
-    </div>
 
-    <div class="container">
-      <h3>S'Inscrire</h3>
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Entrer l'email" name="email" >
-
-      <label for="psw"><b>Mot de Passe</b></label>
-      <input type="password" placeholder="Entrer Mot de Passe" name="psw" >
-      <label for="psw"><b>Confirmer Mot de Passe</b></label>
-      <input type="password" placeholder="Entrer Mot de Passe" name="psw" >
-        
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> se Souvenir
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Annulé</button>
-    </div>
-  </form>
-</div>
 <script>
     function go2Page()   
         {   

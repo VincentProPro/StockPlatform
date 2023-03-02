@@ -272,7 +272,7 @@ span.psw {
 
                   <h2>Fournisseur Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
-                    <form  action="apifournisseuredit.php" method="POST">
+                    <form  action="apifournisseur.php" method="POST">
    
 
     <div class="container">
@@ -280,7 +280,7 @@ span.psw {
 
       <label for="nommdf"><b>Nom Complet</b></label>
       <input type="text" placeholder="Entrer mom" name="nommdf" value="<?php echo $nom; ?>"required>
-      <input type="text"  name="codeis" value="<?php echo $idcode; ?>">
+      <input type="hidden"  name="matricule" value="<?php echo $idcode; ?>">
 
       <label for="telmdf"><b>Tel</b></label>
       <input type="text" placeholder="Entrer le tel" value="<?php echo $tel;?>" name="telmdf" required>
@@ -289,7 +289,8 @@ span.psw {
       <label for="locationmdf"><b>Location</b></label>
       <input type="text" placeholder="Entrer la Position" name="locationmdf" value="<?php echo $location;?> ">
        <label for="plusinfomdf"><b>Plus d'Info</b></label>
-      <input type="text" placeholder="Entrer la description" name="plusinfomdf" value="<?php echo $plusinfo;?> ">
+       <input type="text" placeholder="Entrer la description" name="plusinfomdf" value="<?php echo $plusinfo;?> ">
+       <input type="hidden"  name="formulaire" value="modifier">
       
       <br> <br> 
       
@@ -340,7 +341,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -381,7 +382,7 @@ span.psw {
 </body>
 </html>
 <?php
-                    // include('../config.php');
+                    // include('../db/config.php');
 // error_reporting(0);
 
         if(array_key_exists('modify', $_POST)) {
@@ -405,7 +406,7 @@ span.psw {
                     // $redacteurcode="gastron@gmail.com";
 
 
-         include('../../config.php');
+         include('../../db/config.php');
 
 
 

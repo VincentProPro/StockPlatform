@@ -19,7 +19,7 @@ $description='';
 $nom='';
 
 $sql = "SELECT * FROM categoritable WHERE code = :codeis ";
-         include('../../config.php');
+         include('../../db/config.php');
 
 
                     if($stmt = $pdo->prepare($sql)){
@@ -337,9 +337,11 @@ span.psw {
       
       <br> <br> 
       
-<form action="apicategorydelete.php" method="POST">
+<form action="apicategory.php" method="POST">
 
-  <input type="hidden" name="codeisca" value="<?php echo $codeis;?>">
+  <input type="hidden" name="matricule" value="<?php echo $codeis;?>">
+  <input type="hidden"  name="formulaire" value="delete">
+
         <button type="submit" name="button1" >Supprimer</button>
 
 </form>      
@@ -387,7 +389,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             

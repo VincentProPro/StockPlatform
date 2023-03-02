@@ -269,7 +269,7 @@ span.psw {
 
                   <h2>Categorie Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
-                    <form  action="apicategoryedit.php" method="POST">
+                    <form  action="apicategory.php" method="POST">
    
 
     <div class="container">
@@ -277,12 +277,13 @@ span.psw {
 
       <label for="nommdf"><b>Nom Complet</b></label>
       <input type="text" placeholder="Entrer mom" name="nommdf" value="<?php echo $nom; ?>"required>
-      <input type="text"  name="codeis" value="<?php echo $idcode; ?>">
+      <input type="text"  name="matricule" value="<?php echo $idcode; ?>">
 
       
        <label for="description"><b>Description</b></label>
       <input type="text" placeholder="Entrer la description" name="descriptionmdf" value="<?php echo $description;?> ">
-      
+      <input type="hidden"  name="formulaire" value="modifier">
+
       <br> <br> 
       
       <button type="submit" name="modify">Envoyé</button>
@@ -332,7 +333,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -373,7 +374,7 @@ span.psw {
 </body>
 </html>
 <?php
-                    // include('../config.php');
+                    // include('../db/config.php');
 // error_reporting(0);
 
         if(array_key_exists('modify', $_POST)) {
@@ -395,7 +396,7 @@ span.psw {
                     // $redacteurcode="gastron@gmail.com";
 
 
-         include('../../config.php');
+         include('../../db/config.php');
 
 
 

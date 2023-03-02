@@ -9,7 +9,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../logout.php");
     exit;
 }
-         include('../../config.php');
+         include('../../db/config.php');
 
 
               $nom=$_POST['nom'];
@@ -150,7 +150,7 @@ $numberandom=rand(0,10)+rand(20,90);
 
   $result=strtoupper($result);
   $result.=$numberandom;
-           include('../../config.php');
+           include('../../db/config.php');
 
 
   $sql = "SELECT * FROM categoritable WHERE code = :code ";

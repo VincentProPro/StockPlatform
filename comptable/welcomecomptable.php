@@ -534,7 +534,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
                   ?>
                   
-                </table>   
+                </table>
+                <a href="https://cdn.plot.ly/plotly-2.18.0.min.js" download="w3logo"> here</a>
           </div>
 
         </div>

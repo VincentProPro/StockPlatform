@@ -1,28 +1,4 @@
-.btn-group button {
-  background-color: #04AA6D; /* Green background */
-  border: 1px solid green; /* Green border */
-  color: white; /* White text */
-  padding: 10px 24px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
-  width: fit-content;
-}
 
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
-}
 * {
   box-sizing: border-box;
 }
@@ -608,20 +584,33 @@ div.wrapper {
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+
+
+
+.btn-group{
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: #0000ff; */
+}
 .btn-group button {
-  background-color: #04AA6D; /* Green background */
-  border: 1px solid green; /* Green border */
+  background-color: #0040ff; /* Green background */
+  border: 1px solid rgb(77, 177, 248); /* Green border */
   color: white; /* White text */
   padding: 10px 24px; /* Some padding */
   cursor: pointer; /* Pointer/hand icon */
   float: left; /* Float the buttons side by side */
+  width: fit-content;
 }
 
 /* Clear floats (clearfix hack) */
 .btn-group:after {
   content: "";
   clear: both;
-  display: table;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  /* flex-wrap: wrap; */
 }
 
 .btn-group button:not(:last-child) {
@@ -630,5 +619,16 @@ div.wrapper {
 
 /* Add a background color on hover */
 .btn-group button:hover {
-  background-color: #3e8e41;
+  background-color: #3e778e;
+}
+
+div .labelperiode{
+  /* display: inline; */
+  /* background-color: #f44336; */
+  /* margin-top: 20px; */
+  /* text-align: center; */
+  align-self: center;
+  /* align-content: center;
+  justify-content: center; */
+
 }
