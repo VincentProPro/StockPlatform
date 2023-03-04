@@ -2,7 +2,7 @@
 ob_start();
 $formulaire=$_POST['formulaire'];
 
-require("../../Model/gestionnairestock.php");
+require("../Model/gestionnairestock.php");
 switch ($formulaire) {
     case "ajouter":
     // echo"entrerachat";
@@ -31,7 +31,7 @@ function ajouter(){
         
               $objectCreated=new Gestionnairestock();
           // echo"execute executebondecommande";
-          $objectCreated->createarticle($nom,$description);
+          $objectCreated->createarticle($designation,$prixachat,$prixvente,$category,$quantity_per_unit,$description,$poids_kg,$format,($prixvente-$prixachat),$tmc);
 
 
 }
@@ -46,9 +46,10 @@ function modifier(){
   $poids_kg=$_POST['poids_kg'];
   $format=$_POST['format'];
   $tmc=$_POST['tmc'];
+  $groupcode=$_POST['groupcode'];
         $objectCreated=new Gestionnairestock();
-        // echo"execute executebondecommande";
-        $objectCreated->editarticle($matricule,$nom,$description);
+        echo"In apiarticle >> matricule ".$matricule." groupcode: ".$groupcode." designation: ".$designation." prixachat :".$prixachat." prixvente: ".$prixvente." category : ".$category." quantity_per_unit : ".$quantity_per_unit." description : ".$description." poids_kg: ".$poids_kg." format : ".$format." benefice: ".($prixvente-$prixachat)." tmc : ".$tmc;
+        $objectCreated->editarticle($matricule,$groupcode,$designation,$prixachat,$prixvente,$category,$quantity_per_unit,$description,$poids_kg,$format,($prixvente-$prixachat),$tmc);
     
     
 }

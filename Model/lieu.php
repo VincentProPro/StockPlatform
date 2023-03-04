@@ -1,9 +1,8 @@
 <?php
 require("../authentification.php");
-require("../db/config.php");
-// require("../AutreClass/message.php");
+// require("../db/config.php");
 
-class Category{
+class Lieu{
 
 	private $code;
 	private $matricule;
@@ -23,12 +22,12 @@ class Category{
 
 	// }
 
-				public function setparamedit($code,$nom,$decription){
-									$this->code=$code;
-									$this->nom=$nom;
-									$this->description=$description;
+				// public function setparamedit($code,$nom,$decription){
+				// 					$this->code=$code;
+				// 					$this->nom=$nom;
+				// 					$this->description=$description;
 
-					}
+				// 	}
 				// public function getfullname(){
 				// 	return $this->fullname;
 				// 	}
@@ -52,7 +51,7 @@ class Category{
 				// 	}
 
 				
-    public function ajouter($nom,$description){
+    			public function ajouter($nom,$description){
 				    	// $this->matricule=$matricule;
 						$this->code=$this->generatecode($nom);
 						$this->nom=$nom;
@@ -66,7 +65,7 @@ class Category{
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
 			            	            	         include('../db/config.php');
-			            	            	            $sql="insert into categoritable (code,nom,description,matriculredacteur,lastmodification) values (:code,:nom,:description,:matriculredacteur,:lastmodification)";
+			            	            	            $sql="insert into lieu (code,nom,description,matriculredacteur,lastmodification) values (:code,:nom,:description,:matriculredacteur,:lastmodification)";
 			             	 if($stmt = $pdo->prepare($sql)){
 			                      $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
 			                      $stmt->bindParam(":description", $this->description, PDO::PARAM_STR);
@@ -76,7 +75,7 @@ class Category{
 			                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
 
 			                        if($stmt->execute()){
-			                        														return "La Catégorie a bien ete ajouté ";
+			                        														return "Le lieu a bien ete ajouté ";
 
 
 			                               
@@ -85,13 +84,13 @@ class Category{
 
 			                        }
 			                        else{
-			                        	 return "La Catégorie n'a pas ete ajouté, Requete Invalid veuillez retenter ";
+			                        	 return "Le lieu n'a pas ete ajouté, Requete Invalid veuillez retenter ";
 			                        	
 
 
 			                        }
 			                    }else{
-			                    		 return "La Catégorie n'a pas ete ajouté, Requete Invalid Execution Fail veuillez retenter ";
+			                    		 return "Le lieu n'a pas ete ajouté, Requete Invalid Execution Fail veuillez retenter ";
 
 
 			                    }
@@ -99,135 +98,133 @@ class Category{
 
 												}catch(exception $e){
 
-												return "La Catégorie n'a pas ete ajouté, Requete Invalid veuillez retenter Error:".$e;
+												return "Le lieu n'a pas ete ajouté, Requete Invalid veuillez retenter Error:".$e;
 
 												}
     		
 
 
 			     
-    }
+           				}
 
-	public function generatecode($designation){
-						$codeisthis=$designation;
-						$splitnom=explode(" ",$codeisthis);
-						echo "Count :";
-						echo count($splitnom);
+public function generatecode($designation){
+                            $codeisthis=$designation;
+                            $splitnom=explode(" ",$codeisthis);
+                            echo "Count :";
+                            echo count($splitnom);
 
-						$numberofletternom=strlen($codeisthis);
-						$numltersplitnom=count($splitnom);
-						// $string[strlen($codeisthis)-1];
-						$counterletter=0;
-						$result='';
-
-
-						switch ($numltersplitnom) {
-						// case 0:
-						//     echo "i equals 0";
-						//     break;
-									case 1:
-										echo "i equals 1 mot";
-													
-
-										for ( $i=0;  $i<strlen($splitnom[0]); $i++)
-										{
-											if ($i<4 ){
-														$result.=$splitnom[0][$i]; 
+                            $numberofletternom=strlen($codeisthis);
+                            $numltersplitnom=count($splitnom);
+                            // $string[strlen($codeisthis)-1];
+                            $counterletter=0;
+                            $result='';
 
 
-											}
+                            switch ($numltersplitnom) {
+                              // case 0:
+                              //     echo "i equals 0";
+                              //     break;
+                                          case 1:
+                                              echo "i equals 1 mot";
+                                                        
+
+                                              for ( $i=0;  $i<strlen($splitnom[0]); $i++)
+                                              {
+                                                if ($i<4 ){
+                                                            $result.=$splitnom[0][$i]; 
 
 
-										}
-										break;
-									case 2:
-										for ( $j=0;$j<2;$j++){
-											for ( $i=0; $i<strlen($splitnom[$j]);$i++){
-											if($i<2){
-														$result.=$splitnom[$j][$i]; 
+                                                }
 
 
-											}
+                                              }
+                                              break;
+                                          case 2:
+                                              for ( $j=0;$j<2;$j++){
+                                                for ( $i=0; $i<strlen($splitnom[$j]);$i++){
+                                                  if($i<2){
+                                                              $result.=$splitnom[$j][$i]; 
 
 
-
-										}
-
-
-										}
-
-										
-										break;
-									case 3:
-										for ( $j=0;$j<3;$j++){
-											for ( $i=0;$i<strlen($splitnom[$j]);$i++){
-											if ($i<1 ){
-														// $result.=substr($splitnom[$j], $i); 
-														$result.=$splitnom[$j][$i]; 
-
-											}
+                                                  }
 
 
 
-										}
+                                              }
 
 
-										}
-									$result.=substr($splitnom[2], strlen($splitnom[2])-1); 
-									break;
+                                              }
 
-									default:
-										for ( $j=0;$j<4;$j++){
-											for ( $i=0; $i<strlen($splitnom[$j]);$i++){
-											if ($i<1 ){
-														$result.=$splitnom[$j][$i]; 
+                                              
+                                              break;
+                                          case 3:
+                                              for ( $j=0;$j<3;$j++){
+                                                for ( $i=0;$i<strlen($splitnom[$j]);$i++){
+                                                  if ($i<1 ){
+                                                              // $result.=substr($splitnom[$j], $i); 
+                                                              $result.=$splitnom[$j][$i]; 
 
-											}
-
-
-
-										}
+                                                  }
 
 
-										}
-										break;
-								}
-					$numberandom=rand(0,10)+rand(20,90);
+
+                                              }
 
 
-						$result=strtoupper($result);
-						$result.=$numberandom;
-								include('../db/config.php');
+                                              }
+                                          $result.=substr($splitnom[2], strlen($splitnom[2])-1); 
+                                          break;
+
+                                          default:
+                                              for ( $j=0;$j<4;$j++){
+                                                for ( $i=0; $i<strlen($splitnom[$j]);$i++){
+                                                  if ($i<1 ){
+                                                              $result.=$splitnom[$j][$i]; 
+
+                                                  }
 
 
-						$sql = "SELECT * FROM categoritable WHERE code = :code ";
-																if($stmt = $pdo->prepare($sql)){
-								// Bind variables to the prepared statement as parameters
-								$stmt->bindParam(":code", $code, PDO::PARAM_STR);
-								
-								// Set parameters
-								$code = $result;
-								
-								// Attempt to execute the prepared statement
-								if($stmt->execute()){
+
+                                              }
 
 
-									if($stmt->rowCount() == 0){
-										return $result;
-
-									}
-									else{
-										generatecode($codeisthis);
-									}
-									}}
+                                              }
+                                              break;
+                                      }
+                          $numberandom=rand(0,10)+rand(20,90);
 
 
-}
+                            $result=strtoupper($result);
+                            $result.=$numberandom;
+                                     include('../db/config.php');
 
 
-    public function modifier($matricule,$code,$nom,$description){
+                            $sql = "SELECT * FROM lieu WHERE code = :code ";
+                                                                     if($stmt = $pdo->prepare($sql)){
+                                      // Bind variables to the prepared statement as parameters
+                                      $stmt->bindParam(":code", $code, PDO::PARAM_STR);
+                                      
+                                      // Set parameters
+                                      $code = $result;
+                                      
+                                      // Attempt to execute the prepared statement
+                                      if($stmt->execute()){
 
-									$this->code=$code;
+
+                                          if($stmt->rowCount() == 0){
+                                            return $result;
+
+                                          }
+                                          else{
+                                            generatecode($codeisthis);
+                                          }
+                                        }}
+
+
+  }
+                        public function modifier($matricule,$nom,$description){
+
+									// $this->code=$code;
 									$this->nom=$nom;
 									$this->description=$description;
 
@@ -239,13 +236,12 @@ class Category{
 
 	    	            	         try{
 
-	    	            	         	   $sql="Update  categoritable Set code=:code, nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
+	    	            	         	   $sql="Update  lieu Set nom=:nom , description=:description , matriculredacteur=:matriculredacteur , lastmodification=:lastmodification  WHERE matricule = :matricule";
 	    	            	         	   include('../db/config.php');
 	    	            	         		// echo"this->fullname: ".$this->fullname;
 
 				                        if($stmt = $pdo->prepare($sql)){
 
-											 $stmt->bindParam(":code", $this->code, PDO::PARAM_STR);
 			                      $stmt->bindParam(":description", $this->description, PDO::PARAM_STR);
 			                      $stmt->bindParam(":nom", $this->nom, PDO::PARAM_STR);
 			                      
@@ -259,19 +255,19 @@ class Category{
 											            // Attempt to execute the prepared statement
 											            if($stmt->execute()){
 
-											            	return "La Catégorie a ben été modifié";
+											            	return "Le lieu a ben été modifié";
 
 
 											            }
 											            else{
-											            	return "Le Catégorie n'a pas ete modifié correctement, Requete Invalid veuillez retenter ";
+											            	return "Le lieu n'a pas ete modifié correctement, Requete Invalid veuillez retenter ";
 
 
 											            }}
 
 	    	            	         }
 	    	            	         catch(Exception $e){
-	    	            	         		return "La Catégorie n'a pas ete modifié, Requete Invalid veuillez retenter Error:".$e;
+	    	            	         		return "Le lieu n'a pas ete modifié, Requete Invalid veuillez retenter Error:".$e;
 
 
 
@@ -292,7 +288,7 @@ class Category{
     			
 
 						            	  try{
-											    $sql="Select * from categoritable Where  matricule = :matricule  ";
+											    $sql="Select * from lieu Where  matricule = :matricule  ";
 											                	            	         include('../db/config.php');
 
 
@@ -332,7 +328,7 @@ class Category{
     			
 
 						            	  try{
-											    $sql="Select * from categoritable";
+											    $sql="Select * from lieu";
 											                	            	         include('../db/config.php');
 
 
@@ -370,7 +366,7 @@ class Category{
 			    			
 
 									            	  try{
-														    $sql="Delete from categoritable Where  matricule = :matricule  ";
+														    $sql="Delete from lieu Where  matricule = :matricule  ";
 														                	            	         include('../db/config.php');
 
 
@@ -378,7 +374,7 @@ class Category{
 														      $stmt->bindParam(":matricule", $this->matricule, PDO::PARAM_STR);
 														  
 														        if($stmt->execute()){
-														        	return "La Catégorie a ben été supprimé";
+														        	return "Le lieu a ben été supprimé";
 														          
 
 														        }
@@ -396,8 +392,12 @@ class Category{
 
 	
 }
-
-// $objectCreated=new Format();
+// $objectCreated=new Lieu();
+				// echo$objectCreated->selectmatricule(3)[0][2][0];
+// $l=substr($objectCreated->selectmatricule(3)[0][2], 0,1);
+// $g="ppp";
+// $ggg=$l.$g;
+// 				echo $ggg;
 // echo $objectCreated->ajouter("code","nom","description");
 // echo $objectCreated->modifier("5","code5","nom","description");
 // echo $objectCreated->supprimer("5");

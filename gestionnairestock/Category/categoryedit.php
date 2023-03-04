@@ -9,8 +9,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 $description=$_POST['description'];
-$idcode=$_POST['idcode'];
-
+$matricule=$_POST['idcode'];
+$code=$_POST['code'];
 $nom=$_POST['nom'];
 ?>
  
@@ -259,7 +259,46 @@ span.psw {
       <a href="categorymanage.php">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Lieu/lieumanage.php">Ajouter </a>
+          <a href="../Lieu/lieumanage.php">Modifier</a>
+          <a href="../Lieu/lieumanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div>  
 </div>
 
 <div class="row">
@@ -269,19 +308,20 @@ span.psw {
 
                   <h2>Categorie Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
-                    <form  action="apicategory.php" method="POST">
+                    <form  action="../apicategory.php" method="POST">
    
 
     <div class="container">
             <h3>Categorie Modification</h3>
 
-      <label for="nommdf"><b>Nom Complet</b></label>
-      <input type="text" placeholder="Entrer mom" name="nommdf" value="<?php echo $nom; ?>"required>
-      <input type="text"  name="matricule" value="<?php echo $idcode; ?>">
+      <label for="nom"><b>Nom Complet</b></label>
+      <input type="text" placeholder="Entrer mom" name="nom" value="<?php echo $nom; ?>"required>
+      <input type="hidden"  name="matricule" value="<?php echo $matricule; ?>">
+      <input type="hidden"  name="code" value="<?php echo $code; ?>">
 
       
        <label for="description"><b>Description</b></label>
-      <input type="text" placeholder="Entrer la description" name="descriptionmdf" value="<?php echo $description;?> ">
+      <input type="text" placeholder="Entrer la description" name="description" value="<?php echo $description;?> ">
       <input type="hidden"  name="formulaire" value="modifier">
 
       <br> <br> 
@@ -373,54 +413,5 @@ span.psw {
 
 </body>
 </html>
-<?php
-                    // include('../db/config.php');
-// error_reporting(0);
-
-        if(array_key_exists('modify', $_POST)) {
-            modifyfunc();
-        }
-        else if(array_key_exists('button2', $_POST)) {
-            
-        }
-        function modifyfunc() {
-
-              $codeis=$_POST['codeis'];
-              $nommdf=$_POST['nommdf'];
-             
-              $descriptionmdf=$_POST['descriptionmdf'];
-                 
-            $t=time();
-            $datereel=date("Y-m-d H:i:s",$t);
-            $redacteurcode=$_SESSION["email"];
-                    // $redacteurcode="gastron@gmail.com";
-
-
-         include('../../db/config.php');
-
-
-
-           $sql="Update  categoritable Set nom=:nommdf,  description=:descriptionmdf, matriculredacteur=:matriculredacteur, lastmodification=:lastmodification WHERE code = :codeis";
-
-              if($stmt = $pdo->prepare($sql)){
-                      $stmt->bindParam(":nom", $nommdf, PDO::PARAM_STR);
-                      
-                      $stmt->bindParam(":descriptionmdf", $descriptionmdf, PDO::PARAM_STR);
-                      $stmt->bindParam(":code", $codeis, PDO::PARAM_STR);
-                      $stmt->bindParam(":matriculredacteur", $matriculredacteur, PDO::PARAM_STR);
-                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-                        if($stmt->execute()){
-                               echo "<script>alert('Success!');</script>";
-                                 header("location: categorymanage.php");
-
-
-
-
-                        }}
-            echo "This is Button1 that is selected";
-        }
-
-?>
-
 
  

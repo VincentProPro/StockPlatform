@@ -8,44 +8,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../login.php");
     exit;
 }
-$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-// $url = "https://testurl.com/test/1234?email=abc@test.com&name=sarah";
-$components = parse_url($url);
-parse_str($components['query'], $results);
-$codeis=$results['idcodeis'];
-$emailfourni='';
-$tel='';
-$location='';
-$plusinfo='';
-$nom='';
-
-$sql = "SELECT * FROM fournisseurdb WHERE code = :codeis ";
-         include('../../config.php');
-
-
-                    if($stmt = $pdo->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":codeis", $codeis, PDO::PARAM_STR);
-
-            
-            // Set parameters
-            
-            // Attempt to execute the prepared statement
-            if($stmt->execute()){
-
-
-                if($stmt->rowCount() >0){
-                    
-                    if($row = $stmt->fetch()){
-                        $emailfourni = $row["email"];
-                        $nom = $row["nom"];
-                        $plusinfo = $row["plusinfo"];
-                        $tel = $row["tel"];
-                        $location = $row["location"];
-
-                        }}}}
-
+$description=$_POST['description'];
+$matricule=$_POST['idcode'];
+// $code=$_POST['code'];
+$nom=$_POST['nom'];
 ?>
  
 <!DOCTYPE html>
@@ -225,30 +191,14 @@ span.psw {
      width: 100%;
   }
 }
-.sameline{
-       display: block;
 
-}
-.elemen{
-/*         display: inline-block;
-*/         float: left;
-  margin-left: 10px;
-  text-align: left;
-  font-size: 25px;
-
-}
-.sizeelement{
-    font-size: 30px;
-    font-weight: bold;
-
-}
             </style>  
 </head>
 <body>
 
 <div class="header">
   <h1>Clinic </h1>
-  <p>La Clinic est une Clinique de réference.</p>
+  <p>La Clinic  est une Clinique de réference.</p>
 </div>
 
 <div class="topnav">
@@ -278,24 +228,24 @@ span.psw {
     </div>
   </div> 
  
-    <div class="dropdown">
+      <div class="dropdown">
     <button class="dropbtn">Fournisseur 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id16').style.display='block'">Ajouter </a>
-      <a href="#"onclick="document.getElementById('id017').style.display='block'">Modifier</a>
-      <a href="#"onclick="document.getElementById('id018').style.display='block'">Supprimer</a>
+           <a href="../Fournisseur/fournisseurmanage.php">Ajouter </a>
+      <a href="../Fournisseur/fournisseurmanage.php">Modifier</a>
+      <a href="../Fournisseur/fournisseurmanage.php">Supprimer</a>
     </div>
   </div> 
-   <div class="dropdown">
+     <div class="dropdown">
     <button class="dropbtn">Article 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id19').style.display='block'">Ajouter </a>
-      <a href="#"onclick="document.getElementById('id020').style.display='block'">Modifier</a>
-      <a href="#"onclick="document.getElementById('id021').style.display='block'">Supprimer</a>
+      <a href="../Article/articlemanage.php">Ajouter </a>
+      <a href="../Article/articlemanage.php">Modifier</a>
+      <a href="../Article/articlemanage.php">Supprimer</a>
     </div>
   </div> 
     <div class="dropdown">
@@ -303,13 +253,52 @@ span.psw {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id022').style.display='block'">Voir </a>
-      <a href="#"onclick="document.getElementById('id023').style.display='block'">Ajouter </a>
-      <a href="#" onclick="document.getElementById('id024').style.display='block'" >Modifier </a>
-      <a href="#">Supprimer </a>
+      <a href="categorymanage.php">Voir </a>
+      <a href="categorymanage.php">Ajouter </a>
+      <a href="categorymanage.php">Modifier </a>
+      <a href="categorymanage.php">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Ajouter </a>
+          <a href="#">Modifier</a>
+          <a href="#">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div> 
 </div>
 
 <div class="row">
@@ -317,40 +306,31 @@ span.psw {
       <div class="card shadowexempl">
               <div id="entrerarticle">
 
-                  <h2>Fournisseur Gestion</h2>
+                  <h2>Lieu Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
+                    <form  action="../apilieu.php" method="POST">
    
 
     <div class="container">
-            <h3>Vous Êtes entrain de vouloir supprimer ce fournisseur</h3>
-            <center>
-                          <h4 class="sizeelement"><?php echo $nom;?></h4>
+            <h3>Lieu Modification</h3>
 
-            <div class="sameline">
-              <img class="elemen" src="../../images/deleteicon.jpg">
-              <p class="elemen">tel: <?php echo "  ".$tel;?> <br>Email: <?php echo $emailfourni;?><br> <br>Location: <?php echo $location;?><br> Description: <?php echo $plusinfo;?></p>
-              
-
-
-              
-
-            </div>
-            </center>
-
-            
+      <label for="nom"><b>Nom Complet</b></label>
+      <input type="text" placeholder="Entrer mom" name="nom" value="<?php echo $nom; ?>"required>
+      <input type="hidden"  name="matricule" value="<?php echo $matricule; ?>">
 
       
+       <label for="description"><b>Description</b></label>
+      <input type="text" placeholder="Entrer la description" name="description" value="<?php echo $description;?> ">
+      <input type="hidden"  name="formulaire" value="modifier">
+
       <br> <br> 
       
-<form action="apifournisseurdelete.php" method="POST">
-
-  <input type="hidden" name="codeisca" value="<?php echo $codeis;?>">
-        <button type="submit" name="button1" >Supprimer</button>
-
-</form>      
+      <button type="submit" name="modify">Envoyé</button>
+      
     </div>
 
     
+  </form>
 
                   
       
@@ -392,7 +372,7 @@ span.psw {
 
          <?php
  
-   include('../../config.php');
+   include('../../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -432,7 +412,5 @@ span.psw {
 
 </body>
 </html>
-
-
 
  

@@ -13,18 +13,18 @@ $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'htt
 // $url = "https://testurl.com/test/1234?email=abc@test.com&name=sarah";
 $components = parse_url($url);
 parse_str($components['query'], $results);
-$codeis=$results['idcodeis'];
+$matricule=$results['idcodeis'];
 
 $description='';
 $nom='';
 
-$sql = "SELECT * FROM categoritable WHERE code = :codeis ";
+$sql = "SELECT * FROM categoritable WHERE matricule = :matricule ";
          include('../../db/config.php');
 
 
                     if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":codeis", $codeis, PDO::PARAM_STR);
+            $stmt->bindParam(":matricule", $matricule, PDO::PARAM_STR);
 
             
             // Set parameters
@@ -304,7 +304,46 @@ span.psw {
       <a href="categorymanage.php">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Lieu/lieumanage.php">Ajouter </a>
+          <a href="../Lieu/lieumanage.php">Modifier</a>
+          <a href="../Lieu/lieumanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div>  
 </div>
 
 <div class="row">
@@ -337,23 +376,16 @@ span.psw {
       
       <br> <br> 
       
-<form action="apicategory.php" method="POST">
+<form action="../apicategory.php" method="POST">
 
-  <input type="hidden" name="matricule" value="<?php echo $codeis;?>">
+  <input type="hidden" name="matricule" value="<?php echo $matricule;?>">
   <input type="hidden"  name="formulaire" value="delete">
 
         <button type="submit" name="button1" >Supprimer</button>
 
 </form>      
     </div>
-
-    
-
-                  
-      
-     
-            
-                    
+                
                     <p>Autres fonctions..</p>
                   <p>Le Gestionaire de stock est aussi chargé d'ajouter dans la base de donnée des nouveaux fournisseurs, catégories, format et articles.</p>
                 </div>

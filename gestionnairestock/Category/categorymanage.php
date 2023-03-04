@@ -290,7 +290,46 @@ span.psw {
       <a href="categorymanage.php">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Lieu/lieumanage.php">Ajouter </a>
+          <a href="../Lieu/lieumanage.php">Modifier</a>
+          <a href="../Lieu/lieumanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div>  
 </div>
 
 <div class="row">
@@ -298,14 +337,26 @@ span.psw {
       <div class="card shadowexempl">
               <div id="entrerarticle">
 
-                  <h2>Category Gestion</h2>
+                  <h2>Categorie Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
+                  <center>  <?php 
+      if(isset($_COOKIE['messagedisplay'])) : ?>
+       
+
+         <div class="alerttext">
+          
+          <p>
+            <?php echo $_COOKIE['messagedisplay']; ?></p>
+          </div>
+            <?php endif; ?>
+
+          </center>
 
                    <center>  
         <?php  
           
         // Import the file where we defined the connection to Database.     
-            require_once "../../conn.php";   
+            require_once "../../db/conn.php";   
         
             $per_page_record = 4;  // Number of entries to show in a page.   
             // Look for a GET variable page if not found default is 1.        
@@ -318,7 +369,7 @@ span.psw {
         
             $start_from = ($page-1) * $per_page_record;     
         
-            $query = "SELECT code, nom, description FROM categoritable  LIMIT $start_from, $per_page_record";     
+            $query = "SELECT matricule, code, nom, description FROM categoritable  LIMIT $start_from, $per_page_record";     
             $rs_result = mysqli_query ($con, $query);    
         ?>    
       
@@ -327,8 +378,8 @@ span.psw {
           <div>
           <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ajouter Une Categorie</button>   
             <h1>Liste Des Categories</h1>   
-            <p> Modifier et Supprimer.   
-            </p>   
+            <h3> Vous avez la possibilité de Modifier et Supprimer.   
+          </h3>   
 
             <table id="customers" class="table table-striped table-condensed    
                                               table-bordered">   
@@ -353,10 +404,11 @@ span.psw {
                 <td><?php echo $row["description"]; ?></td>   
                                                          
                 <td>
-                    <form action="apicategory.php" method="POST"> 
+                    <form action="categoryedit.php" method="POST"> 
                     <div class="invisi">
                                         <input type="hidden"  name="idcode" value="<?php echo $row["matricule"]; ?>">
                                         <input type="hidden"  name="nom" value="<?php echo $row["nom"]; ?>">
+                                        <input type="hidden"  name="code" value="<?php echo $row["code"]; ?>">
                                         <input type="hidden"  name="description" value="<?php echo $row["description"]; ?>">
                                         <input type="hidden"  name="formulaire" value="modifier">
                                         
@@ -499,7 +551,7 @@ span.psw {
 </div>
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="apicategory.php" method="POST">
+  <form class="modal-content animate" action="../apicategory.php" method="POST">
    
 
      <div class="container">

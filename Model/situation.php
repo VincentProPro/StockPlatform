@@ -391,7 +391,7 @@ class Situation{
 														      $stmt->bindParam(":matricule", $this->matricule, PDO::PARAM_STR);
 														  
 														        if($stmt->execute()){
-														        	return "Le Module a ben été supprimé";
+														        	return "Le Situation a ben été supprimé";
 														          
 
 														        }

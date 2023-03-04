@@ -2,7 +2,7 @@
 ob_start();
 $formulaire=$_POST['formulaire'];
 
-require("../../Model/gestionnairestock.php");
+require("../Model/gestionnairestock.php");
 switch ($formulaire) {
     case "ajouter":
     // echo"entrerachat";
@@ -19,26 +19,29 @@ switch ($formulaire) {
 
 function ajouter(){
   // $codeis=$_POST['codeis'];
-  $nom=$_POST['nommdf'];
-  $description=$_POST['descriptionmdf'];
+  $nom=$_POST['nom'];
+  $description=$_POST['description'];
+  $matricule_module=$_POST['matricule_module'];
+
 
         
               $objectCreated=new Gestionnairestock();
           // echo"execute executebondecommande";
-          $objectCreated->createcategory($nom,$description);
+          $objectCreated->createsituation($nom,$description,$matricule_module);
 
 
 }
 function modifier(){
         // $fournicode=$_POST['fournisseur'];
         $matricule=$_POST['matricule'];
-        // $codeis=$_POST['codeis'];
-        $nom=$_POST['nommdf'];
-        
-        $description=$_POST['descriptionmdf'];
+        $code=$_POST['code'];
+        $nom=$_POST['nom'];
+        $matricule_module=$_POST['matricule_module'];
+
+        $description=$_POST['description'];
         $objectCreated=new Gestionnairestock();
         // echo"execute executebondecommande";
-        $objectCreated->editcategory($matricule,$nom,$description);
+        $objectCreated->editsituation($matricule,$nom,$code,$description,$matricule_module);
     
     
 }
@@ -49,7 +52,7 @@ function delete(){
        
   $objectCreated=new Gestionnairestock();
   // echo"execute executebondecommande";
-  $objectCreated->deletecategory($matricule);
+  $objectCreated->deletesituation($matricule);
 
 
 }

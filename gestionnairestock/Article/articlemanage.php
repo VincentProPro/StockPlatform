@@ -264,9 +264,9 @@ span.psw {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id16').style.display='block'">Ajouter </a>
-      <a href="#"onclick="document.getElementById('id017').style.display='block'">Modifier</a>
-      <a href="#"onclick="document.getElementById('id018').style.display='block'">Supprimer</a>
+      <a href="Fournisseur/fournisseurmanage.php"onclick="document.getElementById('id16').style.display='block'">Ajouter </a>
+      <a href="Fournisseur/fournisseurmanage.php"onclick="document.getElementById('id017').style.display='block'">Modifier</a>
+      <a href="Fournisseur/fournisseurmanage.php"onclick="document.getElementById('id018').style.display='block'">Supprimer</a>
     </div>
   </div> 
    <div class="dropdown">
@@ -284,13 +284,52 @@ span.psw {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id022').style.display='block'">Voir </a>
-      <a href="#"onclick="document.getElementById('id023').style.display='block'">Ajouter </a>
-      <a href="#" onclick="document.getElementById('id024').style.display='block'" >Modifier </a>
-      <a href="#">Supprimer </a>
+      <a href="Category/categorymanage.php"onclick="document.getElementById('id022').style.display='block'">Voir </a>
+      <a href="Category/categorymanage.php"onclick="document.getElementById('id023').style.display='block'">Ajouter </a>
+      <a href="Category/categorymanage.php" onclick="document.getElementById('id024').style.display='block'" >Modifier </a>
+      <a href="Category/categorymanage.php">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Lieu/lieumanage.php">Ajouter </a>
+          <a href="../Lieu/lieumanage.php">Modifier</a>
+          <a href="../Lieu/lieumanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div>  
 </div>
 
 <div class="row">
@@ -300,6 +339,18 @@ span.psw {
 
                   <h2>Articles Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
+                  <center>  <?php 
+      if(isset($_COOKIE['messagedisplay'])) : ?>
+       
+
+         <div class="alerttext">
+          
+          <p>
+            <?php echo $_COOKIE['messagedisplay']; ?></p>
+          </div>
+            <?php endif; ?>
+
+          </center>
 
                    <center>  
         <?php  
@@ -318,7 +369,7 @@ span.psw {
         
             $start_from = ($page-1) * $per_page_record;     
         
-            $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc FROM article  LIMIT $start_from, $per_page_record";     
+            $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc, groupcode FROM article  LIMIT $start_from, $per_page_record";     
             $rs_result = mysqli_query ($con, $query);    
         ?>    
       
@@ -339,6 +390,8 @@ span.psw {
                   <th>description</th>   
                   <th>poidsenkg</th>   
                   <th>categorycode</th>   
+                  <th>Prix Achat</th>   
+                  <th>Prix Vente</th>   
                   <th></th>   
                 </tr>   
               </thead>   
@@ -354,6 +407,8 @@ span.psw {
                 <td><?php echo $row["description"]; ?></td>   
                 <td><?php echo $row["poids_kg"]; ?></td>   
                 <td><?php echo $row["code_category"]; ?></td>                                           
+                <td><?php echo $row["prixachat"]; ?></td>                                           
+                <td><?php echo $row["prixvente"]; ?></td>                                           
                 <td>
                     <form action="articleedit.php" method="POST"> 
                     <div class="invisi">
@@ -367,6 +422,8 @@ span.psw {
                                         <input type="hidden"  name="prixachat" value="<?php echo $row["prixachat"]; ?>">
                                         <input type="hidden"  name="format" value="<?php echo $row["format"]; ?>">
                                         <input type="hidden"  name="category" value="<?php echo $row["code_category"]; ?>">
+                                        <input type="hidden"  name="groupcode" value="<?php echo $row["groupcode"]; ?>">
+                                        
 </div>
               
 <div id="outer">
@@ -506,15 +563,14 @@ span.psw {
 </div>
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="apiarticle.php" method="POST">
+  <form class="modal-content animate" action="../apiarticle.php" method="POST">
       <div class="container">
       <h3>Article Ajout</h3>       
       <label for="designation"><b>Nom Complet</b></label>
       <input type="text" placeholder="Entrer le nom de l'article" name="designation" >
       <label for="telmdf"><b>Description</b></label>
       <input type="text" placeholder="Entrer la description du produit"  name="description" >
-      <label for="poids_kg"><b>Poids en Kg</b></label>
-      <input type="number"  name="poids_kg" >
+      
       <label for="tmc"><b>TMC</b></label>
       <input type="number"  name="tmc" >
       <label for="poids_kg"><b>Poids en Kg</b></label>
@@ -554,7 +610,7 @@ span.psw {
       <select name="category">
                   <?php
                       include('../../db/config.php');
-                      $sql = "SELECT DISTINCT nom , matricule FROM categoritable";
+                      $sql = "SELECT DISTINCT nom , code FROM categoritable";
                       if($stmt = $pdo->prepare($sql)){
                         if($stmt->execute()){
                             if($stmt->rowCount()>0){
@@ -608,7 +664,7 @@ span.psw {
         {   
           var message=elem;
             // alert(message) ;
-            window.location.href = "articledelete.php?idcodeis="+message;
+            window.location.href = "articledelete.php?idpk="+message;
 
         } 
 </script>

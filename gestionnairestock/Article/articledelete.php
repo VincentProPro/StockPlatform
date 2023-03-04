@@ -5,9 +5,39 @@ session_start();
  
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: ../../index.php");
+    header("location: ../../login.php");
     exit;
 }
+$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+// $url = "https://testurl.com/test/1234?email=abc@test.com&name=sarah";
+$components = parse_url($url);
+parse_str($components['query'], $results);
+$codeis=$results['idpk'];
+$designation='';
+$description='';
+$prixachat='';
+$prixvente='';
+
+$sql = "SELECT * FROM article WHERE matricule=:matricule ";
+         include('../../db/config.php');
+
+
+                    if($stmt = $pdo->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":matricule", $codeis, PDO::PARAM_STR);
+            if($stmt->execute()){
+                if($stmt->rowCount() >0){
+                    
+                    if($row = $stmt->fetch()){
+                        $designation = $row["designation"];
+                        $description = $row["description"];
+                        $prixvente = $row["prixvente"];
+                        echo$prixachat = $row["prixachat"];
+                        // $location = $row["location"];
+
+                        }}}}
+
 ?>
  
 <!DOCTYPE html>
@@ -27,9 +57,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!-- <link rel="stylesheet"  
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->  
         <style>   
-        /*table {  
+        table {  
             border-collapse: collapse;  
-        } */ 
+        }  
             .inline{   
                 display: inline-block;   
                 float: right;   
@@ -187,48 +217,29 @@ span.psw {
      width: 100%;
   }
 }
+.sameline{
+       display: block;
 
-
-
-  #outer
-{
-    width:100%;
-    text-align: center;
 }
-.inner
-{
-    display: inline-block;
-}
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #92CFFE;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
+.elemen{
+/*         display: inline-block;
+*/         float: left;
+  margin-left: 10px;
   text-align: left;
-  background-color: #0040ff;
-  color: white;
+  font-size: 25px;
+
 }
+.sizeelement{
+    font-size: 30px;
+    font-weight: bold;
 
-
+}
             </style>  
 </head>
 <body>
 
 <div class="header">
-  <h1>Clinic</h1>
+  <h1>Clinic </h1>
   <p>La Clinic est une Clinique de réference.</p>
 </div>
 
@@ -264,19 +275,19 @@ span.psw {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Ajouter </a>
-      <a href="#">Modifier</a>
-      <a href="#">Supprimer</a>
+      <a href="../Fournisseur/fournisseurmanage.php">Ajouter </a>
+      <a href="../Fournisseur/fournisseurmanage.php">Modifier</a>
+      <a href="../Fournisseur/fournisseurmanage.php">Supprimer</a>
     </div>
   </div> 
-    <div class="dropdown">
+   <div class="dropdown">
     <button class="dropbtn">Article 
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="../Article/articlemanage.php">Ajouter </a>
-      <a href="../Article/articlemanage.php">Modifier</a>
-      <a href="../Article/articlemanage.php">Supprimer</a>
+      <a href="#">Ajouter </a>
+      <a href="#">Modifier</a>
+      <a href="#">Supprimer</a>
     </div>
   </div> 
     <div class="dropdown">
@@ -286,7 +297,7 @@ span.psw {
     <div class="dropdown-content">
       <a href="../Category/categorymanage.php">Voir </a>
       <a href="../Category/categorymanage.php">Ajouter </a>
-      <a href="../Category/categorymanage.php">Modifier </a>
+      <a href="../Category/categorymanage.php" >Modifier </a>
       <a href="../Category/categorymanage.php">Supprimer </a>
     </div>
   </div> 
@@ -337,149 +348,45 @@ span.psw {
       <div class="card shadowexempl">
               <div id="entrerarticle">
 
-                  <h2>Fournisseur Gestion</h2>
+                  <h2>Article Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
-                  <center>  <?php 
-      if(isset($_COOKIE['messagedisplay'])) : ?>
-       
 
-         <div class="alerttext">
-          
-          <p>
-            <?php echo $_COOKIE['messagedisplay']; ?></p>
-          </div>
-            <?php endif; ?>
 
-          </center>
+    <div class="container">
+            <h3>Vous Êtes entrain de vouloir supprimer cet article</h3>
+            <center>
+                          <h4 class="sizeelement"><?php echo$designation;?></h4>
 
-                   <center>  
-        <?php  
-          
-        // Import the file where we defined the connection to Database.     
-            require_once "../../db/conn.php";   
-        
-            $per_page_record = 4;  // Number of entries to show in a page.   
-            // Look for a GET variable page if not found default is 1.        
-            if (isset($_GET["page"])) {    
-                $page  = $_GET["page"];    
-            }    
-            else {    
-              $page=1;    
-            }    
-        
-            $start_from = ($page-1) * $per_page_record;     
-        
-            $query = "SELECT matricule, nom, tel, email, location, plusinfo FROM fournisseurdb  LIMIT $start_from, $per_page_record";     
-            $rs_result = mysqli_query ($con, $query);    
-        ?>    
-      
-        <div class="container">   
-          <br>   
-          <div>
-          <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ajouter Un Fournisseur</button>   
-            <h1>Liste Des Fournisseurs</h1>   
-            <h3> Vous avez la possibilité de Modifier et Supprimer.   
-          </h3>   
-
-            <table id="customers" class="table table-striped table-condensed    
-                                              table-bordered">   
-              <thead>   
-                <tr>   
-                  <th width="10%">matricule</th>   
-                  <th width="10%">nom</th>   
-                  <th>tel</th>   
-                  <th>email</th>   
-                  <th>location</th>   
-                  <th>plus d'info</th>   
-                  <th></th>   
-                </tr>   
-              </thead>   
-              <tbody>   
-        <?php     
-                while ($row = mysqli_fetch_array($rs_result)) {    
-                      // Display each field of the records.    
-                ?>     
-                <tr>     
-                 <td><?php echo $row["matricule"]; ?></td>     
-                     
-                <td><?php echo $row["nom"]; ?></td>   
-                <td><?php echo $row["tel"]; ?></td>   
-                <td><?php echo $row["email"]; ?></td>   
-                <td><?php echo $row["location"]; ?></td>                                           
-                <td><?php echo $row["plusinfo"]; ?></td>                                           
-                <td>
-                    <form action="fournisseuredit.php" method="POST"> 
-                    <div class="invisi">
-                                        <input type="hidden"  name="idcode" value="<?php echo $row["matricule"]; ?>">
-                                        <input type="hidden"  name="nom" value="<?php echo $row["nom"]; ?>">
-                                        <input type="hidden"  name="tel" value="<?php echo $row["tel"]; ?>">
-                                        <input type="hidden"  name="emailfourni" value="<?php echo $row["email"]; ?>">
-                                        <input type="hidden"  name="location" value="<?php echo $row["location"]; ?>">
-                                        <input type="hidden"  name="plusinfo" value="<?php echo $row["plusinfo"]; ?>">
-</div>
+            <div class="sameline">
+              <img class="elemen" src="../../images/deleteicon.jpg">
+              <p class="elemen">Description: <?php echo"  ".$description;?> <br>Prix Achat: <?php echo $prixachat;?> <br>Prix De Vente: <?php echo $prixvente;?><br></p>
               
-<div id="outer">
-  <div class="inner"><button type="submit"  >Modifier</button></div>
-  <div class="inner"><button type="button" id="<?php echo $row["matricule"]; ?>" onclick="myFunctionDelete(this.id)">Supprimer</button></div>
- 
-</div>
-</form>
 
-                        
-                </td>                                           
-                </tr>     
-                <?php     
-                    };    
-                ?>     
-              </tbody>   
-            </table>   
-      
-         <div class="pagination">    
-          <?php  
-            $query = "SELECT COUNT(*) FROM fournisseurdb";     
-            $rs_result = mysqli_query($con, $query);     
-            $row = mysqli_fetch_row($rs_result);     
-            $total_records = $row[0];     
+
               
-        echo "</br>";     
-            // Number of pages required.   
-            $total_pages = ceil($total_records / $per_page_record);     
-            $pagLink = "";       
-          
-            if($page>=2){   
-                echo "<a href='fournisseurmanage.php?page=".($page-1)."'>  Prev </a>";   
-            }       
-                       
-            for ($i=1; $i<=$total_pages; $i++) {   
-              if ($i == $page) {   
-                  $pagLink .= "<a class = 'active' href='fournisseurmanage.php?page="  
-                                                    .$i."'>".$i." </a>";   
-              }               
-              else  {   
-                  $pagLink .= "<a href='fournisseurmanage.php?page=".$i."'>   
-                                                    ".$i." </a>";     
-              }   
-            };     
-            echo $pagLink;   
-      
-            if($page<$total_pages){   
-                echo "<a href='fournisseurmanage.php?page=".($page+1)."'>  Next </a>";   
-            }   
-      
-          ?>    
-          </div>  
-      
-      
-          <div class="inline">   
-          <input id="page" type="number" min="1" max="<?php echo $total_pages?>"   
-          placeholder="<?php echo $page."/".$total_pages; ?>" required>   
-          <button onClick="go2Page();">Go</button>   
-         </div>    
-        </div>   
-      </div>  
 
-    </center>   
+            </div>
+            </center>
+
+            
+
+      
+      <br> <br> 
+      
+<form action="../apiarticle.php" method="POST">
+
+<input type="hidden" name="matricule" value="<?php echo $codeis;?>">
+<input type="hidden" name="formulaire" value="delete">
+        <button type="submit" name="button1" >Supprimer</button>
+
+</form>      
+    </div>
+
     
+
+                  
+      
+     
             
                     
                     <p>Autres fonctions..</p>
@@ -553,60 +460,11 @@ span.psw {
 <div class="footer">
   <h2>Footer</h2>
 </div>
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="../apifournisseur.php" method="POST">
-   
-
-     <div class="container">
-            <h3>Fournisseur Ajout</h3>
-
-      <label for="nommdf"><b>Nom Complet</b></label>
-      <input type="text" placeholder="Entrer mom" name="nommdf" >
-
-      <label for="telmdf"><b>Tel</b></label>
-      <input type="text" placeholder="Entrer le tel"  name="telmdf" >
-      <label for="emailmdf"><b>Email</b></label>
-      <input type="text" placeholder="Entrer email" name="emailmdf" >
-      <label for="locationmdf"><b>Location</b></label>
-      <input type="text" placeholder="Entrer la Position" name="locationmdf" >
-       <label for="plusinfomdf"><b>Plus d'Info</b></label>
-       <input type="text" placeholder="Entrer la description" name="plusinfomdf" >
-       <input type="hidden"  name="formulaire" value="ajouter" >
-      
-      <br> <br> 
-      
-      <button type="submit" name="ajout">Envoyé</button>
-      
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Annulé</button>
-    </div>
-  </form>
-</div>
 
 
-<script>
-    function go2Page()   
-        {   
-            var page = document.getElementById("page").value;   
-            page = ((page><?php echo $total_pages; ?>)?<?php echo $total_pages; ?>:((page<1)?1:page));   
-            window.location.href = 'fournisseurmanage.php?page='+page;   
-        }  
-
-
-
- function myFunctionDelete(elem)   
-        {   
-          var message=elem;
-            // alert(message) ;
-            window.location.href = "fournisseurdelete.php?idcodeis="+message;
-
-        } 
-</script>
 </body>
 </html>
+
 
 
  

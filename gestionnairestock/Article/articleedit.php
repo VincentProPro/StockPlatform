@@ -11,13 +11,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 
 $matricule=$_POST['matricule'];
+$groupcode=$_POST['groupcode'];
 $designation=$_POST['designation'];
 $prixachat=$_POST['prixachat'];
 $prixvente=$_POST['prixvente'];
 $category=$_POST['category'];
 $quantity_per_unit=$_POST['quantity_per_unit'];
 $description=$_POST['description'];
-$poids_kg=$_POST['poids_kg'];
+$poids_kg=$_POST['poidsenkg'];
 $format=$_POST['format'];
 $tmc=$_POST['tmc'];
 ?>
@@ -267,7 +268,46 @@ span.psw {
       <a href="#">Supprimer </a>
     </div>
   </div> 
- 
+  <div class="dropdown">
+        <button class="dropbtn">Format 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Format/formatmanage.php">Ajouter </a>
+          <a href="../Format/formatmanage.php">Modifier</a>
+          <a href="../Format/formatmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Situation 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Situation/situationmanage.php">Ajouter </a>
+          <a href="../Situation/situationmanage.php">Modifier</a>
+          <a href="../Situation/situationmanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Lieu 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Lieu/lieumanage.php">Ajouter </a>
+          <a href="../Lieu/lieumanage.php">Modifier</a>
+          <a href="../Lieu/lieumanage.php">Supprimer</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Module 
+        <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="../Module/modulemanage.php">Ajouter </a>
+          <a href="../Module/modulemanage.php">Modifier</a>
+          <a href="../Module/modulemanage.php">Supprimer</a>
+        </div>
+      </div>  
 </div>
 
 <div class="row">
@@ -277,7 +317,7 @@ span.psw {
 
                   <h2>Fournisseur Gestion</h2>
                   <h5>Gestionaire de Stock Fonction</h5>
-                    <form  action="apifournisseuredit.php" method="POST">
+                    <form  action="../apiarticle.php" method="POST">
    
 
     <div class="container">
@@ -288,9 +328,9 @@ span.psw {
       <label for="telmdf"><b>Description</b></label>
       <input type="text" placeholder="Entrer la description du produit"  name="description"  value="<?php echo $description;?> " >
       <label for="poids_kg"><b>Poids en Kg</b></label>
-      <input type="number"  name="poids_kg"  value="<?php echo $poids_kg;?> ">
+      <input type="number"  name="poids_kg"  value="<?php echo$poids_kg;?>">
       <label for="tmc"><b>TMC</b></label>
-      <input type="number"  name="tmc"  value="<?php echo $tmc;?> ">
+      <input type="number"  name="tmc"  value="<?php echo$tmc;?>">
       <label for="format"><b>Format </b></label>
 
       <select name="format">
@@ -314,11 +354,11 @@ span.psw {
                     ?>
       </select>
       <label for="quantity_per_unit"><b>Quantité par Unité</b></label>
-      <input type="number"  name="quantity_per_unit"  value="<?php echo $quantity_per_unit;?> ">
+      <input type="number"  name="quantity_per_unit"  value="<?php echo$quantity_per_unit;?>">
       <label for="prixachat"><b>Prix Achat </b></label>
-      <input type="number"  name="prixachat"  value="<?php echo $prixachat;?> ">
+      <input type="number"  name="prixachat"  value="<?php echo$prixachat;?>">
       <label for="prixvente"><b>Prix Vente </b></label>
-      <input type="number"  name="prixvente"  value="<?php echo $prixvente;?> ">
+      <input type="number"  name="prixvente"  value="<?php echo$prixvente;?>">
 
                                                     <br><br>
       <label for="category"><b>Categorie </b></label>
@@ -326,7 +366,7 @@ span.psw {
       <select name="category">
                   <?php
                       include('../../db/config.php');
-                      $sql = "SELECT DISTINCT nom , matricule FROM categoritable";
+                      $sql = "SELECT DISTINCT nom , code FROM categoritable";
                       if($stmt = $pdo->prepare($sql)){
                         if($stmt->execute()){
                             if($stmt->rowCount()>0){
@@ -352,6 +392,9 @@ span.psw {
         <option value="Seringle">Seringle</option>
                       </select>
       <br> <br> 
+      
+      <input type="hidden" name="groupcode" value="<?php echo$groupcode;?>" >      
+      <input type="hidden" name="matricule" value="<?php echo$matricule;?>" >      
       <input type="hidden" name="formulaire" value="modifier" >      
       <br> <br> 
       

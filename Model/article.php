@@ -65,6 +65,7 @@ class Article{
 				 //     //                           $messageObject->sendmessage();
 
 					// 	}
+					
 		public function ajouter($designation,$prixachat,$prixvente,$code_category,$quantity_per_unit,$description,$poids_kg,$format,$benefice,$tmc){
 				$this->description=$description;
 				$this->prixachat=$prixachat;
@@ -156,21 +157,26 @@ class Article{
     		
 
 
-            public function modifier($matricule,$designation,$prixachat,$prixvente,$code_category,$quantity_per_unit,$description,$poids_kg,$format,$benefice,$tmc){
+            public function modifier($matricule,$groupcode,$designation,$prixachat,$prixvente,$category,$quantity_per_unit,$description,$poids_kg,$format,$benefice,$tmc){
+
+									echo"In article >> matricule ".$matricule." groupcode: ".$groupcode." designation: ".$designation." prixachat :".$prixachat." prixvente: ".$prixvente." category : ".$category." quantity_per_unit : ".$quantity_per_unit." description : ".$description." poids_kg: ".$poids_kg." format : ".$format." benefice: ".($prixvente-$prixachat)." tmc : ".$tmc;
 
 									$this->description=$description;
 									$this->prixachat=$prixachat;
 									$this->prixvente=$prixvente;
 									$this->quantity_per_unit=$quantity_per_unit;
-									$this->code_category=$code_category;
+									$this->code_category=$category;
 									$this->poids_kg=$poids_kg;
 									$this->format=$format;
 									$this->benefice=$benefice;
 									$this->tmc=$tmc;
 									$this->designation=$designation;
-									// $this->groupcode=$this->generatecode($designation);//Convert all letterer to uppercase
-
-									// $this->code=""+$this->groupcode;//Add firrst letter of format nom
+									$this->groupcode=$groupcode;//Convert all letterer to uppercase
+									$objectCreated=new Format();
+									// $objectCreated->selectmatricule($format)[0][2];
+									$letteris=substr($objectCreated->selectmatricule($format)[0][2], 0,1);
+					
+									$this->code=$letteris.$this->groupcode;//Add firrst letter of format nom
 									$this->matricule=$matricule;
 					    			$t=time();
 					           		$datereel=date("Y-m-d H:i:s",$t);
@@ -351,7 +357,7 @@ class Article{
                                               }}
   
 
-                    }
+        }
 		
 		public function selectmatricule($matricule){
     							$this->matricule=$matricule;
