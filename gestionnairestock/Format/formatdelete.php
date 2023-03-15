@@ -253,27 +253,8 @@ span.psw {
 <!--   <a href="#" style="float:right">Link</a>
  -->
 </div>
-
 <div class="navbar">
-    <a href="../welcomestocker.php#entrerarticle">Entrer Magasin</a>
-    <a href="../welcomestocker.php#retraitarticle">Retrait Magasin</a>
-    <a href="../welcomestocker.php#retraitarticleperunit">Retrait Détailé Magasin</a>
-    <a href="../validationentrer.php">Validation d'Entrer Magasin</a>
-
- 
-   
-
-   <div class="dropdown">
-    <button class="dropbtn">Transfert 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id07').style.display='block'">A Destination d'un autre magasin</a>
-      <a href="#"onclick="document.getElementById('id08').style.display='block'">En Provenance d'un autre magasin<</a>
-    </div>
-  </div> 
- 
-        <div class="dropdown">
+<div class="dropdown">
     <button class="dropbtn">Fournisseur 
       <i class="fa fa-caret-down"></i>
     </button>
@@ -304,7 +285,7 @@ span.psw {
       <a href="categorymanage.php">Supprimer </a>
     </div>
   </div> 
-
+       
   <div class="dropdown">
         <button class="dropbtn">Format 
         <i class="fa fa-caret-down"></i>
@@ -345,6 +326,26 @@ span.psw {
           <a href="../Module/modulemanage.php">Supprimer</a>
         </div>
       </div> 
+
+</div>
+<div class="navbar">
+    <a href="../welcomestocker.php#entrerarticle">Entrer Magasin</a>
+    <a href="../welcomestocker.php#retraitarticle">Retrait Magasin</a>
+    <a href="../welcomestocker.php#retraitarticleperunit">Retrait Détailé Magasin</a>
+    <a href="../validationentrer.php">Validation d'Entrer Magasin</a>
+
+
+   <div class="dropdown">
+    <button class="dropbtn">Transfert 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#"onclick="document.getElementById('id07').style.display='block'">A Destination d'un autre magasin</a>
+      <a href="#"onclick="document.getElementById('id08').style.display='block'">En Provenance d'un autre magasin<</a>
+    </div>
+  </div> 
+ 
+   
  
 </div>
 
