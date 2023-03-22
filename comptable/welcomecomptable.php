@@ -35,13 +35,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   <p>La Clinic  est une Clinique de réference.</p>
 </div>
 
-<div class="topnav">
+<!-- <div class="topnav">
   <a href="#">Accueil</a>
   <a href="#">Connexion</a>
   <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
-</div>
+
+</div> -->
+<?php include("../menu.php"); ?>
+
 
 <div class="row">
   <div class="leftcolumn">
@@ -535,7 +536,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                   ?>
                   
                 </table>
-                <a href="https://cdn.plot.ly/plotly-2.18.0.min.js" download="w3logo"> here</a>
           </div>
 
         </div>
@@ -559,28 +559,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
 
     </div>
-    <?php 
-    if($_SESSION['role']=="SuperAdmin"){
-
-      ?>
-      <div class="card">
-      <h3>Type Role</h3>
-      <div class="rolebtn"><a href="../coursier/welcomecoursier.php"><button >Coursier</button></div>
-      <div class="rolebtn"><a href="../gestionnairestock/welcomestocker.php"><button >Gestionnaire de Stock</button></div>
-      <div class="rolebtn"><a href="../cmu/welcomecmu.php"><button >Gestion CMU</button></div>
-      <div class="rolebtn"><a href="../caisse/welcomecaisse.php"><button >Caisse</button></div>
-      <div class="rolebtn"><a href="../surveillante/welcomsurveillante.php"><button >Surveillante</button></div>        
-      <div class="rolebtn"><a href="#"><button >Comptable</button></div>
-      <div class="rolebtn"><a href="a.p"><button >Admin</button></div>
-      <div class="rolebtn"><a href="../welcomesuperAdmin.php"><button >Super Admin</button></div>
-      
-      <a href="logout.php"><button class="fakeimg" >Log Out</button></a>
-    </div>
-
-      <?php
-    }
-
-    ?>
+    <?php include("../component/role.php"); ?>
      <div class="card">
        <h3>Laisser un Commentaire</h3>
       

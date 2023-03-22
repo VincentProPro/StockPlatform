@@ -35,13 +35,8 @@ require("viewsurveillante.php");
   <p>La Clinic  d'Afrique est une Clinique de réference.</p>
 </div>
 
-<div class="topnav">
-  <a href="#">Accueil</a>
-  <a href="#">Connexion</a>
-  <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
-</div>
+<?php include("../menu/menusurveillante.php"); ?>
+
 
 <div class="row">
   <div class="leftcolumn">
@@ -1149,28 +1144,8 @@ require("viewsurveillante.php");
             <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
 
     </div>
-    <?php 
-    if($_SESSION['role']=="SuperAdmin"){
+    <?php include("../component/role.php"); ?>
 
-      ?>
-      <div class="card">
-      <h3>Type Role</h3>
-      <div class="rolebtn"><a href="../coursier/welcomecoursier.php"><button >Coursier</button></div>
-      <div class="rolebtn"><a href="../gestionnairestock/welcomestocker.php"><button >Gestionnaire de Stock</button></div>
-      <div class="rolebtn"><a href="../cmu/welcomecmu.php"><button >Gestion CMU</button></div>
-      <div class="rolebtn"><a href="../comptable/welcomecomptable.php"><button >Comptable</button></div>
-      <div class="rolebtn"><a href="../caisse/welcomecaisse.php"><button >Caisse</button></div>
-      <div class="rolebtn"><a href="#"><button >Surveillante</button></div>
-      <div class="rolebtn"><a href="a.p"><button >Admin</button></div>
-      <div class="rolebtn"><a href="../welcomesuperAdmin.php"><button >Super Admin</button></div>
-      
-      <a href="logout.php"><button class="fakeimg" >Log Out</button></a>
-    </div>
-
-      <?php
-    }
-
-    ?>
      <div class="card">
        <h3>Laisser un Commentaire</h3>
       

@@ -202,6 +202,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <div class="fakeimg"><p>Chargé d'insérer les données liées à l'achat des articles</p></div>
       <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
     </div>
+    <?php include("../component/role.php"); ?>
+
     <div class="card">
        <h3>Laisser un Commentaire</h3>
       

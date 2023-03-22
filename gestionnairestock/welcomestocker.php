@@ -73,60 +73,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   <a href="#">Accueil</a>
   <a href="#">Connexion</a>
   <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
 </div>
 
-<div class="navbar">
-    <a href="#entrerarticle">Entrer Magasin</a>
-    <a href="#retraitarticleperunit">Retrait Détailé Magasin</a>
+ 
+<?php include("../menu/menugestionairestock.php"); ?>
 
- 
-   
-
-   <div class="dropdown">
-    <button class="dropbtn">Transfert 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#"onclick="document.getElementById('id07').style.display='block'">A Destination d'un autre magasin</a>
-      <a href="#"onclick="document.getElementById('id08').style.display='block'">En Provenance d'un autre magasin<</a>
-    </div>
-  </div> 
- 
-    <div class="dropdown">
-    <button class="dropbtn">Fournisseur 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-           <a href="Fournisseur/fournisseurmanage.php">Ajouter </a>
-      <a href="Fournisseur/fournisseurmanage.php">Modifier</a>
-      <a href="Fournisseur/fournisseurmanage.php">Supprimer</a>
-    </div>
-  </div> 
-   <div class="dropdown">
-    <button class="dropbtn">Article 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="Article/articlemanage.php">Ajouter </a>
-      <a href="Article/articlemanage.php">Modifier</a>
-      <a href="Article/articlemanage.php">Supprimer</a>
-    </div>
-  </div> 
-    <div class="dropdown">
-    <button class="dropbtn">Catégorie 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="Category/categorymanage.php">Voir </a>
-      <a href="Category/categorymanage.php">Ajouter </a>
-      <a href="Category/categorymanage.php">Modifier </a>
-      <a href="Category/categorymanage.php">Supprimer </a>
-    </div>
-  </div> 
- 
-</div>
 
 <div class="row">
   <div class="leftcolumn">
@@ -969,6 +920,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       
       <div class="fakeimg"><p>Le Gestionnaire de stock est chargé de saisir les sorties d'articles, ajouter des articles, fournisseurs et catégories dans la base de donnée.</p></div>
     </div>
+    <?php include("../component/role.php"); ?>
+
 <div class="card">
        <h3>Laisser un Commentaire</h3>
       

@@ -21,12 +21,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
+
 <link rel="stylesheet" href="../cliniccss.css">
+<link rel="stylesheet" href="../css/style2.css">
+
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
      <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-       <style type="text/css">
-         .alerttext{
+<style type="text/css">
+          .alerttext{
           border: solid 3px red;
 /*  background-color: red;
 */
@@ -91,7 +95,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
 table { border-collapse: collapse; }
 tr { border: 1px solid #dfdfdf; }
-th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
+th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;} 
        </style>
 </head>
 <body>
@@ -129,9 +133,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
       <a href="statisticcmu.php#evolutionrecette">Evolution Recette</a>
     </div>
   </div> 
- 
-   
- 
+
 </div>
 
 <div class="row">
@@ -420,6 +422,8 @@ if($stmt->execute()){
       
       <div class="fakeimg"><p>Le Gestionnaire de stock est chargé de saisir les sorties d'articles, ajouter des articles, fournisseurs et catégories dans la base de donnée.</p></div>
     </div>
+    <?php include("../component/role.php"); ?>
+
 <div class="card">
        <h3>Laisser un Commentaire</h3>
       

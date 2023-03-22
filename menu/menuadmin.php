@@ -69,9 +69,30 @@
       <a href="#"onclick="document.getElementById('id09').style.display='block'">Reports et Stock </a>
       <a href="#"onclick="document.getElementById('id010').style.display='block'">Inventaires</a>
     </div>
-  </div> 
+  </div>
+  <div class="dropdown">
+          <button class="dropbtn">Module 
+          <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="http://localhost/StockPlatform/gestionnairestock/Module/modulemanage.php">Ajouter </a>
+            <a href="http://localhost/StockPlatform/gestionnairestock/Module/moduleedit.php">Modifier</a>
+            <a href="http://localhost/StockPlatform/gestionnairestock/Module/delete.php">Supprimer</a>
+        </div>
+    </div>  
  
- 
+  <div class="dropdown">
+    <button class="dropbtn">Membre 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="http://localhost/StockPlatform/managemembre.php"onclick="document.getElementById('id011').style.display='block'">Voir </a>
+      <a href="http://localhost/StockPlatform/managemembre.php"onclick="document.getElementById('id012').style.display='block'">Ajouter </a>
+      <a href="http://localhost/StockPlatform/managemembre.php" onclick="document.getElementById('id013').style.display='block'" >Modifier </a>
+      <a href="http://localhost/StockPlatform/managemembre.php">Supprimer </a>
+    </div>
+  </div>
+
 
   <div class="dropdown">
     <button class="dropbtn">Statistic 
@@ -83,5 +104,3 @@
     </div>
   </div> 
 </div>
-
-        

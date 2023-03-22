@@ -632,3 +632,69 @@ div .labelperiode{
   justify-content: center; */
 
 }
+.alerttext{
+  border: solid 3px red;
+/*  background-color: red;
+*/
+}
+.alerttext p{
+color: blue;
+font-size: 25px;
+}
+/*the container must be positioned relative:*/
+.dataautocomplete {
+position: relative;
+display: inline-block;
+}
+
+.caisse input {
+border: 1px solid transparent;
+background-color: #f1f1f1;
+padding: 10px;
+font-size: 16px;
+}
+
+.caisse input[type=text] {
+background-color: #f1f1f1;
+width: 100%;
+}
+
+.caisse input[type=button] {
+background-color: DodgerBlue;
+color: #fff;
+cursor: pointer;
+}
+
+.dataautocomplete-items {
+position: absolute;
+border: 1px solid #d4d4d4;
+border-bottom: none;
+border-top: none;
+z-index: 99;
+/*position the autocomplete items to be the same width as the container:*/
+top: 100%;
+left: 0;
+right: 0;
+}
+
+.dataautocomplete-items div {
+padding: 10px;
+cursor: pointer;
+background-color: #fff; 
+border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.dataautocomplete-items div:hover {
+background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.dataautocomplete-active {
+background-color: DodgerBlue !important; 
+color: #ffffff; 
+}
+
+table { border-collapse: collapse; }
+tr { border: 1px solid #dfdfdf; }
+th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}

@@ -3,7 +3,6 @@
   <h1>Clinic  d'Afrique</h1>
   <p>La Clinic  d'Afrique est une Clinique de réference.</p>
 </div>
-
 <div class="topnav">
   <a href="#">Accueil</a>
   <a href="#">Connexion</a>

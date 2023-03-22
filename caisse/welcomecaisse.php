@@ -134,13 +134,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
   <p>La Clinic St Vincent d'Afrique est une Clinique de réference.</p>
 </div>
 
-<div class="topnav">
-  <a href="#">Accueil</a>
-  <a href="#">Connexion</a>
-  <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
-</div>
+<?php include("../menu/menucaisse.php"); ?>
 
 <div class="row">
   <div class="leftcolumn">
@@ -443,28 +437,8 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
             <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
 
     </div>
-    <?php 
-    if($_SESSION['role']=="SuperAdmin"){
+    <?php include("../component/role.php"); ?>
 
-      ?>
-      <div class="card">
-      <h3>Type Role</h3>
-      <div class="rolebtn"><a href="../coursier/welcomecoursier.php"><button >Coursier</button></div>
-      <div class="rolebtn"><a href="../gestionnairestock/welcomestocker.php"><button >Gestionnaire de Stock</button></div>
-      <div class="rolebtn"><a href="../cmu/welcomecmu.php"><button >Gestion CMU</button></div>
-      <div class="rolebtn"><a href="#"><button >Caisse</button></div>
-      <div class="rolebtn"><a href="../surveillante/welcomsurveillante.php"><button >Surveillante</button></div>
-      <div class="rolebtn"><a href="../comptable/welcomecomptable.php"><button >Comptable</button></div>
-      <div class="rolebtn"><a href="#"><button >Admin</button></div>
-      <div class="rolebtn"><a href="../welcomesuperAdmin.php"><button >Super Admin</button></div>
-      
-      <a href="logout.php"><button class="fakeimg" >Log Out</button></a>
-    </div>
-
-      <?php
-    }
-
-    ?>
      <div class="card">
        <h3>Laisser un Commentaire</h3>
       
