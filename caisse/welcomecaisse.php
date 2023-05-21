@@ -15,118 +15,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../logout.php");
     exit;
 }
+include("../component/headpart.php"); 
+
 ?>
  
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 	<meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="../css/style2.css">
-
-<style type="text/css">
-          
-#myInput {
-  background-image: url('../images/search.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  background-size: 2%;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid black;
-  font-size: 18px;
-}
-
-#myTable th{
-  text-align: center;
-  padding: 12px;
-}
-#myTable td {
-  text-align: center;
-  padding: 12px;
-    border: 1px solid #dddddd;
-
-}
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
-
-
-/*the container must be positioned relative:*/
-.caisseautocomplete {
-  position: relative;
-  display: inline-block;
-}
-
-.caisse input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.caisse input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-
-.caisse input[type=button] {
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
-}
-
-.caisseautocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-
-.caisseautocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
-}
-
-/*when hovering an item:*/
-.caisseautocomplete-items div:hover {
-  background-color: #e9e9e9; 
-}
-
-/*when navigating through the items using the arrow keys:*/
-.caisseautocomplete-active {
-  background-color: DodgerBlue !important; 
-  color: #ffffff; 
-}
-    
-table { border-collapse: collapse; }
-tr { border: 1px solid #dfdfdf; }
-th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
-        </style>
-
-</head>
 <body>
 
 <div class="header">
@@ -291,7 +184,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
       <div class="card shadowexempl">
         <h2>Stock Liste</h2>
         <h3>Voulez vous rechercher un article?</h3>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <input type="text" id="mysearchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         <div class="retraitarticleperunit">
           <div class="wrapper">
 
@@ -423,20 +316,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
 
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-      <b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-            <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
-
-    </div>
+  <?php include("../component/profile.php");?>
     <?php include("../component/role.php"); ?>
 
      <div class="card">
@@ -490,9 +370,8 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 <script type="text/javascript" src="../javascript.js"></script>
 <script type="text/javascript">
     
@@ -581,7 +460,7 @@ cell2.innerHTML = xqty;
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i,j, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("mysearchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");

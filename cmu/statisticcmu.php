@@ -4,7 +4,10 @@
 // Initialize the session
 session_start();
 error_reporting(0);
+// ob_start();
+// ob_end_flush(); // Flush the output from the buffer
 
+// header("refresh: 5"); 
 require("viewcmu.php");
 // echo json_encode($gerantcmu->viewsorticmuSixMois());
 // echo json_encode($gerantcmu->viewsorticmuPeriode('2022-01-02','2023-01-02'));
@@ -345,7 +348,6 @@ function generategraphrevenu(para){
 
 
                       }else if(para==7){
-
                            //display on periode months
                             x1 = document.getElementById("date1").value; 
                             x2 = document.getElementById("date2").value;

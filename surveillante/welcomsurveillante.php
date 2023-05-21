@@ -15,26 +15,15 @@ require("viewsurveillante.php");
 //     header("location: ../logout.php");
 //     exit;
 // }
+include("../component/headpart.php"); 
 ?>
  
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 	<meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="../css/style2.css">
-
-</head>
 <body>
 
-<div class="header">
-  <h1>Clinic  d'Afrique</h1>
-  <p>La Clinic  d'Afrique est une Clinique de réference.</p>
-</div>
 
+
+<?php include("../component/headersection.php"); ?>
 <?php include("../menu/menusurveillante.php"); ?>
 
 
@@ -1000,7 +989,7 @@ require("viewsurveillante.php");
     <div class="card shadowexempl">
     <h2>Magasin Stock Liste</h2>
         <h3>Voulez vous rechercher un article?</h3>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher ici.." title="Type in a name">
+        <input type="text" id="mysearchInput" onkeyup="myFunction()" placeholder="Rechercher ici.." title="Type in a name">
         <div class="retraitarticleperunit">
           <div class="wrapper">
 
@@ -1102,20 +1091,7 @@ require("viewsurveillante.php");
 
 
                       </div>
-                        
-                       
-                       <!-- <label for="fourni"><b>Fournisseur </b></label>
-                  <input type="text" placeholder="Entrer le fournisseur" name="fourni" required> -->
-
-                    
-
-                      <!-- <label for="comandnum"><b>Numéro Commande</b></label>
-                  <input type="text" placeholder="Entrer le numéro de la commande" name="comandnum" required>
-                  <label for="facturnum"><b>Numéro Facture</b></label>
-                  <input type="text" placeholder="Entrer le numéro de la facture" name="facturnum" required> -->
-                 <!--  <label for="datesorti"><b>Date</b></label>
-                  <input type="date"  name="datesorti" required>
-                  <br> <br>  -->
+                      
                            
                   <br> <br> 
                   <input type="hidden" name="formulaire" value="sortimagasin">
@@ -1130,20 +1106,7 @@ require("viewsurveillante.php");
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-<b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-            <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
-
-    </div>
+  <?php include("../component/profile.php");?>
     <?php include("../component/role.php"); ?>
 
      <div class="card">
@@ -1196,9 +1159,8 @@ require("viewsurveillante.php");
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 <script>
 function openCity(evt, object) {
   var i, tabcontent, tablinks;
@@ -1215,7 +1177,7 @@ function openCity(evt, object) {
 }
 function myFunction() {
   var input, filter, table, tr, td, i,j, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("mysearchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
@@ -1245,196 +1207,6 @@ function myFunction() {
 
 <?php
 ob_end_flush();
-                    // include('../config.php');
-// error_reporting(0);
-
-//         if(array_key_exists('buttonyy1', $_POST)) {
-//             button1();
-//         }
-//         else if(array_key_exists('buttonyy2', $_POST)) {
-//             button2();
-//         }
-//         function button1() {
-//             echo "This is Button1 that is selected";
-//         }
-//         function button2() {
-
-
-//         $magasin=$_POST['magasin'];
-//         $description=$_POST['description'];
-
-//         $libeller=$_POST['libeller'];
-//         $tarif=$_POST['tarif'];
-//         $t=time();
-//         $datereel=date("Y-m-d",$t);
-//         $idtimetable_err='' ;
-//         $comandnum=trim($_POST["comandnum"]);
-//         $redacteurcode=$_SESSION["email"];
-//        if(empty($comandnum)){
-//               $idtimetable_err = "Please enter command num.";
-//               echo $idtimetable_err;
-//           } else{
-//               $comandnum = trim($_POST["comandnum"]);
-//           }
-
-//         if(empty($idtimetable_err) ){
-
-
-//                     //start
-//                     $sql = "SELECT * FROM bondecommandedb WHERE code = :comandnum";
-//                        include('../config.php');
-
-
-//                     if($stmt = $pdo->prepare($sql)){
-//                     // Bind variables to the prepared statement as parameters
-//                     $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-              
-//                     // Set parameters
-//                     $comandnum = trim($_POST["comandnum"]);
-                    
-//                     // Attempt to execute the prepared statement
-//                           if($stmt->execute()){
-
-
-//                                 if($stmt->rowCount() ==0){
-//                                      //let go
-//                                      try{
-
-
-
-//                                               $sql="insert into  bondecommandedb (code,libeller,tarif,magazincode,description,lastmodification,redacteurcode) values (:comandnum, :libeller, :tarif,:magasin,:description,:lastmodification,:redacteurcode)";
-
-//                                               if($stmt = $pdo->prepare($sql)){
-
-//                                                     $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-
-//                                                     $stmt->bindParam(":description", $description, PDO::PARAM_STR);
-//                                                     $stmt->bindParam(":libeller", $libeller, PDO::PARAM_STR);
-//                                                     $stmt->bindParam(":tarif", $tarif, PDO::PARAM_STR);
-//                                                     $stmt->bindParam(":magasin", $magasin, PDO::PARAM_STR);
-//                                                     $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-//                                                     $stmt->bindParam(":redacteurcode", $redacteurcode, PDO::PARAM_STR);
-
-                                  
-          
-           
-            
-//                                                           // Attempt to execute the prepared statement
-//                                                           if($stmt->execute()){
-
-//                                                                       $sql = "SELECT * FROM bondecommandedb WHERE code = :comandnum";
-                                                      
-//                                                                   if($stmt = $pdo->prepare($sql)){
-//                                                                       // Bind variables to the prepared statement as parameters
-//                                                                       $stmt->bindParam(":comandnum", $comandnum, PDO::PARAM_STR);
-            
-//                                                                               // Set parameters
-//                                                                               //$idSession = trim($_POST["idSession"]);
-                                                                              
-//                                                                               // Attempt to execute the prepared statement
-//                                                                               if($stmt->execute()){
-//                                                                                   // Check if username exists, if yes then verify password
-//                                                                                   if($stmt->rowCount() >0){
-//                                                                                       $arraystable= $stmt->fetchAll();
-                                                                                         
-//                                                                                           $options['expires']=time()+30;
-//                                                                                           $message="Le besoin de , a bien ete signale";
-//           setcookie("messagedisplay",$message,$options);
-//               // header("location: viewregisclub.php");
-//                                                                                                     unset($pdo);
-
-
-                                                                                                      
-//                                                                                                             // http_response_code(205);
-
-
-//                                                                                               // show products data in json format
-//                                                                                                                           //echo"hello";
-
-                                                                                                                      
-//                                                                                   }
-//                                                                                   else{
-//                                                                                       echo  "Course add fails ";
-//                                                                                           http_response_code(201);
-//                                                                                           $message="This comandnum has not been added";
-//                                                                                            $options['expires']=time()+30;
-//                                                                                           $message="Le besoin de ibeller, n'a pas ete enregistrer. Veuillez retenter";
-//           setcookie("messagedisplay",$message,$options);
-
-//                                                                                           echo json_encode($message);
-//                                                                                   }
-//                                                                               }
-//                                                                               else{
-//                                                                                     echo  "Course Add fails ";
-//                                                                                             http_response_code(201);
-//                                                                                             $message="This comandnum has not been added";
-
-//                                                                                             echo json_encode($message);
-//                                                                               }
-//                                                                   }
-//                                                                   else{
-//                                                                     echo "canot execute select";
-//                                                                   }
-
-
-//                                                               //echo "good good";
-//                                                           }
-//                                                           else{
-//                                                               echo "canot execute insert";
-//                                                           }
-
-
-
-//                                                           }
-//                                                           else{
-//                                                               echo " canot insert comandnum";
-//                                                           }
-
-// }
-
-                                                                  
-//                                         catch(exception $e){
-//                                            $message="This comandnum has not been added";
-//                                                                                            $options['expires']=time()+30;
-//                                                                                           $message="Le besoin de libeller, n'a pas ete enregistrer. Veuillez retenter. Voici l'erreur: ".$e;
-//           setcookie("messagedisplay",$message,$options);
-//                                                   // echo"try again".$e;
-                                                  
-
-//                                         }
-
-//                 }else{
-//                     echo  "comandnum Add fails, course code exists ";
-//                         http_response_code(201);
-//                         $message="This comandnum has not been added because comandnum code exists already";
-
-//  $options['expires']=time()+30;                                                                          
-// $message="Le besoin de libeller, n'a pas ete enregistrer. Veuillez retenter.";
-// setcookie("messagedisplay",$message,$options);
-//               header("location: welcomsurveillante.php");
-//               }
-
-
-//             }else{
-//                 echo "something went wrong in execute()";
-//             }
-//         }else{
-//                 echo "canot do the stmt = pdo->prepare(sql)something went wrong";
-//             }
-//              unset($stmt);
-// }else{
-//     echo  "comand Add fails,  code is required ";
-//                         http_response_code(201);
-//                         $message="This comand has not been added because  code is required field";
-
-//                         echo json_encode($message);
-// }
-
-        
-//       }
-//           unset($pdo);
-
-
     ?>
 
 <?php

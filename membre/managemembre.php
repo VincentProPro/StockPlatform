@@ -9,6 +9,9 @@ session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: index.php");
     exit;
+
+    // include("../component/headpart.php"); 
+
 }
 ?>
  
@@ -423,29 +426,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
    </div>
   <div class="rightcolumn">
-    <div class="card shadowexempl">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-<b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-    </div>
-    <div class="card">
-      <h3>Type Role</h3>
-      <div class="rolebtn"><a href="coursier/welcomecoursier.php"><button >Coursier</button></div>
-      <div class="rolebtn"><a href="gestionnairestock/welcomestocker.php"><button >Gestionnaire de Stock</button></div>
-      <div class="rolebtn"><a href="cmu/welcomecmu.php"><button >Gestion CMU</button></div>
-      <div class="rolebtn"><a href="comptable/welcomecomptable.php"><button >Comptable</button></div>
-      <div class="rolebtn"><a href="a.p"><button >Admin</button></div>
-      <div class="rolebtn"><a href="#"><button >Super Admin</button></div>
-      
-      <a href="logout.php"><button class="fakeimg" >Log Out</button></a>
-    </div>
+  <?php include("../component/profile.php");?>
+  <?php include("../component/role.php");?>
     
     <div class="card">
        <h3>Laisser un Commentaire</h3>
@@ -456,7 +438,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
          <?php
  
-   include('db/config.php');
+   include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -498,9 +480,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 </div>
 
-<div class="footer">
-  <h2>Pied De Page</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 
 <div id="id01" class="modal1">
   

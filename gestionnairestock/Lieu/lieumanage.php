@@ -8,6 +8,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../index.php");
     exit;
 }
+
 ?>
  
 <!DOCTYPE html>
@@ -225,13 +226,18 @@ span.psw {
 
             </style>  
 </head>
+<?php include("../../component/headpart.php"); 
+?>
 <body>
 
 <div class="header">
   <h1>Clinic </h1>
   <p>La Clinic  est une Clinique de réference.</p>
 </div>
-<?php include("../menu/menugestionairestock.php"); ?>
+
+<?php 
+include("../../menu/menugestionairestock.php");
+ ?>
 
 <div class="row">
   <div class="leftcolumn">
@@ -308,7 +314,6 @@ span.psw {
                     <div class="invisi">
                                         <input type="hidden"  name="idcode" value="<?php echo $row["matricule"]; ?>">
                                         <input type="hidden"  name="nom" value="<?php echo $row["nom"]; ?>">
-                                        <input type="hidden"  name="code" value="<?php echo $row["code"]; ?>">
                                         <input type="hidden"  name="description" value="<?php echo $row["description"]; ?>">
                                         <input type="hidden"  name="formulaire" value="modifier">
                                         
@@ -446,9 +451,8 @@ span.psw {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../../component/pieddepage.php"); ?>
+
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="../apilieu.php" method="POST">

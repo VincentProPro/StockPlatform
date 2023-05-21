@@ -13,21 +13,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../logout.php");
     exit;
 }
+
+include("../component/headpart.php"); 
+
 ?>
- 
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 	<meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="../css/style2.css">
-
-
-
-</head>
 <body>
 
 <div class="header">
@@ -503,7 +493,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
           </div>
           <h2>Listes Des Documents </h2>
         <h3>Voulez vous rechercher un document?</h3>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for documents.." title="Type in a name">
+        <input type="text" id="mysearchInput" onkeyup="myFunction()" placeholder="Search for documents.." title="Type in a name">
         <div class="retraitarticleperunit">
           <div class="wrapper">
 
@@ -545,20 +535,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-<b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-            <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
-
-    </div>
+  <?php include("../component/profile.php");?>
     <?php include("../component/role.php"); ?>
      <div class="card">
        <h3>Laisser un Commentaire</h3>
@@ -610,15 +587,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
 <script type="text/javascript" src="../javascript.js"></script>
 <script type="text/javascript" >
 
 function myFunction(){
   var input, filter, table, tr, td, i,j, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("mysearchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");

@@ -9,21 +9,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../logout.php");
     exit;
 }
+include("../component/headpart.php"); 
+
 ?>
- 
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 	<meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
-</head>
 <body>
 
 <div class="header">
@@ -185,23 +174,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-<b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-    </div>
-    <div class="card">
-      <h3>Role Coursier</h3>
-      <div class="fakeimg"><p>Chargé d'insérer les données liées à l'achat des articles</p></div>
-      <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
-    </div>
+  <?php include("../component/profile.php");?>
     <?php include("../component/role.php"); ?>
 
     <div class="card">
@@ -246,9 +219,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 <script type="text/javascript">
   $(function() {
      $( "#autocomplete-search" ).autocomplete({

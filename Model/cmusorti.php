@@ -333,192 +333,6 @@ public function ajouter($article_desgnation,$quantity,$situation_matricule,$nume
     		
 
 
-    //         public function modifier($matricule,$article_matricule,$prixachat,$prixvente,$quantity,$quantityperunit,$sortimagasin_matricule,$situation_matricule,$benefice,$taxe){
-
-								
-				// 					$this->matricule=$matricule;
-				// 	    			$t=time();
-				// 	           		$datereel=date("Y-m-d H:i:s",$t);
-				// 	            	$redacteurcode=$_SESSION["matricule"];
-				// 	            	$this->prixachat=$prixachat;
-				// $this->prixvente=$prixvente;
-				// $this->quantityperunit=$quantityperunit;
-				// $this->quantity=$quantity;
-				// $this->sortimagasin_matricule=$sortimagasin_matricule;
-				// $this->situation_matricule=$situation_matricule;
-				// $this->benefice=$benefice;
-				// $this->taxe=$taxe;
-				// $this->article_matricule=$article_matricule;
-				// $qtyadded=0;
-				// $matricule_articleadded=0;
-
-
-
-
-
-		  //            try{
-		  //            	$sql="Select quantity ,matricule_article from cmuentrer Where  matricule = :matricule  ";
-				// 							                	            	         include('../db/config.php');
-
-
-				// 							    if($stmt = $pdo->prepare($sql)){
-				// 							      $stmt->bindParam(":matricule", $this->matricule, PDO::PARAM_STR);
-											  
-				// 							        if($stmt->execute()){
-				// 							        	 if($stmt->rowCount()>0){
-				// 							        	 	$arraystable= $stmt->fetchAll();
-				// 							        		$qtyadded=$arraystable[0][0];
-				// 							        		$matricule_articleadded=$arraystable[0][01;
-
-
-				// 							        	 }}}
-		  //            	$sql="Select quantity from cmustock Where  matricule_article = :matricule_articleadded  ";
-				// 							                	            	         include('../db/config.php');
-
-
-				// 							    if($stmt = $pdo->prepare($sql)){
-				// 							      $stmt->bindParam(":matricule_articleadded", $matricule_articleadded, PDO::PARAM_STR);
-											  
-				// 							        if($stmt->execute()){
-				// 							        	 if($stmt->rowCount()>0){
-				// 							        	 	$arraystable= $stmt->fetchAll();
-				// 							        		$this->previousqty=$arraystable[0][0];
-				// 							        		$sql="Update quantity=:quantity from cmustock Where  matricule_article = :matricule_article  ";
-				// 							                	            	         include('../db/config.php');
-
-
-				// 							    if($stmt = $pdo->prepare($sql)){
-				// 							    	$currentqtybefore=$previousqty-$qtyadded;
-				// 							      $stmt->bindParam(":matricule_article", $matricule_article, PDO::PARAM_STR);
-				// 							      $stmt->bindParam(":quantity", $currentqtybefore, PDO::PARAM_STR);
-											  
-				// 							        if($stmt->execute()){
-				// 							        	 $sql="Update  cmuentrer Set article_matricule=:article_matricule, prixachat=:prixachat , prixvente=:prixvente ,sortimagasin_matricule=:sortimagasin_matricule,quantity=:quantity,quantityperunit=:quantityperunit, taxe=:taxe,situation_matricule=:situation_matricule,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-
-		  //            	  if($stmt = $pdo->prepare($sql)){
-
-
-    //                                                 $stmt->bindParam(":sortimagasin_matricule", $this->sortimagasin_matricule, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":article_matricule", $this->article_matricule, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":prixachat", $this->prixachat, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":prixvente", $this->prixvente, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":quantityperunit", $this->quantityperunit, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":quantity", $this->quantity, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":taxe", $this->taxe, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":situation_matricule", $this->situation_matricule, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":benefice", $this->benefice, PDO::PARAM_STR);
-
-    //                                                 $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":matricule", $redacteurcode, PDO::PARAM_STR);
-
-
-		  //                       if($stmt->execute()){
-		  //                              	return "L'cmuentrer  a ben été enregistré";
-
-
-
-
-		  //                       }
-		  //                       else{
-		  //                       	return "L'cmuentrer n'a pas ete ajouté, Requete Invalid veuillez retenter ";
-		                             
-
-
-		  //                       }
-		  //                   }
-		  //                    else{
-		  //                       	return "L'cmuentrer  n'a pas ete ajouté, Requete Invalid veuillez retenter ";
-		                             
-
-
-		  //                       }
-
-											        	 
-				// 							        	 }}
-											        		
-
-				// 							        	 }else{
-				// 							        	 	return "previousqty==0";
-				// 							        	 }
-
-										
-		             	 
-											        	
-											          
-
-				// 							        }
-				// 							        else{
-				// 							        	 return "La selection a échoué, veuillez retenter.";
-				// 							        }
-											  
-				// 							    }else{
-				// 							    	 return "La selection a échoué, veuillez retenter. ";
-
-				// 							    }
-		  //            		// $this->matriculredacteur=$matriculredacteur;
-		    			
-		  //               }catch (Exception $e) {
-		  //               	return "Une erreur sest produite, Requete Invalid veuillez retenter ".$e->getMessage()."";
-
-				// }
-
-
-				// //end
-	    	            	        
-
-	   //  	            	         try{
-
-	   //  	            	         	   $sql="Update  cmuentrer Set description=:description, prixachat=:prixachat , prixvente=:prixvente ,quantity=:quantity,quantityperunit=:quantityperunit, poids=:poids,situation_matricule=:situation_matricule,benefice=:benefice,lastmodification=:lastmodification  WHERE matricule = :matricule";
-	   //  	            	         	   include('../db/config.php');
-	   //  	            	         		// echo"this->fullname: ".$this->fullname;
-
-				//                         if($stmt = $pdo->prepare($sql)){
-
-				// 							$stmt->bindParam(":article_matricule", $this->article_matricule, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":prixachat", $this->prixachat, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":prixvente", $this->prixvente, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":quantity", $this->quantity, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":quantityperunit", $this->quantityperunit, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":poids", $this->poids, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":format", $this->format, PDO::PARAM_STR);
-    //                                                 $stmt->bindParam(":benefice", $this->benefice, PDO::PARAM_STR);
-
-                                                    
-			                      
-			 //                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
-			 //                      $stmt->bindParam(":matricule", $matricule, PDO::PARAM_STR);
-											            
-											          
-											           
-											            
-				// 							            // Attempt to execute the prepared statement
-				// 							            if($stmt->execute()){
-
-				// 							            	return "L'achat coursier  a ben été modifié";
-
-
-				// 							            }
-				// 							            else{
-				// 							            	return "L'achat coursier  n'a pas ete modifié correctement, Requete Invalid veuillez retenter ";
-
-
-				// 							            }}
-
-	   //  	            	         }
-	   //  	            	         catch(Exception $e){
-	   //  	            	         		return "L'achat coursier  n'a pas ete modifié, Requete Invalid veuillez retenter Error:".$e;
-
-
-
-	   //  	            	         }
-
-
-
-
-
-
-		     
-				// 			 }
 
 		public function validationCmuSorti($matricule,$validation){
 
@@ -581,46 +395,7 @@ public function ajouter($article_desgnation,$quantity,$situation_matricule,$nume
 		
 
 		
-		// public function selectmatricule($matricule){
-  //   							$this->matricule=$matricule;
-    			
-
-		// 				            	  try{
-		// 									    $sql="Select * from achatcoursier Where  matricule = :matricule  ";
-		// 									                	            	         include('../db/config.php');
-
-
-		// 									    if($stmt = $pdo->prepare($sql)){
-		// 									      $stmt->bindParam(":matricule", $this->matricule, PDO::PARAM_STR);
-											  
-		// 									        if($stmt->execute()){
-		// 									        	 if($stmt->rowCount()>0){
-		// 									        	 	$arraystable= $stmt->fetchAll();
-		// 									        		return $arraystable;
-
-		// 									        	 }else{
-		// 									        	 	return "none";
-		// 									        	 }
-											        	
-											          
-
-		// 									        }
-		// 									        else{
-		// 									        	 return "La selection a échoué, veuillez retenter.";
-		// 									        }
-											  
-		// 									    }else{
-		// 									    	 return "La selection a échoué, veuillez retenter. ";
-
-		// 									    }
-
-		// 									  }
-		// 									catch(exception $e){
-		// 										 return "La suppression a échoué, veuillez retenter. Error: ".$e;
-											     
-
-		// 									  }
-		// 					        }
+		
 
 		public function selectAll(){
     			
@@ -772,7 +547,12 @@ public function selectAllSixMois(){
 		}
 }
 
-		public function selectAllPeriode($debutperiode,$finperiode){
+		public function selectAllPeriodeSorti($debutperiode,$finperiode){
+			// echo '<script> alert("essa") </script>';
+			// $debutperiode='2023-01-13';
+			// $finperiode='2023-05-12';
+			$debutperiode=$debutperiode;
+			$finperiode=$finperiode;
     			
 
 			try{
@@ -853,7 +633,7 @@ public function selectAllYear(){
 			    			
 
 		// 							            	  try{
-		// 												    $sql="Delete from achatcoursier Where  matricule = :matricule  ";
+		// 												    $sql="Delete from cmusorti Where  matricule = :matricule  ";
 		// 												                	            	         include('../db/config.php');
 
 
@@ -861,7 +641,7 @@ public function selectAllYear(){
 		// 												      $stmt->bindParam(":matricule", $this->matricule, PDO::PARAM_STR);
 														  
 		// 												        if($stmt->execute()){
-		// 												        	return "L'achat coursier  a ben été supprimé";
+		// 												        	return " a ben été supprimé";
 														          
 
 		// 												        }

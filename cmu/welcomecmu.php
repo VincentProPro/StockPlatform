@@ -10,94 +10,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../index.php");
     exit;
 }
+include("../component/headpart.php"); 
+
 ?>
  
-<!DOCTYPE html>
-<html>
-<head>
-<!--  <meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="../css/style2.css">
-
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-       <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<style type="text/css">
-          .alerttext{
-          border: solid 3px red;
-/*  background-color: red;
-*/
-}
-.alerttext p{
-  color: blue;
-  font-size: 25px;
-}
-/*the container must be positioned relative:*/
-.dataautocomplete {
-  position: relative;
-  display: inline-block;
-}
-
-.caisse input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.caisse input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-
-.caisse input[type=button] {
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
-}
-
-.dataautocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-
-.dataautocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
-}
-
-/*when hovering an item:*/
-.dataautocomplete-items div:hover {
-  background-color: #e9e9e9; 
-}
-
-/*when navigating through the items using the arrow keys:*/
-.dataautocomplete-active {
-  background-color: DodgerBlue !important; 
-  color: #ffffff; 
-}
-    
-table { border-collapse: collapse; }
-tr { border: 1px solid #dfdfdf; }
-th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;} 
-       </style>
-</head>
 <body>
 
 <div class="header">
@@ -153,7 +69,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
           </center>
         <h2>Stock Liste des Articles expirant Dans 3 Mois</h2>
         <h3>Voulez vous rechercher un article?</h3>
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <input type="text" id="mysearchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         <div class="retraitarticleperunit">
           <div class="wrapper">
 
@@ -198,7 +114,7 @@ th, td { padding: 2px 5px 2px 5px; border: 1px solid #dfdfdf;}
                       <div class="caisse" id="aftercaisse"> 
 
                         <div class="dataautocomplete" style="width:300px;">
-                          <input id="myInputartcl" type="text" name="myArticle" placeholder="Nom de l'article ici">
+                          <input id="mysearchInputartcl" type="text" name="myArticle" placeholder="Nom de l'article ici">
                         </div>
                         <input type="number" name="quantity" id="idqty" placeholder="Entrer quantité">
                         <label>Date d'Expiration </label><input type="date" name="dateexpiring">
@@ -403,25 +319,7 @@ if($stmt->execute()){
     </div>
   </div>
   <div class="rightcolumn">
-    <div class="card">
-      <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="../images/contact.png" style="height:80px;"></div>
-<b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
-      <br>
-      <br>
-      <b>role: <?php echo htmlspecialchars($_SESSION["role"]); ?></b>
-            <br>
-      <b>tel: <?php echo htmlspecialchars($_SESSION["tel"]); ?></b>
-        <br>
-      <b>email: <?php echo htmlspecialchars($_SESSION["email"]); ?></b>
-                  <a href="../logout.php"><button class="fakeimg" >Log Out</button></a>
-
-    </div>
-    <div class="card">
-      <h3>Gestionnaire De Stock </h3>
-      
-      <div class="fakeimg"><p>Le Gestionnaire de stock est chargé de saisir les sorties d'articles, ajouter des articles, fournisseurs et catégories dans la base de donnée.</p></div>
-    </div>
+  <?php include("../component/profile.php");?>
     <?php include("../component/role.php"); ?>
 
 <div class="card">
@@ -433,7 +331,7 @@ if($stmt->execute()){
 
          <?php
  
-   include('db/config.php');
+   include('../db/config.php');
           // $query=mysqli_query($conn,"select * from `users`");
           $sql = "SELECT DISTINCT role FROM users";
             
@@ -466,9 +364,8 @@ if($stmt->execute()){
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 <script type="text/javascript">
 
   $(function() {
@@ -478,7 +375,7 @@ if($stmt->execute()){
   });
   function myFunction() {
   var input, filter, table, tr, td, i,j, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("mysearchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");
@@ -611,8 +508,8 @@ if($stmt->execute()){
 /*An array containing all the country names in the world:*/
 // var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-dataautocomplete(document.getElementById("myInputartcl"), objarticle);    
+/*initiate the autocomplete function on the "mysearchInput" element, and pass along the countries array as possible autocomplete values:*/
+dataautocomplete(document.getElementById("mysearchInputartcl"), objarticle);    
 </script>
 </body>
 </html>

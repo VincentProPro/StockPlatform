@@ -1,10 +1,4 @@
-<div class="topnav">
-  <a href="#">Accueil</a>
-  <a href="#">Connexion</a>
-  <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
-</div>
+
 
 <div class="navbar">
     <a href="http://localhost/StockPlatform/gestionnairestock/welcomestocker.php">Gestionaire</a>
@@ -12,7 +6,7 @@
     <a href="http://localhost/StockPlatform/cmu/welcomecmu.php">CMU</a>
     <a href="http://localhost/StockPlatform/caisse/welcomecaisse.php">Caisse</a>
     <a href="http://localhost/StockPlatform/coursier/welcomecoursier.php">Coursier</a>
-    <a href="http://localhost/StockPlatform/surveillante/welcomsurveillant.php">Surveillante</a>
+    <a href="http://localhost/StockPlatform/surveillante/welcomsurveillante.php">Surveillante</a>
 </div>
 
 <div class="navbar">

@@ -201,7 +201,7 @@ span.psw {
   <p>La Clinic  est une Clinique de réference.</p>
 </div>
 
-<?php include("../menu/menugestionairestock.php"); ?>
+<?php include("../../menu/menugestionairestock.php"); ?>
 
 <div class="row">
   <div class="leftcolumn">

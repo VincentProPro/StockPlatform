@@ -12,70 +12,16 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../index.php");
     exit;
 }
+include("../component/headpart.php"); 
+
 ?>
  
-<!DOCTYPE html>
-<html>
-<head>
-<!-- 	<meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<link rel="stylesheet" href="../cliniccss.css">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <style type="text/css">
-          
-#myInput {
-  background-image: url('../images/search.png');
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  background-size: 2%;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px;
-}
-
-#myTable th, #myTable td {
-  text-align: left;
-  padding: 12px;
-}
-
-#myTable tr {
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
-        </style>
-</head>
 <body>
 
-<div class="header">
-  <h1>Clinic </h1>
-  <p>La Clinic  est une Clinique de réference.</p>
-</div>
 
-<div class="topnav">
-  <a href="#">Accueil</a>
-  <a href="#">Connexion</a>
-  <a href="#">Apropos</a>
-</div>
 
  
+<?php include("../menu/topmenu.php"); ?>
 <?php include("../menu/menugestionairestock.php"); ?>
 
 
@@ -611,7 +557,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
       <div class="card shadowexempl">
         <h2>Stock Liste</h2>
 <h3>Voulez vous rechercher un article?</h3>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+  <input type="text" id="mysearchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
         <div class="wrapper">
 
 
@@ -964,14 +910,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../component/pieddepage.php"); ?>
+
 <script type="text/javascript" src="../javascript.js"></script>
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i,j, txtValue;
-  input = document.getElementById("myInput");
+  input = document.getElementById("mysearchInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
   tr = table.getElementsByTagName("tr");

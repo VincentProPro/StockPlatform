@@ -8,6 +8,8 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../index.php");
     exit;
 }
+// include("../../component/headpart.php"); 
+
 ?>
  
 <!DOCTYPE html>
@@ -232,7 +234,7 @@ span.psw {
   <p>La Clinic  est une Clinique de réference.</p>
 </div>
 
-<?php include("../menu/menugestionairestock.php"); ?>
+<?php include("../../menu/menugestionairestock.php"); ?>
 
 
 <div class="row">
@@ -449,9 +451,8 @@ span.psw {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../../component/pieddepage.php"); ?>
+
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="../apicategory.php" method="POST">

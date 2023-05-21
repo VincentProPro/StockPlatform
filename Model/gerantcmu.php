@@ -75,7 +75,7 @@ class GerantCMU{
 	function viewsorticmuPeriode($debutperiode,$finperiode){
 				$objectCreated=new Cmusorti();
 
-		return $objectCreated->selectAllPeriode($debutperiode,$finperiode);
+		return $objectCreated->selectAllPeriodeSorti($debutperiode,$finperiode);
 		
 	}
 	function viewsorticmuMois(){

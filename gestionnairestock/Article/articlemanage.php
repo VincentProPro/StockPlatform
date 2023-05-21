@@ -2,229 +2,17 @@
 // Initialize the session
 session_start();
 
- 
+// require("viewarticle.php");
+
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: ../../index.php");
     exit;
 }
+include("../../component/headpart.php"); 
+
 ?>
  
-<!DOCTYPE html>
-<html>
-<head>
-<!--    <meta charset="ISO-8859-1">
- -->
- <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-
-<link rel="stylesheet" href="../../cliniccss.css">
-<!-- //<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-//        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-//        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
-
-<!-- <link rel="stylesheet"  
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  -->  
-        <style>   
-        /*table {  
-            border-collapse: collapse;  
-        } */ 
-            .inline{   
-                display: inline-block;   
-                float: right;   
-                margin: 20px 0px;   
-            }   
-             
-            input, button{   
-                height: 34px;   
-            }   
-      
-        .pagination {   
-            display: inline-block;   
-        }   
-        .pagination a {   
-            font-weight:bold;   
-            font-size:18px;   
-            color: black;   
-            float: left;   
-            padding: 8px 16px;   
-            text-decoration: none;   
-            border:1px solid black;   
-        }   
-        .pagination a.active {   
-                background-color: pink;   
-        }   
-        .pagination a:hover:not(.active) {   
-            background-color: skyblue;   
-        }  
-        .invisi {
-    display: none;
-        visibility: hidden;
-
-} 
-
-
-
-
-body {font-family: Arial, Helvetica, sans-serif;}
-
-/* Full-width input fields */
-/*input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
- Set a style for all buttons 
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}*/
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal,.modal2 {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 80%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 0px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-
-
-
-  #outer
-{
-    width:100%;
-    text-align: center;
-}
-.inner
-{
-    display: inline-block;
-}
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #92CFFE;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #0040ff;
-  color: white;
-}
-
-
-            </style>  
-</head>
 <body>
 
 <div class="header">
@@ -232,7 +20,7 @@ span.psw {
   <p>La Clinic est une Clinique de réference.</p>
 </div>
 
-<?php include("../menu/menugestionairestock.php"); ?>
+<?php include("../../menu/menugestionairestock.php"); ?>
 
 
 <div class="row">
@@ -274,6 +62,31 @@ span.psw {
         
             $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc, groupcode FROM article  LIMIT $start_from, $per_page_record";     
             $rs_result = mysqli_query ($con, $query);    
+        
+            // Recherche de médicaments
+    if (isset($_GET['search'])) {
+      $searchTerm = $_GET['search'];
+      $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc, groupcode FROM article WHERE 
+      designation LIKE '%$searchTerm%' OR
+      description LIKE '%$searchTerm%' OR
+      poids_kg LIKE '%$searchTerm%' OR
+      quantity_per_unit LIKE '%$searchTerm%' OR
+      prixachat LIKE '%$searchTerm%' OR
+      format LIKE '%$searchTerm%' OR
+      prixvente LIKE '%$searchTerm%' ";
+      // $stmt = $database->query($query);
+      // $liste_medicament = $stmt->fetchAll();
+      $rs_result = mysqli_query ($con, $query);    
+
+  } else {
+      // Requête pour récupérer les médicaments de la page courante
+      $query = "SELECT matricule, designation, description, poids_kg, article.quantity_per_unit, code_category,format, prixvente, prixachat, tmc, groupcode FROM article  LIMIT $start_from, $per_page_record";
+      // $stmt = $database->query($query);
+      // $liste_medicament = $stmt->fetchAll();
+      $rs_result = mysqli_query ($con, $query);    
+
+  }
+        
         ?>    
       
         <div class="container">   
@@ -282,7 +95,14 @@ span.psw {
           <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Ajouter Un Article</button>   
             <h1>Liste Des Articles</h1>   
             <h3> Vous avez la possibilité de Modifier et Supprimer.   
-          </h3>   
+          </h3>  
+          <form method="GET" action="">
+            <div class="form_input">
+                <input type="text" name="search" id="searchInput" placeholder="Entrez un nom de médicament"
+                    value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                <button type="submit" class="bouton_rechercher">Rechercher</button>
+            </div>
+        </form>
 
             <table id="customers" class="table table-striped table-condensed    
                                               table-bordered">   
@@ -461,9 +281,8 @@ span.psw {
   </div>
 </div>
 
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+<?php include("../../component/pieddepage.php"); ?>
+
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="../apiarticle.php" method="POST">
@@ -570,6 +389,57 @@ span.psw {
             window.location.href = "articledelete.php?idpk="+message;
 
         } 
+ 
+  
+function SearchArticle() {
+  var input, filter, table, tr, td, i,j, txtValue;
+  input = document.getElementById("mysearchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    
+    td = tr[i].getElementsByTagName("td")[0];
+    td2 = tr[i].getElementsByTagName("td")[1];
+    td3 = tr[i].getElementsByTagName("td")[2];
+    td4 = tr[i].getElementsByTagName("td")[3];
+    td5 = tr[i].getElementsByTagName("td")[4];
+    td6 = tr[i].getElementsByTagName("td")[5];
+      
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+    // if (td1) {
+    //   txtValue1 = td1.textContent || td1.innerText;
+    //   if (txtValue1.toUpperCase().indexOf(filter) > -1) {
+    //     tr[i].style.display = "";
+    //   } else {
+    //     tr[i].style.display = "none";
+    //   }
+    // }
+    // if (td2) {
+    //   txtValue2 = td2.textContent || td.innerText;
+    //   if (txtValue2.toUpperCase().indexOf(filter) > -1) {
+    //     tr[i].style.display = "";
+    //   } else {
+    //     tr[i].style.display = "none";
+    //   }
+    // }
+    // if (td3) {
+    //   txtValue3 = td3.textContent || td3.innerText;
+    //   if (txtValue3.toUpperCase().indexOf(filter) > -1) {
+    //     tr[i].style.display = "";
+    //   } else {
+    //     tr[i].style.display = "none";
+    //   }
+    // }       
+  }
+}
 </script>
 </body>
 </html>
