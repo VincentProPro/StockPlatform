@@ -736,7 +736,8 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-.btn1class{
+
+.btn1class, input[type=submit]{
 
  
   background-color: #0040ff;
@@ -749,7 +750,7 @@ input[type=text], input[type=password] {
 
 }
 /* Set a style for all buttons */
-button,.btn1class {
+button,.btn1class, input[type=submit] {
   background-color: #0040ff;
   color: white;
   padding: 14px 20px;
@@ -799,7 +800,7 @@ span.psw {
   left: 0;
   top: 0;
   width: 100%; /* Full width */
-  height: 80%; /* Full height */
+  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -1456,7 +1457,7 @@ z-index: 1; /* Sit on top */
 left: 0;
 top: 0;
 width: 100%; /* Full width */
-height: 80%; /* Full height */
+height: 100%; /* Full height */
 overflow: auto; /* Enable scroll if needed */
 background-color: rgb(0,0,0); /* Fallback color */
 background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -1468,7 +1469,7 @@ padding-top: 0px;
 background-color: #fefefe;
 margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
 border: 1px solid #888;
-width: 80%; /* Could be more or less, depending on screen size */
+width: 40%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */

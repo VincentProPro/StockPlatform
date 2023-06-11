@@ -365,7 +365,7 @@ include("component/headpart.php");
 
     <div class="card shadowexempl">
       <h2>Gérant CMU Function</h2>
-      <h5>Entré Medicament CMU</h5>
+      <h5>Entré Produit CMU</h5>
 <!--       <div class="fakeimg" style="height:200px;">Image</div>
  -->
         <div><form action="coursierinsertachat.php" method="POST">
@@ -436,7 +436,7 @@ include("component/headpart.php");
  -->
   <div class="card shadowexempl">
       <h2>Gérant CMU Function</h2>
-      <h5>Sorti Medicament CMU</h5>
+      <h5>Sorti Produit CMU</h5>
 <!--       <div class="fakeimg" style="height:200px;">Image</div>
  -->
         <div><form action="coursierinsertachat.php" method="POST">
@@ -495,7 +495,7 @@ include("component/headpart.php");
 
     <div class="card shadowexempl">
       <h2>Gérant Fonction</h2>
-      <h5>Inventaire pharmacie </h5>
+      <h5>Inventaire Boutique </h5>
       <form action="coursierinsertachat.php" method="POST">
         <div>
             <label for="codearticl"><b>Code Article</b></label>

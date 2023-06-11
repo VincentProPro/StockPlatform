@@ -29,11 +29,15 @@ function ajoutcaisse(){
         $prix=htmlspecialchars($_POST['prix']);
         $titre=htmlspecialchars($_POST['titre']);
         $recu=htmlspecialchars($_POST['recu']);
+        $reglement=htmlspecialchars($_POST['reglement']);
+        $nameInput=htmlspecialchars($_POST['nameInput']);
+        $phoneInput=htmlspecialchars($_POST['phoneInput']);
+        
 
        
             $objectCreated=new Caisse();
         // echo"execute executebondecommande";
-         $objectCreated->ajoutcaisse($module,$titre,$description,$prix,$recu,$apayer);
+         $objectCreated->ajoutcaisse($module,$titre,$description,$prix,$recu,$apayer,$reglement,$phoneInput,$nameInput);
 
 
 }

@@ -12,49 +12,23 @@ class CaisseEntrer{
 	private $description;
 	private $matriculredacteur;
 	private $matricule_module;
+	private $reglement;
+	private $phoneInput;
+	private $nameInput;
 	
 	function __construct(){}
-	// function __construct($matricule,$fullname,$email,$tel,$position,$role,$status){
-	// 	$this->fullname=$fullname;
-	// 	$this->email=$email;
-	// 	$this->tel=$tel;
-	// 	$this->position=$position;
-	// 	$this->role=$role;
-	// 	$this->matricule=$matricule;
-	// 	$this->status=$status;
-
-	// }
+	
 
 				
-				// public function getfullname(){
-				// 	return $this->fullname;
-				// 	}
-				// public function getmatricule(){
-				// 	return $this->matricule;
-				// 	}
-				// public function getrole(){
-				// 	return $this->role;
-				// 	}
-				// public function getposition(){
-				// 	return $this->position;
-				// 	}
-				// public function gettel(){
-				// 	return $this->tel;
-				// 	}
-				// public function getemail(){
-				// 	return $this->email;
-				// 	}
-				// public function getstatus(){
-				// 	return $this->status;
-				// 	}
-
-				
-    			public function ajouter($titre,$description,$matricule_module,$prix,$recu,$payement){
+    			public function ajouter($titre,$description,$matricule_module,$prix,$recu,$payement,$reglement,$phoneInput,$nameInput){
 				    	// $this->matricule=$matricule;
 
 						$this->titre=$titre;
 						$this->prix=$prix;
 						$this->payement=$payement;
+						$this->reglement=$reglement;
+						$this->phoneInput=$phoneInput;
+						$this->nameInput=$nameInput;
 						$this->recu=$recu;
 						$this->description=$description;
 						$this->matricule_module=$matricule_module;
@@ -67,17 +41,20 @@ class CaisseEntrer{
 			            	$redacteurcode=$_SESSION["email"];
 			            	// $redacteurcode="_SESSION";
 			            	            	         include('../db/config.php');
-			            	            	            $sql="insert into caisse (titre,description,prix,recu,payement,matricule_module,matriculredacteur,lastmodification) values (:titre,:description,:prix,:recu,:payement,:matricule_module,:matriculredacteur,:lastmodification)";
-			             	 if($stmt = $pdo->prepare($sql)){
-			                      $stmt->bindParam(":titre", $this->titre, PDO::PARAM_STR);
-			                      $stmt->bindParam(":prix", $this->prix, PDO::PARAM_STR);
-			                      $stmt->bindParam(":description", $this->description, PDO::PARAM_STR);
-			                      $stmt->bindParam(":recu", $this->recu, PDO::PARAM_STR);
-			                      $stmt->bindParam(":matricule_module", $this->matricule_module, PDO::PARAM_STR);
-			                      $stmt->bindParam(":payement", $this->payement, PDO::PARAM_STR);
-			                      
-			                      $stmt->bindParam(":matriculredacteur", $redacteurcode, PDO::PARAM_STR);
-			                      $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
+													 $sql="insert into caisse (titre,description,prix,recu,payement,reglement,phoneClient,nameClient, matricule_module,matriculredacteur,lastmodification) values (:titre,:description,:prix,:recu,:payement,:reglement,:phoneClient,:nameClient,:matricule_module,:matriculredacteur,:lastmodification)";
+													 if($stmt = $pdo->prepare($sql)){
+														 $stmt->bindParam(":titre", $this->titre, PDO::PARAM_STR);
+														 $stmt->bindParam(":prix", $this->prix, PDO::PARAM_STR);
+														 $stmt->bindParam(":description", $this->description, PDO::PARAM_STR);
+														 $stmt->bindParam(":recu", $this->recu, PDO::PARAM_STR);
+														 $stmt->bindParam(":matricule_module", $this->matricule_module, PDO::PARAM_STR);
+														 $stmt->bindParam(":payement", $this->payement, PDO::PARAM_STR);
+														 $stmt->bindParam(":reglement", $this->reglement, PDO::PARAM_STR);
+														 $stmt->bindParam(":phoneClient", $this->phoneInput, PDO::PARAM_STR);
+														 $stmt->bindParam(":nameClient", $this->nameInput, PDO::PARAM_STR);
+					
+														 $stmt->bindParam(":matriculredacteur", $redacteurcode, PDO::PARAM_STR);
+														 $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
 
 			                        if($stmt->execute()){
 			                        														return "Paiement Enregistrer avec succès";
@@ -221,7 +198,8 @@ class CaisseEntrer{
     			
 
 						            	  try{
-											    $sql="Select * from caisse";
+											$sql="SELECT caisse.matricule, caisse.titre, caisse.description, caisse.matricule_module, caisse.prix, caisse.recu, caisse.reglement, caisse.nameClient, caisse.phoneClient, caisse.payement, caisse.lastmodification AS dateentrer, module.nom AS modulename FROM caisse JOIN module ON caisse.matricule_module=module.matricule";
+											
 											                	            	         include('../db/config.php');
 
 

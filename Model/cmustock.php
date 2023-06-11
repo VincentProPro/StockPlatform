@@ -15,17 +15,19 @@ class CmuStock{
 	private $prixachat;
 	private $prixvente;
 	private $benefice;	
+	private $taxe;	
 	private $timestamp;
 	private $lastmodification;
 
 	function __construct(){}
 	
-	public function ajouter($matricule_article,$groupcode_article,$prixachat,$prixvente,$benefice,$quantity,$currentqty){
+	public function ajouter($matricule_article,$groupcode_article,$prixachat,$prixvente,$benefice,$taxe,$quantity,$currentqty){
 				$this->matricule_article=$matricule_article;
 				$this->groupcode_article=$groupcode_article;
 				$this->prixachat=$prixachat;
 				$this->prixvente=$prixvente;
 				$this->quantity=$quantity;
+				$this->taxe=$taxe;
 				$this->benefice=$benefice;
 				$this->currentqty=$currentqty;
 				
@@ -81,7 +83,7 @@ class CmuStock{
 											    	//  $article=new Article();
 											    	// $groupcode_article=$article->selectmatricule($this->matricule_article)[0][1];
 											    	// $code_article=$article->selectmatricule(2)[0][1];
-											    	 $sql="insert into  cmustock (groupcode_article,matricule_article,quantity,quantityreal,prixachat,prixvente,benefice,date,lastmodification,matriculredacteur) values (:groupcode_article,:matricule_article,:quantity,:quantityreal,:prixachat,:prixvente,:benefice,:date,:lastmodification,:matriculredacteur)";
+											    	 $sql="insert into  cmustock (groupcode_article,matricule_article,quantity,quantityreal,prixachat,prixvente,taxe,benefice,date,lastmodification,matriculredacteur) values (:groupcode_article,:matricule_article,:quantity,:quantityreal,:prixachat,:prixvente,:taxe,:benefice,:date,:lastmodification,:matriculredacteur)";
 		             	 if($stmt = $pdo->prepare($sql)){
 		             	 	
 
@@ -93,6 +95,7 @@ class CmuStock{
                                                     $stmt->bindParam(":quantityreal", $this->currentqty, PDO::PARAM_STR);
                                                     $stmt->bindParam(":quantity", $this->currentqty, PDO::PARAM_STR);
                                                     $stmt->bindParam(":benefice", $this->benefice, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":taxe", $this->taxe, PDO::PARAM_STR);
 
                                                     $stmt->bindParam(":lastmodification", $datereel, PDO::PARAM_STR);
                                                     $stmt->bindParam(":matriculredacteur", $redacteurcode, PDO::PARAM_STR);
@@ -497,7 +500,7 @@ class CmuStock{
     			
 
 						            	  try{
-											    $sql="SELECT cmustock.matricule, cmustock.groupcode_article,cmustock.quantity, cmustock.prixachat, cmustock.prixvente, article.designation FROM cmustock JOIN article ON cmustock.matricule_article=article.matricule";
+											    $sql="SELECT cmustock.matricule, cmustock.groupcode_article,cmustock.quantity, cmustock.prixachat, cmustock.prixvente, article.designation, cmustock.taxe FROM cmustock JOIN article ON cmustock.matricule_article=article.matricule";
 											                	            	         include('../db/config.php');
 
 

@@ -67,7 +67,7 @@ span.psw {
   left: 0;
   top: 0;
   width: 100%; /* Full width */
-  height: 80%; /* Full height */
+  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -79,9 +79,12 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  /* height: 50%; */
+  width: 40%; /* Could be more or less, depending on screen size */
 }
-
+.txtwitdh{
+  width:60%;
+}
 /* The Close Button (x) */
 .close {
   position: absolute;
@@ -115,7 +118,7 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 500px) {
   span.psw {
      display: block;
      float: none;
@@ -123,12 +126,21 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
+  /* Modal Content/Box */
+.modal-content {
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  /* height: 50%; */
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+.txtwitdh{
+  width:100%;
+}
 }
 </style>
 </head>
 <body>
   <center>
-    <div style="width:50%">
+    <div class="txtwitdh">
   <h2>Cette page est strictement réserver aux membres de l'entreprise. Accceder a cette page sans authorisation est passible de poursuite judiciare.</h2>
   <img src="images/traffic-sign-38589_1280.png" style="width:50%">
   <div>
@@ -163,7 +175,7 @@ span.psw {
   <form class="modal-content animate" action="loginmember.php" method="POST">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="images/1550389719.jpeg" width="200" height="200" alt="Avatar" class="avatar">
+      <img src="images/1550389719.jpeg" width="60" height="70" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
@@ -205,7 +217,7 @@ span.psw {
   <form class="modal-content animate" action="regismember.php" method="POST">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="images/1550389719.jpeg" width="200" height="250" alt="Avatar" class="avatar">
+      <img src="images/1550389719.jpeg" width="60" height="70" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">

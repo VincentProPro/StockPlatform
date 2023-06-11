@@ -21,11 +21,11 @@ class Caisse{
 
 		}
 
-	function ajoutcaisse($module,$titre,$description,$prix,$recu,$apayer){
+	function ajoutcaisse($module,$titre,$description,$prix,$recu,$apayer,$reglement,$phoneInput,$nameInput){
 
 		$caisseEntrer=new CaisseEntrer();
 
-		$this->callnotification($caisseEntrer->ajouter($titre,$description,$module,$prix,$recu,$apayer),"../caisse/welcomecaisse.php");
+		$this->callnotification($caisseEntrer->ajouter($titre,$description,$module,$prix,$recu,$apayer,$reglement,$phoneInput,$nameInput),"../caisse/welcomecaisse.php");
 	}
 	
 
@@ -44,12 +44,21 @@ class Caisse{
 		
 	}
 	function viewAllCmuStock(){
-			$objectCreated=new CmuStock();
+		$objectCreated=new CmuStock();
 
-			return $objectCreated->selectAll();
+		return $objectCreated->selectAll();
 
 
-		}
+	}
+	function viewAllCaisseEntrer(){
+		$objectCreated=new CaisseEntrer();
+
+		return $objectCreated->selectAll();
+
+
+	}
+
+		
 
 
 }

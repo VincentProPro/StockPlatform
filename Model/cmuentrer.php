@@ -140,7 +140,7 @@ class Cmuentrer{
 		                        if($stmt->execute()){
 		                        	$cmustock=new CmuStock();
 
-		                        							return $cmustock->ajouter($this->article_matricule,$this->groupcode_article,$this->prixachat,$this->prixvente,$this->benefice,$this->quantity,$this->currentqty);
+		                        							return $cmustock->ajouter($this->article_matricule,$this->groupcode_article,$this->prixachat,$this->prixvente,$this->benefice,$this->taxe,$this->quantity,$this->currentqty);
 
 		                        	// return "L'cmuentrer a ete ajouté";
 		                        	
