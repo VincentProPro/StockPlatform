@@ -794,6 +794,199 @@ class Sortidetailmagasin{
 								  }
 				        }
 
+	public function selectAllMois(){
+    			
+
+							try{
+								  $sql="SELECT sortidetailmagasin.matricule, sortimagasin.matricule_module, sortidetailmagasin.matricule_article, article.designation,magasintable.nom, sortidetailmagasin.quantity, sortidetailmagasin.situation_matricule, sortidetailmagasin.quantityperunit,sortidetailmagasin.matricule_format, sortidetailmagasin.date FROM sortidetailmagasin JOIN article ON sortidetailmagasin.matricule_article=article.matricule JOIN magasintable ON sortidetailmagasin.matricule_magasin=magasintable.matricule JOIN sortimagasin ON sortidetailmagasin.matricule_sorti=sortimagasin.matricule WHERE  MONTH(sortidetailmagasin.date) = MONTH(now()) and YEAR(sortidetailmagasin.date) = YEAR(now())";
+																		   include('../db/config.php');
+
+
+								  if($stmt = $pdo->prepare($sql)){
+								
+									  if($stmt->execute()){
+										   if($stmt->rowCount()>0){
+											   $arraystable= $stmt->fetchAll();
+											  return $arraystable;
+
+										   }else{
+											   return "none";
+										   }
+										
+
+									  }else{
+									   return "La selection a échoué, veuillez retenter. ";
+
+								  }
+								
+								  }else{
+									   return "La selection a échoué, veuillez retenter. ";
+
+								  }
+
+								}
+							  catch(exception $e){
+								   return "La suppression a échoué, veuillez retenter. Error: ".$e;
+								   
+
+								}
+		}
+	public function selectAllThreeMois(){
+		
+
+		try{
+			$sql="SELECT sortidetailmagasin.matricule, sortimagasin.matricule_module, sortidetailmagasin.matricule_article, article.designation,magasintable.nom, sortidetailmagasin.quantity, sortidetailmagasin.situation_matricule, sortidetailmagasin.quantityperunit,sortidetailmagasin.matricule_format, sortidetailmagasin.date FROM sortidetailmagasin JOIN article ON sortidetailmagasin.matricule_article=article.matricule JOIN magasintable ON sortidetailmagasin.matricule_magasin=magasintable.matricule JOIN sortimagasin ON sortidetailmagasin.matricule_sorti=sortimagasin.matricule  WHERE sortidetailmagasin.date > now() - INTERVAL 3 MONTH";
+													include('../db/config.php');
+
+
+			if($stmt = $pdo->prepare($sql)){
+		
+				if($stmt->execute()){
+					if($stmt->rowCount()>0){
+						$arraystable= $stmt->fetchAll();
+						return $arraystable;
+
+					}else{
+						return "none";
+					}
+				
+
+				}else{
+				return "La selection a échoué, veuillez retenter. ";
+
+			}
+		
+			}else{
+				return "La selection a échoué, veuillez retenter. ";
+
+			}
+
+		}
+		catch(exception $e){
+			return "La suppression a échoué, veuillez retenter. Error: ".$e;
+			
+
+		}
+		}
+	public function selectAllSixMois(){
+		
+
+		try{
+		$sql="SELECT sortidetailmagasin.matricule, sortimagasin.matricule_module, sortidetailmagasin.matricule_article, article.designation,magasintable.nom, sortidetailmagasin.quantity, sortidetailmagasin.situation_matricule, sortidetailmagasin.quantityperunit,sortidetailmagasin.matricule_format, sortidetailmagasin.date FROM sortidetailmagasin JOIN article ON sortidetailmagasin.matricule_article=article.matricule JOIN magasintable ON sortidetailmagasin.matricule_magasin=magasintable.matricule JOIN sortimagasin ON sortidetailmagasin.matricule_sorti=sortimagasin.matricule  WHERE sortidetailmagasin.date > now() - INTERVAL 6 MONTH";
+											include('../db/config.php');
+
+
+		if($stmt = $pdo->prepare($sql)){
+
+		if($stmt->execute()){
+			if($stmt->rowCount()>0){
+				$arraystable= $stmt->fetchAll();
+				return $arraystable;
+
+			}else{
+				return "none";
+			}
+		
+
+		}else{
+		return "La selection a échoué, veuillez retenter. ";
+
+		}
+
+		}else{
+		return "La selection a échoué, veuillez retenter. ";
+
+		}
+
+		}
+		catch(exception $e){
+		return "La suppression a échoué, veuillez retenter. Error: ".$e;
+
+
+		}
+		}
+
+	public function selectAllPeriodeSorti($debutperiode,$finperiode){
+		// echo '<script> alert("essa") </script>';
+		// $debutperiode='2023-01-13';
+		// $finperiode='2023-05-12';
+		$debutperiode=$debutperiode;
+		$finperiode=$finperiode;
+		
+
+		try{
+			$sql="SELECT sortidetailmagasin.matricule, sortimagasin.matricule_module, sortidetailmagasin.matricule_article, article.designation,magasintable.nom, sortidetailmagasin.quantity, sortidetailmagasin.situation_matricule, sortidetailmagasin.quantityperunit,sortidetailmagasin.matricule_format, sortidetailmagasin.date FROM sortidetailmagasin JOIN article ON sortidetailmagasin.matricule_article=article.matricule JOIN magasintable ON sortidetailmagasin.matricule_magasin=magasintable.matricule JOIN sortimagasin ON sortidetailmagasin.matricule_sorti=sortimagasin.matricule  WHERE sortidetailmagasin.date BETWEEN :date1 AND :date2";
+													include('../db/config.php');
+
+
+			if($stmt = $pdo->prepare($sql)){
+				$stmt->bindParam(":date1", $debutperiode, PDO::PARAM_STR);
+				$stmt->bindParam(":date2", $finperiode, PDO::PARAM_STR);
+		
+				if($stmt->execute()){
+					if($stmt->rowCount()>0){
+						$arraystable= $stmt->fetchAll();
+						return $arraystable;
+
+					}else{
+						return "none";
+					}
+				
+
+				}else{
+				return "La selection a échoué, veuillez retenter. ";
+
+			}
+		
+			}else{
+				return "La selection a échoué, veuillez retenter. ";
+
+			}
+
+		}
+		catch(exception $e){
+			return "La suppression a échoué, veuillez retenter. Error: ".$e;
+			
+
+		}
+		}
+	public function selectAllYear(){
+		
+
+		try{
+		$sql="SELECT sortidetailmagasin.matricule, sortimagasin.matricule_module, sortidetailmagasin.matricule_article, article.designation,magasintable.nom, sortidetailmagasin.quantity, sortidetailmagasin.situation_matricule, sortidetailmagasin.quantityperunit,sortidetailmagasin.matricule_format, sortidetailmagasin.date FROM sortidetailmagasin JOIN article ON sortidetailmagasin.matricule_article=article.matricule JOIN magasintable ON sortidetailmagasin.matricule_magasin=magasintable.matricule JOIN sortimagasin ON sortidetailmagasin.matricule_sorti=sortimagasin.matricule  WHERE sortidetailmagasin.date > now() - INTERVAL 1 YEAR;";
+											include('../db/config.php');
+
+
+		if($stmt = $pdo->prepare($sql)){
+
+		if($stmt->execute()){
+			if($stmt->rowCount()>0){
+				$arraystable= $stmt->fetchAll();
+				return $arraystable;
+
+			}else{
+				return "none";
+			}
+		
+
+		}else{
+		return "La selection a échoué, veuillez retenter. ";
+
+		}
+
+		}else{
+		return "La selection a échoué, veuillez retenter. ";
+
+		}
+
+		}
+		catch(exception $e){
+		return "La suppression a échoué, veuillez retenter. Error: ".$e;
+
+
+		}
+		}
 	public function supprimer($matricule){
 								$this->matricule=$matricule;
 				

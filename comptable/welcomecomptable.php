@@ -18,12 +18,15 @@ include("../component/headpart.php");
 
 ?>
 
+ 
 <body>
+<?php include("../component/headersection.php"); ?>
+<?php include("../menu/topmenu.php"); ?>
+<?php include("../menu/menucomptable.php"); ?>
 
-<div class="header">
-  <h1>Clinic </h1>
-  <p>La Clinic  est une Clinique de réference.</p>
-</div>
+
+
+
 
 <!-- <div class="topnav">
   <a href="#">Accueil</a>

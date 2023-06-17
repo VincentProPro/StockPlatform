@@ -19,6 +19,7 @@ include("../component/headpart.php");
 <body>
 
 
+<?php include("../component/headersection.php"); ?>
 
  
 <?php include("../menu/topmenu.php"); ?>

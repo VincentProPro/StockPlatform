@@ -1,17 +1,25 @@
+<?php include("constant.php"); ?>
 <?php 
     if($_SESSION['role']=="SuperAdmin"){
 
       ?>
       <div class="card">
       <h3>Type Role</h3>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/coursier/welcomecoursier.php"><button >Coursier</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/gestionnairestock/welcomestocker.php"><button >Gestionnaire de Stock</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/cmu/welcomecmu.php"><button >Gestion Boutique</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/caisse/welcomecaisse.php"><button >Caisse</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/surveillante/welcomsurveillante.php"><button >Surveillante</button></div>        
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/comptable/welcomecomptable.php"><button >Comptable</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform"><button >Admin</button></div>
-      <div class="rolebtn"><a href="http://localhost/StockPlatform/welcomesuperAdmin.php"><button >Super Admin</button></div>
+      <div class="dropdown">
+    <button class="dropbtn"><div class="navbar">Voir les roles</div> 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="<?php echo$urlsite; ?>/coursier/welcomecoursier.php">Coursier</a>
+       <a href="<?php echo$urlsite; ?>/gestionnairestock/welcomestocker.php">Gestionnaire de Stock</a>
+      <a href="<?php echo$urlsite; ?>/cmu/welcomecmu.php">Boutique</a>
+      <a href="<?php echo$urlsite; ?>/caisse/welcomecaisse.php">Caisse </a>
+      <a href="<?php echo$urlsite; ?>/comptable/welcomecomptable.php">Comptable</a>
+      <a href="<?php echo$urlsite; ?>/">Admin</a>
+      <a href="<?php echo$urlsite; ?>/welcomesuperAdmin.php">Super Admin</a>
+    </div>
+  </div>
+
       
       <a href="logout.php"><button class="fakeimg" >Log Out</button></a>
     </div>

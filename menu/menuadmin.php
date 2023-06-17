@@ -1,12 +1,11 @@
 
-
 <div class="navbar">
-    <a href="http://localhost/StockPlatform/gestionnairestock/welcomestocker.php">Gestionaire</a>
-    <a href="http://localhost/StockPlatform/comptable/welcomecomptable.php">Comptable</a>
-    <a href="http://localhost/StockPlatform/cmu/welcomecmu.php">CMU</a>
-    <a href="http://localhost/StockPlatform/caisse/welcomecaisse.php">Caisse</a>
-    <a href="http://localhost/StockPlatform/coursier/welcomecoursier.php">Coursier</a>
-    <a href="http://localhost/StockPlatform/surveillante/welcomsurveillante.php">Surveillante</a>
+    <a href="<?php echo$urlsite; ?>/gestionnairestock/welcomestocker.php">Gestionaire</a>
+    <a href="<?php echo$urlsite; ?>/comptable/welcomecomptable.php">Comptable</a>
+    <a href="<?php echo$urlsite; ?>/cmu/welcomecmu.php">Boutique</a>
+    <a href="<?php echo$urlsite; ?>/caisse/welcomecaisse.php">Caisse</a>
+    <a href="<?php echo$urlsite; ?>/coursier/welcomecoursier.php">Coursier</a>
+    <a href="<?php echo$urlsite; ?>/surveillante/welcomsurveillante.php">Surveillante</a>
 </div>
 
 <div class="navbar">
@@ -49,8 +48,8 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="gestionnairestock/welcomestocker.php#entrerarticle">Entrer Maga</a>
-      <a href="gestionnairestock/welcomestocker.php#retraitarticle">Sorti Maga</a>
+      <a href="<?php echo$urlsite; ?>/gestionnairestock/welcomestocker.php#entrerarticle">Entrer Maga</a>
+      <a href="<?php echo$urlsite; ?>gestionnairestock/welcomestocker.php#retraitarticle">Sorti Maga</a>
     </div>
   </div> 
 
@@ -69,9 +68,9 @@
           <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="http://localhost/StockPlatform/gestionnairestock/Module/modulemanage.php">Ajouter </a>
-            <a href="http://localhost/StockPlatform/gestionnairestock/Module/moduleedit.php">Modifier</a>
-            <a href="http://localhost/StockPlatform/gestionnairestock/Module/delete.php">Supprimer</a>
+            <a href="<?php echo$urlsite; ?>/gestionnairestock/Module/modulemanage.php">Ajouter </a>
+            <a href="<?php echo$urlsite; ?>/gestionnairestock/Module/moduleedit.php">Modifier</a>
+            <a href="<?php echo$urlsite; ?>/gestionnairestock/Module/delete.php">Supprimer</a>
         </div>
     </div>  
  
@@ -80,10 +79,10 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="http://localhost/StockPlatform/managemembre.php"onclick="document.getElementById('id011').style.display='block'">Voir </a>
-      <a href="http://localhost/StockPlatform/managemembre.php"onclick="document.getElementById('id012').style.display='block'">Ajouter </a>
-      <a href="http://localhost/StockPlatform/managemembre.php" onclick="document.getElementById('id013').style.display='block'" >Modifier </a>
-      <a href="http://localhost/StockPlatform/managemembre.php">Supprimer </a>
+      <a href="<?php echo$urlsite; ?>/managemembre.php"onclick="document.getElementById('id011').style.display='block'">Voir </a>
+      <a href="<?php echo$urlsite; ?>/managemembre.php"onclick="document.getElementById('id012').style.display='block'">Ajouter </a>
+      <a href="<?php echo$urlsite; ?>/managemembre.php" onclick="document.getElementById('id013').style.display='block'" >Modifier </a>
+      <a href="<?php echo$urlsite; ?>/managemembre.php">Supprimer </a>
     </div>
   </div>
 

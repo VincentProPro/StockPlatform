@@ -55,6 +55,7 @@ class GerantCMU{
 
 	function viewentrercmu(){
 				$objectCreated=new Cmuentrer();
+				//erreur
 
 		return $objectCreated->selectAllValider();
 		

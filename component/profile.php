@@ -1,6 +1,7 @@
+<?php include("constant.php"); ?>
 <div class="card shadowexempl">
       <h2>Profile </h2>
-            <div class="fakeimg" style="height:100px;"><img src="http://localhost/StockPlatform/images/contact.png" style="height:80px;"></div>
+            <div class="fakeimg" style="height:100px;"><img src="<?php echo$urlsite; ?>/images/contact.png" style="height:80px;"></div>
 <b>Bonjour Mr <?php echo htmlspecialchars($_SESSION["fullname"]); ?></b>
       <br>
       <br>

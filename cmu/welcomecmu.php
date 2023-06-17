@@ -15,42 +15,13 @@ include("../component/headpart.php");
 ?>
  
 <body>
+<?php include("../component/headersection.php"); ?>
+<?php include("../menu/topmenu.php"); ?>
+<?php include("../menu/menucmu.php"); ?>
 
-<div class="header">
-  <h1>Clinic </h1>
-  <p>La Clinic  est une Clinique de réference.</p>
-</div>
 
-<div class="topnav">
-  <a href="#">Accueil</a>
-  <a href="#">Connexion</a>
-  <a href="#">Apropos</a>
-<!--   <a href="#" style="float:right">Link</a>
- -->
-</div>
 
-<div class="navbar">
-    <a href="#entrerarticle">Entrer CMU</a>
-    <a href="#retraitarticle">Sorti CMU</a>
-   
 
- 
-   
-
-   <div class="dropdown">
-    <button class="dropbtn">Statistique 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="statisticcmu.php">Statistique Geeneral</a>
-       <a href="statisticcmu.php#situationstock">Situation Stock</a>
-      <a href="statisticcmu.php#frequencesorties">Frequence des sorties</a>
-      <a href="statisticcmu.php#rentabiliarticle">Rentabilité par article </a>
-      <a href="statisticcmu.php#evolutionrecette">Evolution Recette</a>
-    </div>
-  </div> 
-
-</div>
 
 <div class="row">
   <div class="leftcolumn">

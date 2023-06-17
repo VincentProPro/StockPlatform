@@ -248,6 +248,68 @@ class Gestionnairestock{
 		
 	}
 
+	//Add Statistic
+
+
+
+
+
+function viewsortiMagasin(){
+		$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAll();
+
+}
+
+function viewentrerMagasinPeriode($debutperiode,$finperiode){
+		$objectCreated=new EntrerMagasin();
+
+return $objectCreated->selectAllPeriode($debutperiode,$finperiode);
+
+}
+function viewsortiMagasinPeriode($debutperiode,$finperiode){
+		$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAllPeriodeSorti($debutperiode,$finperiode);
+
+}
+function viewsortiMagasinMois(){
+$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAllMois();
+
+}
+function viewsortiMagasinThreeMois(){
+$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAllThreeMois();
+
+}
+function viewsortiMagasinSixMois(){
+$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAllSixMois();
+
+}
+function viewsortiMagasinAllYear(){
+$objectCreated=new Sortidetailmagasin();
+
+return $objectCreated->selectAllYear();
+
+}
+// function viewStockExpiringInThree(){
+// $objectCreated=new ExpiringArticle();
+
+// return $objectCreated->selectAllInthreeMois();
+
+// }
+// function viewStockExpiringInSix(){
+// $objectCreated=new ExpiringArticle();
+
+// return $objectCreated->selectAllInSixMois();
+
+// }
+
 
 }
 

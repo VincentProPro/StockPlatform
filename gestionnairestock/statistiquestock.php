@@ -8,15 +8,16 @@ error_reporting(0);
 // ob_end_flush(); // Flush the output from the buffer
 
 // header("refresh: 5"); 
-require("viewcmu.php");
-// echo json_encode($gerantcmu->viewsorticmuSixMois());
+require("viewgestionnairestock.php");
+// echo json_encode($gestionnairestock->viewsortiMagasinSixMois());
 // echo json_encode($gerantcmu->viewsorticmuPeriode('2022-01-02','2023-01-02'));
 
 // echo json_encode($gerantcmu->viewsorticmuAllYear());
 
 
-// echo json_encode($gerantcmu->viewsorticmu());
+echo json_encode($gestionnairestock->viewAllStockMagasin());
 
+//  echo $gestionnairestock->viewAllStockMagasin(); 
 //  echo$gerantcmu->viewstockcmu()[0][4]; 
 // Check if the user is logged in, if not then redirect him to login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -31,7 +32,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <body>
 <?php include("../component/headersection.php"); ?>
 <?php include("../menu/topmenu.php"); ?>
-<?php include("../menu/menucmu.php"); ?>
+<?php include("../menu/menugestionairestock.php"); ?>
 
 
 <div class="row">
@@ -200,28 +201,79 @@ generategraphrevenu(0);
 generategraphfrequencesorti(0);
 function generategraphstock(){
                   var datadesignation=[];
-                    var dataquantity=[];
-                    <?php foreach ($gerantcmu->viewstockcmu() as $element){ ?>
+                  var dataquantity=[];
+                  var dataformat=[];
+                  var dataqtyunit=[];
+                  var datamagasin=[];
+                  var uniqueMagasin=[];
+                  
+                    <?php foreach ($gestionnairestock->viewAllStockMagasin() as $element){ ?>
                       var designation=<?php echo json_encode($element["designation"]); ?>;
                       var quantity=<?php echo json_encode($element["quantity"]); ?>;
+                      var formatnom=<?php echo json_encode($element["formatnom"]); ?>;
+                      var quantityperunit=<?php echo json_encode($element["quantityperunit"]); ?>;
+                      var magazinnom=<?php echo json_encode($element["magazinnom"]); ?>;
                       // alert("designation is "+designation);
 
                       datadesignation.push(designation);
                       dataquantity.push(quantity);
+                      dataformat.push(formatnom);
+                      dataqtyunit.push(quantityperunit);
+                      datamagasin.push(magazinnom);
                       <?php
                     }
                       ?>
+                      // const array = [1, 2, 3, 4, 2, 3, 1, 5];
+                       uniqueMagasin = [...new Set(datamagasin)];
 
-                    var data = [{
-                      x:datadesignation,
-                      y:dataquantity,
+                      for (let i = 0; i < uniqueMagasin.length; i++) {
+                        var newqty=[];
+                        var newdesignation=[];
+                        var newformat=[];
+                        var newqtyperunit=[];
+                        var description=[];
+                        for (let j = 0; j < datamagasin.length; j++) {
+                          if(datamagasin[j]==uniqueMagasin[i]){
+                            //create new array from position
+                            newqty.push(dataquantity[j]);
+                            newdesignation.push(datadesignation[j] +" qtyUnit: "+dataqtyunit[j]+" format: "+dataformat[j] );
+                            newformat.push(dataformat[j]);
+                            newqtyperunit.push(dataqtyunit[j]);
+                            description.push(" Article : "+datadesignation[j]+" Quantité : "+dataquantity[j]+" qty par unité: "+dataqtyunit[j]+" format: "+dataformat[j]);
+
+                          }
+
+
+                        }
+                        //display graph for this particular magasin
+                        alert("newdesignation");
+                        alert(newdesignation);
+                        alert("newqty");
+                        alert(newqty);
+                        var data = [{
+                      x:newdesignation,
+                      y:newqty,
                       type:"bar"
                     }];
 
-                var layout = {title:"Vue du StockCMU"};
+                    const newDiv = document.createElement('div');
+                    var dynamicId='graphContainermg'+i
+                    newDiv.id = dynamicId;
+                    const parentElement = document.getElementById('graphsituationstock');
+                parentElement.appendChild(newDiv);
+
+                    var layout = {title:"Vue du "+uniqueMagasin[i]};
                 document.getElementById("graphsituationstock").style.width = 'auto';
-                document.getElementById("graphsituationstock").style.height = '550px';
-                Plotly.newPlot("graphsituationstock", data, layout);
+                document.getElementById("graphsituationstock").style.height = 'auto';
+                newDiv.style.width = 'auto';
+                newDiv.style.height = '550px';
+                Plotly.newPlot(dynamicId, data, layout);
+                
+
+
+                      }
+
+                    
 }
 
 function getCookie(name) {
@@ -252,7 +304,7 @@ function generategraphrevenu(para){
                       var datadate1=[];
                       if (para==1){
                         //display on 1 month
-                        <?php foreach ($gerantcmu->viewsorticmuMois() as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinMois() as $element){ ?>
                           var datearr=<?php echo json_encode($element["date"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
@@ -266,7 +318,7 @@ function generategraphrevenu(para){
                       }
                       else if(para==3){
                            //display on 3 months
-                           <?php foreach ($gerantcmu->viewsorticmuThreeMois() as $element){ ?>
+                           <?php foreach ($gestionnairestock->viewsortiMagasinThreeMois() as $element){ ?>
                           var datearr=<?php echo json_encode($element["date"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
@@ -281,7 +333,7 @@ function generategraphrevenu(para){
                       }
                       else if(para==6){
                            //display on 6 months
-                           <?php foreach ($gerantcmu->viewsorticmuSixMois() as $element){ ?>
+                           <?php foreach ($gestionnairestock->viewsortiMagasinSixMois() as $element){ ?>
                           var datearr=<?php echo json_encode($element["date"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
@@ -315,7 +367,7 @@ function generategraphrevenu(para){
 
 
                          
-                        <?php foreach ($gerantcmu->viewsorticmuPeriode($_COOKIE['periodrentbltdate1'],$_COOKIE['periodrentbltdate2']) as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinPeriode($_COOKIE['periodrentbltdate1'],$_COOKIE['periodrentbltdate2']) as $element){ ?>
                           var datearr=<?php echo json_encode($element["date"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
@@ -329,7 +381,7 @@ function generategraphrevenu(para){
 
 
                       }else{
-                        <?php foreach ($gerantcmu->viewsorticmuAllYear() as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinAllYear() as $element){ ?>
                           var datearr=<?php echo json_encode($element["date"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
 
@@ -439,7 +491,7 @@ function generategraphfrequencesorti(para){
                       var datatotalbenefice=0;
                       if (para==1){
                         //display on 1 month
-                        <?php foreach ($gerantcmu->viewsorticmuMois() as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinMois() as $element){ ?>
                           var designation=<?php echo json_encode($element["designation"]); ?>;
                           var quantity=<?php echo json_encode($element["quantity"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
@@ -455,7 +507,7 @@ function generategraphfrequencesorti(para){
                       else if(para==3){
                            //display on 3 months
                            var b=0;
-                           <?php foreach ($gerantcmu->viewsorticmuThreeMois() as $element){ ?>
+                           <?php foreach ($gestionnairestock->viewsortiMagasinThreeMois() as $element){ ?>
                           var designation=<?php echo json_encode($element["designation"]); ?>;
                           var quantity=<?php echo json_encode($element["quantity"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
@@ -471,7 +523,7 @@ function generategraphfrequencesorti(para){
                       }
                       else if(para==6){
                            //display on 6 months
-                           <?php foreach ($gerantcmu->viewsorticmuSixMois() as $element){ ?>
+                           <?php foreach ($gestionnairestock->viewsortiMagasinSixMois() as $element){ ?>
                           var designation=<?php echo json_encode($element["designation"]); ?>;
                           var quantity=<?php echo json_encode($element["quantity"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
@@ -504,7 +556,7 @@ function generategraphfrequencesorti(para){
                          cookieValue1 = getCookie("periodrentbltdate1");
                          cookieValue2 = getCookie("periodrentbltdate2");
                          alert("in cookie "+cookieValue1+'|'+cookieValue2);
-                        <?php foreach ($gerantcmu->viewsorticmuPeriode($_COOKIE['periodrentbltdate1'],$_COOKIE['periodrentbltdate2']) as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinPeriode($_COOKIE['periodrentbltdate1'],$_COOKIE['periodrentbltdate2']) as $element){ ?>
                           var designation=<?php echo json_encode($element["designation"]); ?>;
                           var quantity=<?php echo json_encode($element["quantity"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
@@ -520,7 +572,7 @@ function generategraphfrequencesorti(para){
 
 
                       }else{
-                        <?php foreach ($gerantcmu->viewsorticmuAllYear() as $element){ ?>
+                        <?php foreach ($gestionnairestock->viewsortiMagasinAllYear() as $element){ ?>
                           var designation=<?php echo json_encode($element["designation"]); ?>;
                           var quantity=<?php echo json_encode($element["quantity"]); ?>;
                           var benefice=<?php echo json_encode($element["benefice"]*$element["quantity"]); ?>;
